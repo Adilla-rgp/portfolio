@@ -1,0 +1,30 @@
+/*
+ * CSS-only loops (marquee, blink). Entrances use Framer Motion variants from
+ * src/lib/motion.ts; per-frame loops use useRafTicker.
+ */
+@theme {
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-marquee-slow: marquee 60s linear infinite;
+  --animate-blink: blink 1.4s steps(2) infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @keyframes blink {
+    50% { opacity: 0.25; }
+  }
+}
+
+/* DESIGN.md: no loops under reduced motion and transitions of at most 150ms. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-iteration-count: 1 !important;
+    animation-duration: 0s !important;
+    transition-duration: 150ms !important;
+    scroll-behavior: auto !important;
+  }
+}

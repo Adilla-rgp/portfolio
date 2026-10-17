@@ -1,25 +1,27 @@
 # AGENTS.md
 
 ## Project
-Premium portfolio built with Next.js, focused on Software Engineering, Artificial Intelligence and Data Engineering.
-The objective is to create a production-level portfolio with clean architecture, reusable components and exceptional UI/UX.
+Portfolio built with Next.js for Ádilla Gomes: back-end + AI/data in one site.
+The objective is a production-level portfolio with clean architecture, reusable components and exceptional UI/UX.
 
-The final result should resemble products such as Vercel, Stripe, Linear, Raycast, Clerk, Dub, Magic UI, and Aceternity UI, while maintaining its own identity.
+> **Visual source of truth: [`docs/DESIGN.md`](docs/DESIGN.md).** It defines the concept, tokens, typography,
+> layout, primitives, motion, routes, content rules and the implementation roadmap. It overrides anything in this
+> file about visual identity. The screens in `docs/design-reference/*.dc.html` are prototypes: use them as the
+> spec for layout, copy and behavior, and reimplement in React. Never copy their format.
 
 ---
 
 # Tech Stack
-- Next.js 16
+- Next.js 16 (App Router)
 - React 19
 - TypeScript
-- Tailwind CSS
+- Tailwind CSS v4 (tokens in `@theme`)
+- class-variance-authority (component variants)
 - Framer Motion
 - Lucide Icons
 
-Future (only if necessary):
-- Spline
-- Three.js
-- GSAP
+Do not add 3D libraries (Three.js, Spline) or theme switching: DESIGN.md specifies a single dark theme and
+2D `<canvas>` for particles.
 
 ---
 
@@ -27,7 +29,7 @@ Future (only if necessary):
 - Dev server: `npm run dev`
 - Build: `npm run build`
 - Lint: `npm run lint`
-- Type check: `npm run type-check` (or `tsc --noEmit` if no script exists)
+- Type check: `npm run type-check`
 
 > Update this section as scripts are added (tests, formatting, etc). Never guess a command — check `package.json` first.
 
@@ -40,7 +42,6 @@ This project prioritizes:
 - scalability
 - performance
 - accessibility
-- animations
 - reusable components
 
 Avoid quick fixes. Always prefer reusable abstractions.
@@ -52,7 +53,7 @@ Always:
 - use functional components
 - use TypeScript
 - avoid `any`
-- use named exports
+- use named exports (except where Next.js requires a default export: pages, layouts)
 - use interfaces for props
 - avoid duplicated code
 - avoid inline styles
@@ -66,26 +67,28 @@ Comments:
 
 # Folder Structure
 ```
+docs/
+  DESIGN.md              visual source of truth
+  design-reference/      HTML prototypes (spec only, not code)
 src/
+  app/                   routes; route-private components go in `_components/`
   components/
-    ui/
-    hero/
+    ui/                  primitives (see DESIGN.md "Primitivas")
     layout/
-    background/
+  content/               typed site content (`as const`): site, projects, decisions, timeline
   sections/
-  lib/
-  styles/
-  hooks/
-  types/
+  lib/                   cn(), motion.ts
+  hooks/                 useRafTicker, ...
+  styles/                globals.css, tokens.css, animations.css, utilities.css
 ```
 
 ---
 
 # Component Rules
-Every UI component must:
-- accept `className`
-- use `cn()`
-- support composition
+Every UI primitive must:
+- use `forwardRef` and forward native props (`...props`)
+- accept `className` and merge it with `cn()`
+- declare variants with CVA (export the `*Variants` function for reuse, e.g. `buttonVariants` on a Next `<Link>`)
 - avoid fixed widths
 - be responsive
 
@@ -95,7 +98,7 @@ Naming:
 - Components: PascalCase
 - Hooks: camelCase
 - Types: PascalCase
-- Files: PascalCase.tsx
+- Files: PascalCase.tsx (hooks: camelCase.ts)
 
 Imports: always absolute.
 ```ts
@@ -105,13 +108,14 @@ import { Button } from "@/components/ui/Button";
 ---
 
 # Typography
-Never use `text-6xl`, `font-bold`, etc. directly inside pages.
-Always use: `<Heading>`, `<Text>`, `<Label>`, `<GradientText>`.
+Never use raw font-size/weight utilities for headings or body copy inside pages.
+Always use `<Heading>`, `<Text>` and `<Kicker>` from `@/components/ui/Typography`, whose sizes come from the
+`--text-*` tokens.
 
 ---
 
 # Layout
-Every page must follow:
+Every page section follows:
 ```
 <Section>
   <Container>
@@ -123,64 +127,31 @@ Every page must follow:
 ---
 
 # Styling
-- Colors must come from design tokens — never random colors.
-- Spacing must come from the spacing scale — never random spacing.
-- Avoid arbitrary Tailwind values.
+- Colors must come from the tokens in `src/styles/tokens.css` (mirrors DESIGN.md). The default Tailwind palette is disabled.
+- Spacing must come from the spacing scale or the layout tokens (`gutter`, `section`, `max-w-page`).
+- Avoid arbitrary Tailwind values. If a value is missing, add a token or an `@utility`.
 - Avoid duplicated utility strings — extract if repeated.
-
----
-
-# Design Direction
-- Dark theme
-- Purple identity
-- Glassmorphism
-- Soft glow, subtle gradients
-- High-quality spacing and premium typography
-
-The final result should feel like a polished SaaS landing page rather than a traditional personal portfolio — every section should reinforce engineering quality through code organization, visual consistency, and smooth interactions.
+- When adding a custom token namespace value, register it in `src/lib/cn.ts` so tailwind-merge resolves conflicts.
 
 ---
 
 # Animations
-All animations must use Framer Motion.
-Animation variants belong inside `lib/motion.ts`. Never duplicate animation objects — reuse variants whenever possible.
-Respect `prefers-reduced-motion`.
-
----
-
-# Hero
-The Hero section is the most important area of the application. Its visual quality should be comparable to Vercel, Stripe, Linear, Raycast.
-
-Hero is composed by:
-- Background
-- HeroContent
-- HeroKeyboard
-- HeroButtons
-- HeroSocials
-- AnimatedRole
-- FloatingCards
-- MouseLight
-
----
-
-# Background
-Background is composed by independent layers:
-- MeshGradient
-- Grid
-- Glow
-- Noise
-- Particles
+- Entrances: Framer Motion, with variants from `src/lib/motion.ts`. Never duplicate animation objects.
+- Infinite CSS loops (marquee, blink): keyframes in `src/styles/animations.css` only.
+- Per-frame loops (canvas, SVG): `useRafTicker` (~30fps, pauses off-screen).
+- Always respect `prefers-reduced-motion` (rules in DESIGN.md "Movimento").
 
 ---
 
 # Buttons & Cards
 - Always use the `Button` component — never create button styles inline.
-- Every card must inherit the `Card` component.
+- Every card must use the `Card` component.
 
 ---
 
 # State
 Prefer local state. Lift state only when necessary. Avoid unnecessary global state.
+The portfolio lens lives in the URL (`?lente=dados`).
 
 ---
 
@@ -193,12 +164,8 @@ Prefer local state. Lift state only when necessary. Avoid unnecessary global sta
 ---
 
 # Accessibility
-- Semantic HTML
-- Keyboard navigation
-- Proper `aria-label`
-- Proper heading hierarchy
-- Sufficient color contrast
-- Respect `prefers-reduced-motion`
+See DESIGN.md "Acessibilidade". In short: real controls, semantic HTML, keyboard navigation, `aria-label` on
+groups and charts, 44px touch targets, proper heading hierarchy, AA contrast, `prefers-reduced-motion`.
 
 ---
 
@@ -211,12 +178,10 @@ Prefer local state. Lift state only when necessary. Avoid unnecessary global sta
 
 # Future Features
 Prepare the codebase (without requiring major refactoring) for:
-- Blog
+- Projects / case studies (one route per real project)
+- Blog / Articles
 - CMS
-- Projects / Articles
 - Internationalization
-- Theme switching
-- Admin dashboard
 
 ---
 
@@ -225,5 +190,6 @@ Prepare the codebase (without requiring major refactoring) for:
 - Never duplicate components or abstractions
 - Never create magic numbers
 - Never hardcode colors or typography
+- Never invent metrics (use `[— ms]`-style placeholders) or present illustrative data as real
 - Never ignore TypeScript errors
 - Never move files without justification

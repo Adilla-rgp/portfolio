@@ -1,23 +1,39 @@
-import { ReactNode } from "react";
+import { forwardRef, type ComponentPropsWithoutRef } from "react";
+import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/cn";
 
-interface CardProps {
-  children: ReactNode;
-  className?: string;
-}
+export const cardVariants = cva("rounded-card border", {
+  variants: {
+    variant: {
+      surface: "border-line bg-surface text-fg",
+      sunken: "border-line bg-sunken text-fg",
+      /** The "current" item: inverted onto bone. */
+      lit: "border-fg bg-fg text-bg",
+    },
+    padding: {
+      none: "",
+      md: "p-7",
+    },
+  },
+  defaultVariants: {
+    variant: "surface",
+    padding: "md",
+  },
+});
 
-export function Card({
-  children,
-  className,
-}: CardProps) {
+export interface CardProps
+  extends ComponentPropsWithoutRef<"div">,
+    VariantProps<typeof cardVariants> {}
+
+export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
+  { variant, padding, className, ...props },
+  ref,
+) {
   return (
     <div
-      className={cn(
-        "rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 transition-all duration-300 hover:border-violet-500/30",
-        className
-      )}
-    >
-      {children}
-    </div>
+      ref={ref}
+      className={cn(cardVariants({ variant, padding }), className)}
+      {...props}
+    />
   );
-}
+});

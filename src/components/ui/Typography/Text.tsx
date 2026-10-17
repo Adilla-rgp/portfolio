@@ -1,57 +1,45 @@
-import { ReactNode } from "react";
+import { forwardRef, type ComponentPropsWithoutRef, type ElementType } from "react";
+import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/cn";
 
-type TextVariant = "default" | "secondary" | "muted";
+export const textVariants = cva("font-sans", {
+  variants: {
+    tone: {
+      soft: "text-fg-soft",
+      muted: "text-muted",
+      /** Takes the parent color, e.g. inside `Card variant="lit"`. */
+      inherit: "text-inherit",
+    },
+    size: {
+      body: "text-body",
+      lg: "text-body-lg",
+    },
+  },
+  defaultVariants: {
+    tone: "soft",
+    size: "body",
+  },
+});
 
-type TextSize = "sm" | "md" | "lg" | "xl";
+type TextTag = "p" | "span" | "div" | "li" | "figcaption";
 
-type TextAlign = "left" | "center" | "right";
-
-interface TextProps {
-  children: ReactNode;
-  variant?: TextVariant;
-  size?: TextSize;
-  align?: TextAlign;
-  className?: string;
+export interface TextProps
+  extends ComponentPropsWithoutRef<"p">,
+    VariantProps<typeof textVariants> {
+  as?: TextTag;
 }
 
-const variantClasses = {
-  default: "text-white",
-  secondary: "text-zinc-300",
-  muted: "text-zinc-500",
-};
-
-const sizeClasses = {
-  sm: "text-sm",
-  md: "text-base",
-  lg: "text-lg",
-  xl: "text-xl",
-};
-
-const alignClasses = {
-  left: "text-left",
-  center: "text-center",
-  right: "text-right",
-};
-
-export function Text({
-  children,
-  variant = "default",
-  size = "md",
-  align = "left",
-  className,
-}: TextProps) {
+export const Text = forwardRef<HTMLElement, TextProps>(function Text(
+  { as = "p", tone, size, className, ...props },
+  ref,
+) {
+  // Widened so one ref type fits every allowed tag.
+  const Component = as as ElementType;
   return (
-    <p
-      className={cn(
-        variantClasses[variant],
-        sizeClasses[size],
-        alignClasses[align],
-        "leading-relaxed",
-        className
-      )}
-    >
-      {children}
-    </p>
+    <Component
+      ref={ref}
+      className={cn(textVariants({ tone, size }), className)}
+      {...props}
+    />
   );
-}
+});

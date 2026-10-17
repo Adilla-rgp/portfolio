@@ -1,0 +1,10 @@
+/* RevealText line mask; the bottom padding keeps descenders from being clipped. */
+@utility reveal-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.04em;
+}
+
+@utility animation-paused {
+  animation-play-state: paused;
+}

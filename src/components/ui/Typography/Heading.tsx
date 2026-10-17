@@ -1,76 +1,49 @@
-import { ReactNode } from "react";
+import { forwardRef, type ComponentPropsWithoutRef, type ElementType } from "react";
+import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/cn";
 
-type HeadingLevel = "h1" | "h2" | "h3" | "h4" | "h5";
+// Font-stretch has no theme namespace in Tailwind v4, so the width axis is set
+// here; size, line-height, tracking and weight come from the --text-* tokens.
+export const headingVariants = cva("font-sans", {
+  variants: {
+    tone: {
+      default: "text-fg",
+      /** Takes the parent color, e.g. inside `Card variant="lit"`. */
+      inherit: "text-inherit",
+    },
+    size: {
+      display: "text-display font-stretch-125% uppercase",
+      displayXl: "text-display-xl font-stretch-125%",
+      h2: "text-h2 font-stretch-115% uppercase",
+      h3: "text-h3 font-stretch-115%",
+      project: "text-project font-stretch-120% uppercase",
+      number: "text-number font-stretch-125% tabular-nums",
+    },
+  },
+  defaultVariants: {
+    tone: "default",
+    size: "h2",
+  },
+});
 
-type HeadingSize =
-  | "hero"
-  | "display"
-  | "xl"
-  | "lg"
-  | "md"
-  | "sm";
+type HeadingTag = "h1" | "h2" | "h3" | "h4" | "p" | "span";
 
-type HeadingAlign = "left" | "center" | "right";
-
-type HeadingWeight =
-  | "regular"
-  | "medium"
-  | "semibold"
-  | "bold";
-
-interface HeadingProps {
-  children: ReactNode;
-  level?: HeadingLevel;
-  size?: HeadingSize;
-  align?: HeadingAlign;
-  weight?: HeadingWeight;
-  className?: string;
+export interface HeadingProps
+  extends ComponentPropsWithoutRef<"h2">,
+    VariantProps<typeof headingVariants> {
+  as?: HeadingTag;
 }
 
-const sizeClasses = {
-  hero: "text-6xl md:text-8xl",
-  display: "text-5xl md:text-7xl",
-  xl: "text-4xl",
-  lg: "text-3xl",
-  md: "text-2xl",
-  sm: "text-xl",
-};
-
-const alignClasses = {
-  left: "text-left",
-  center: "text-center",
-  right: "text-right",
-};
-
-const weightClasses = {
-  regular: "font-normal",
-  medium: "font-medium",
-  semibold: "font-semibold",
-  bold: "font-bold",
-};
-
-export function Heading({
-  children,
-  level = "h1",
-  size = "xl",
-  align = "left",
-  weight = "bold",
-  className,
-}: HeadingProps) {
-  const Component = level;
-
-  return (
-    <Component
-      className={cn(
-        sizeClasses[size],
-        alignClasses[align],
-        weightClasses[weight],
-        "text-white tracking-tight",
-        className
-      )}
-    >
-      {children}
-    </Component>
-  );
-}
+export const Heading = forwardRef<HTMLElement, HeadingProps>(
+  function Heading({ as = "h2", tone, size, className, ...props }, ref) {
+    // Widened so one ref type fits every allowed tag.
+    const Component = as as ElementType;
+    return (
+      <Component
+        ref={ref}
+        className={cn(headingVariants({ tone, size }), className)}
+        {...props}
+      />
+    );
+  },
+);

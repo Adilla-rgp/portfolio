@@ -1,53 +1,95 @@
-:root {
-  /* Colors */
+/*
+ * Design tokens — source of truth: docs/DESIGN.md.
+ * The first block mirrors DESIGN.md verbatim. The default Tailwind palette is
+ * reset so components can only reach for these colors.
+ */
+@theme {
+  --color-*: initial;
 
-  --background: #050816;
-  --background-secondary: #0b1120;
+  /* superfícies */
+  --color-bg: #0B0B0C;
+  --color-sunken: #0F0F11;     /* faixas de seção alternadas */
+  --color-surface: #111113;    /* cards, painéis */
+  --color-surface-2: #141416;  /* itens dentro de painéis */
+  --color-raised: #1F1F23;     /* hover/selecionado dentro de painéis */
+  --color-line: #26262A;
+  --color-line-strong: #3A3A40;
+  /* texto */
+  --color-fg: #F2EFE8;         /* osso */
+  --color-fg-soft: #C9C5BC;    /* parágrafos */
+  --color-muted: #9A968E;      /* labels mono */
+  --color-dim: #6E6A63;        /* itens inativos grandes */
+  --color-faint: #4A4741;      /* desativado */
+  /* sinal */
+  --color-signal: #FF5A1F;     /* acento único; texto sobre ele = bg */
+  --color-ok: #47D17C;         /* status online / acerto */
 
-  --surface: #111827;
+  --font-sans: var(--font-archivo), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 
-  --card: #161b2e;
+  --radius-pill: 999px;
+  --radius-card: 1rem;     /* 16px painéis */
+  --radius-item: 0.75rem;  /* 12px itens */
+  --radius-chip: 0.25rem;
 
-  --primary: #7c3aed;
+  --ease-out-expo: cubic-bezier(.2, .8, .2, 1);
+}
 
-  --primary-hover: #8b5cf6;
+/* Typography scale — DESIGN.md "Tipografia". Font-stretch has no theme
+   namespace in Tailwind v4, so it lives on the Heading variants. */
+@theme {
+  --text-display: clamp(3.5rem, 10.4vw, 9.75rem);
+  --text-display--line-height: 0.9;
+  --text-display--letter-spacing: -0.035em;
+  --text-display--font-weight: 850;
 
-  --primary-light: #a78bfa;
+  --text-display-xl: clamp(5rem, 17vw, 15.625rem);
+  --text-display-xl--line-height: 0.82;
+  --text-display-xl--letter-spacing: -0.05em;
+  --text-display-xl--font-weight: 900;
 
-  --primary-glow: #c4b5fd;
+  --text-h2: clamp(2.5rem, 5vw, 4.5rem);
+  --text-h2--line-height: 0.95;
+  --text-h2--letter-spacing: -0.03em;
+  --text-h2--font-weight: 800;
 
-  --text-primary: #f8fafc;
+  --text-h3: clamp(2rem, 3.8vw, 3.375rem);
+  --text-h3--line-height: 1;
+  --text-h3--letter-spacing: -0.02em;
+  --text-h3--font-weight: 800;
 
-  --text-secondary: #a1a1aa;
+  --text-project: clamp(2.25rem, 5.6vw, 5.25rem);
+  --text-project--line-height: 0.95;
+  --text-project--letter-spacing: -0.03em;
+  --text-project--font-weight: 800;
 
-  --text-muted: #71717a;
+  --text-number: 4.5rem;
+  --text-number--line-height: 1;
+  --text-number--letter-spacing: -0.03em;
+  --text-number--font-weight: 850;
 
-  --border: rgba(255,255,255,.08);
+  --text-body-lg: 1.25rem;
+  --text-body-lg--line-height: 1.5;
 
-  --border-purple: rgba(124,58,237,.18);
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.55;
 
-  /* Radius */
+  --text-mono-sm: 0.75rem;
+  --text-mono-sm--line-height: 1.4;
+  --text-mono: 0.8125rem;
+  --text-mono--line-height: 1.4;
+  --text-mono-lg: 0.875rem;
+  --text-mono-lg--line-height: 1.4;
 
-  --radius-sm: 8px;
+  --tracking-kicker: 0.08em;
+  --tracking-label: 0.06em;
+  --tracking-button: 0.04em;
+}
 
-  --radius-md: 12px;
-
-  --radius-lg: 18px;
-
-  --radius-xl: 28px;
-
-  /* Shadows */
-
-  --shadow-purple:
-    0 0 50px rgba(124,58,237,.28);
-
-  /* Motion */
-
-  --duration-fast: .15s;
-
-  --duration-normal: .25s;
-
-  --duration-slow: .4s;
-
-  --duration-page: .7s;
+/* Layout — DESIGN.md "Layout". */
+@theme {
+  --container-page: 85rem;     /* 1360px */
+  --spacing-gutter: 2.5rem;    /* 40px */
+  --spacing-gutter-sm: 1.25rem; /* 20px, celular */
+  --spacing-section: 7.5rem;   /* 120px */
 }
