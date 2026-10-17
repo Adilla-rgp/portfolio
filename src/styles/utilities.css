@@ -41,3 +41,54 @@
 @utility collapsible-open {
   grid-template-rows: 1fr;
 }
+
+/* Trace waterfall. Per-row timing arrives as unitless fractions of the shared
+   scale (--bar-start, --bar-width, --at), set once per run; CSS turns them into
+   positions and delays, so playback never re-renders React. */
+@utility trace-bar {
+  position: absolute;
+  inset-block: 0;
+  left: calc(var(--bar-start) * 100%);
+  width: calc(var(--bar-width) * 100%);
+  transform-origin: left center;
+  animation: trace-grow calc(var(--bar-width) * var(--trace-playback)) linear
+    calc(var(--bar-start) * var(--trace-playback)) both;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+/* Hidden until --at of the playback, then shown. */
+@utility trace-after {
+  animation: trace-hidden calc(var(--at) * var(--trace-playback)) step-end;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+/* Shown only until --at of the playback. */
+@utility trace-until {
+  visibility: hidden;
+  animation: trace-visible calc(var(--at) * var(--trace-playback)) step-end;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+/* Holds every trace animation at its first frame until the panel is seen. */
+@utility trace-paused {
+  & * {
+    animation-play-state: paused;
+  }
+}
+
+@utility grid-cols-trace {
+  grid-template-columns: 6.5rem minmax(0, 1fr) 3.5rem;
+
+  @variant md {
+    grid-template-columns: 9.375rem minmax(0, 1fr) 4.375rem;
+  }
+}

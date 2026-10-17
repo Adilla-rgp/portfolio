@@ -10,6 +10,24 @@
   --reveal-stagger: 0.15s;
 }
 
+/* Trace waterfall: one playback for the full (cold) scale. */
+:root {
+  --trace-playback: 1.3s;
+}
+
+@keyframes trace-grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes trace-hidden {
+  from, to { visibility: hidden; }
+}
+
+@keyframes trace-visible {
+  from, to { visibility: visible; }
+}
+
 @keyframes rise {
   from { transform: translateY(105%); }
   to { transform: translateY(0); }
@@ -37,6 +55,7 @@
   *::after {
     animation-iteration-count: 1 !important;
     animation-duration: 0s !important;
+    animation-delay: 0s !important;
     transition-duration: 150ms !important;
     scroll-behavior: auto !important;
   }

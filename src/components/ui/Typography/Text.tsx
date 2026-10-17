@@ -19,6 +19,12 @@ export const textVariants = cva("font-sans", {
       label: "font-mono text-mono-sm uppercase tracking-label",
       mono: "font-mono text-mono uppercase tracking-label",
       monoLg: "font-mono text-mono-lg uppercase tracking-button",
+      /** Mono in its own case, for identifiers like `api.handler`. */
+      code: "font-mono text-mono",
+      codeSm: "font-mono text-mono-sm",
+      codeXs: "font-mono text-mono-xs",
+      /** Large mono figures in summaries. */
+      monoValue: "font-mono text-mono-xl font-bold",
     },
   },
   defaultVariants: {

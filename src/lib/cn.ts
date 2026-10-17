@@ -21,6 +21,8 @@ const twMerge = extendTailwindMerge({
         "mono-sm",
         "mono",
         "mono-lg",
+        "mono-xl",
+        "mono-xs",
       ],
       tracking: ["kicker", "label", "button"],
       radius: ["pill", "card", "item", "chip"],

@@ -36,8 +36,6 @@ export const homeContent = {
     kicker: "01 — O sistema",
     title: "Esta página, por dentro",
     body: "Uma requisição a esta página, etapa por etapa. Dispare e veja cada etapa acontecer. Depois esquente o cache e compare.",
-    controlsPlaceholder: "[peça interativa: disparar GET /home · cache frio/quente]",
-    panelPlaceholder: "[peça interativa: trace de 5 etapas]",
   },
   threshold: {
     ariaLabel: "Gráfico explorável",

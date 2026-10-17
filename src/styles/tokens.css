@@ -93,6 +93,10 @@
   --text-mono--line-height: 1.4;
   --text-mono-lg: 0.875rem;
   --text-mono-lg--line-height: 1.4;
+  --text-mono-xl: 1.625rem;
+  --text-mono-xl--line-height: 1.2;
+  --text-mono-xs: 0.6875rem;
+  --text-mono-xs--line-height: 1.4;
 
   --tracking-kicker: 0.08em;
   --tracking-label: 0.06em;

@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
+import { FadeIn } from "@/components/ui/FadeIn";
 import { PiecePlaceholder } from "@/components/ui/PiecePlaceholder";
 import { Section } from "@/components/ui/Section";
 import { Accent } from "@/components/ui/Typography/Accent";
@@ -7,6 +8,7 @@ import { Heading } from "@/components/ui/Typography/Heading";
 import { Kicker } from "@/components/ui/Typography/Kicker";
 import { Text } from "@/components/ui/Typography/Text";
 import { homeContent } from "@/content/home";
+import { stagger } from "@/lib/motion";
 
 const { threshold } = homeContent;
 
@@ -14,7 +16,7 @@ export function ThresholdSection() {
   return (
     <Section tone="sunken" aria-label={threshold.ariaLabel}>
       <Container className="flex flex-wrap items-center gap-16">
-        <div className="flex min-w-0 grow-10 basis-90 flex-col gap-6">
+        <FadeIn className="flex min-w-0 grow-10 basis-90 flex-col gap-6">
           <Kicker>{threshold.kicker}</Kicker>
           <Heading>
             {threshold.title}
@@ -42,11 +44,11 @@ export function ThresholdSection() {
           <Text size="label" tone="muted">
             {threshold.verdict}
           </Text>
-        </div>
-        <div className="flex min-w-0 grow-13 basis-140 flex-col gap-4">
+        </FadeIn>
+        <FadeIn delay={stagger.sibling} className="flex min-w-0 grow-13 basis-140 flex-col gap-4">
           <PiecePlaceholder label={threshold.chartPlaceholder} className="aspect-chart" />
           <PiecePlaceholder label={threshold.controlsPlaceholder} className="h-chart-controls" />
-        </div>
+        </FadeIn>
       </Container>
     </Section>
   );

@@ -19,14 +19,22 @@ export const reducedTransition: Transition = {
   ease: "linear",
 };
 
-/** Opacity + 12px lift. */
+/** Gap between sibling entrances, e.g. the two columns of a section. */
+export const stagger = {
+  sibling: 0.15,
+} as const;
+
+/** Section entrances fire once, when a quarter of the block is visible. */
+export const inViewOnce = { once: true, amount: 0.25 } as const;
+
+/** Opacity + 12px lift. Pass the delay in seconds as the `custom` prop. */
 export const fade: Variants = {
   hidden: { opacity: 0, y: FADE_OFFSET_PX },
-  visible: {
+  visible: (delay: number = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: duration.fade, ease: easeOutExpo },
-  },
+    transition: { duration: duration.fade, ease: easeOutExpo, delay },
+  }),
 };
 
 /** Reduced-motion fallback for any entrance: opacity only, ≤150ms. */
