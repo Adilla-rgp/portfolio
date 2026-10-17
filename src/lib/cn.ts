@@ -10,12 +10,14 @@ const twMerge = extendTailwindMerge({
       text: [
         "display",
         "display-xl",
+        "display-page",
         "h2",
         "h3",
         "project",
         "number",
         "stat",
         "marquee",
+        "node",
         "body-lg",
         "body",
         "mono-sm",
@@ -29,7 +31,7 @@ const twMerge = extendTailwindMerge({
       spacing: ["gutter", "gutter-sm", "section", "hero", "trace-panel"],
       container: ["page"],
       ease: ["out-expo"],
-      animate: ["marquee", "marquee-fast", "blink"],
+      animate: ["marquee", "marquee-fast", "blink", "dash-flow", "glitch"],
     },
   },
 });

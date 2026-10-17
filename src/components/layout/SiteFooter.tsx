@@ -4,11 +4,11 @@ import { NavLink } from "@/components/ui/NavLink";
 import { Accent } from "@/components/ui/Typography/Accent";
 import { Heading } from "@/components/ui/Typography/Heading";
 import { Text } from "@/components/ui/Typography/Text";
-import { homeContent } from "@/content/home";
+import { site } from "@/content/site";
 
-const { footer } = homeContent;
+const { footer } = site;
 
-export function HomeFooter() {
+export function SiteFooter() {
   return (
     <footer id={footer.id} className="overflow-hidden border-t border-line">
       <Marquee

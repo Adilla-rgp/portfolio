@@ -7,7 +7,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/cn";
 
 export const buttonVariants = cva(
-  "inline-flex shrink-0 cursor-pointer items-center justify-center gap-3 rounded-pill font-mono font-bold uppercase tracking-button whitespace-nowrap transition-colors duration-150 ease-out-expo disabled:pointer-events-none disabled:text-faint",
+  "inline-flex shrink-0 cursor-pointer items-center justify-center gap-3 rounded-pill font-mono font-bold uppercase tracking-button whitespace-nowrap transition-colors duration-150 ease-out-expo disabled:pointer-events-none disabled:border disabled:border-dashed disabled:border-line-strong disabled:bg-transparent disabled:text-muted",
   {
     variants: {
       variant: {
@@ -15,6 +15,8 @@ export const buttonVariants = cva(
         outline:
           "border border-line-strong bg-bg text-fg-soft hover:border-fg hover:text-fg",
         ghost: "text-fg-soft hover:bg-raised hover:text-fg",
+        /** The selected item in a set, inverted onto bone like `Card variant="lit"`. */
+        lit: "border border-fg bg-fg text-bg",
       },
       size: {
         md: "min-h-11 px-5 text-mono-sm",

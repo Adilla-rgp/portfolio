@@ -46,6 +46,12 @@
   --text-display--letter-spacing: -0.035em;
   --text-display--font-weight: 850;
 
+  /* Opening title of inner pages (About.dc.html: 8.6vw, up to 128px). */
+  --text-display-page: clamp(3.125rem, 8.6vw, 8rem);
+  --text-display-page--line-height: 0.9;
+  --text-display-page--letter-spacing: -0.035em;
+  --text-display-page--font-weight: 850;
+
   --text-display-xl: clamp(2.75rem, 18.5vw - 1.4rem, 15.625rem); /* = 17vw at 1440px */
   --text-display-xl--line-height: 0.82;
   --text-display-xl--letter-spacing: -0.05em;
@@ -80,6 +86,12 @@
   --text-marquee--line-height: 1;
   --text-marquee--letter-spacing: -0.04em;
   --text-marquee--font-weight: 900;
+
+  /* Node labels: stack map projects, timeline milestones. */
+  --text-node: 1.375rem;
+  --text-node--line-height: 1.2;
+  --text-node--letter-spacing: -0.02em;
+  --text-node--font-weight: 800;
 
   --text-body-lg: 1.25rem;
   --text-body-lg--line-height: 1.5;

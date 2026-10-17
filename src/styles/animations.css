@@ -56,6 +56,10 @@
   --animate-marquee: marquee 38s linear infinite;
   --animate-marquee-fast: marquee 22s linear infinite;
   --animate-blink: blink 1.4s steps(2) infinite;
+  /* Stack map: dashes travel along the selected links. */
+  --animate-dash-flow: dash-flow 0.36s linear infinite;
+  /* 404: a short jolt every few seconds. */
+  --animate-glitch: glitch 3.2s steps(1) infinite;
 
   @keyframes marquee {
     from { transform: translateX(0); }
@@ -64,6 +68,19 @@
 
   @keyframes blink {
     50% { opacity: 0.25; }
+  }
+
+  /* One dash + gap (10 + 8), so the loop is seamless. */
+  @keyframes dash-flow {
+    from { stroke-dashoffset: 0; }
+    to { stroke-dashoffset: -18; }
+  }
+
+  @keyframes glitch {
+    0%, 92%, 100% { transform: none; }
+    93% { transform: translate(-6px, 2px); }
+    95% { transform: translate(5px, -3px); }
+    97% { transform: translate(-2px, 1px); }
   }
 }
 

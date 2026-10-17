@@ -5,6 +5,8 @@
  * are normalized to it so the wave keeps the same number of cycles at any size.
  */
 
+import { clamp01, easeOutCubic } from "@/lib/easing";
+
 const REFERENCE_WIDTH = 1440;
 const REFERENCE_HEIGHT = 800;
 
@@ -103,14 +105,6 @@ export function waveY(x: number, t: number, width: number, height: number): numb
     scale * primary.amplitude * height * Math.sin(u * primary.frequency + t * primary.speed) +
     scale * secondary.amplitude * height * Math.sin(u * secondary.frequency + t * secondary.speed)
   );
-}
-
-function clamp01(value: number) {
-  return Math.max(0, Math.min(1, value));
-}
-
-function easeOutCubic(value: number) {
-  return 1 - Math.pow(1 - value, 3);
 }
 
 /** 0 = pure noise, 1 = settled on the wave. `elapsed` counts from the last (re)start. */

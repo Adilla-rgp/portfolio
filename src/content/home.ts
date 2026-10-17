@@ -1,5 +1,3 @@
-import { site } from "@/content/site";
-
 export const homeContent = {
   hero: {
     id: "topo",
@@ -47,17 +45,5 @@ export const homeContent = {
     id: "trabalho",
     title: "Trabalho",
     orderPrefix: "Ordem da lente /",
-  },
-  footer: {
-    id: "contato",
-    cta: "Vamos conversar",
-    ctaArrow: "→",
-    place: "São Luís, BR · UFMA · Laboratório Telemídia",
-    navLabel: "Contato",
-    links: [
-      { label: "Cal.com ↗", href: site.links.cal },
-      { label: "GitHub ↗", href: site.links.github },
-      { label: "LinkedIn ↗", href: site.links.linkedin },
-    ],
   },
 } as const;

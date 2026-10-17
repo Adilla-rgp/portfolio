@@ -156,3 +156,20 @@
     0 0 1rem var(--color-bg),
     0 0 1.5rem var(--color-bg);
 }
+
+/* Stack map: dash pattern of the selected links. Keep in sync with the
+   `dash-flow` keyframes, which travel exactly one dash + gap. */
+@utility stroke-dash-flow {
+  stroke-dasharray: 10 8;
+}
+
+/* Timeline progress bar. --progress (0–1) is written by the component on its
+   root while autoplaying or dragging, so React never re-renders per frame. */
+@utility timeline-fill {
+  width: calc(var(--progress, 1) * 100%);
+}
+
+/* Timeline milestones: as many 280px-or-wider columns as fit. */
+@utility grid-cols-timeline {
+  grid-template-columns: repeat(auto-fill, minmax(17.5rem, 1fr));
+}

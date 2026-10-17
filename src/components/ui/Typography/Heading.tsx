@@ -18,6 +18,7 @@ export const headingVariants = cva("font-sans hyphens-auto", {
     },
     size: {
       display: "text-display font-stretch-125% uppercase",
+      displayPage: "text-display-page font-stretch-125% uppercase",
       displayXl: "text-display-xl font-stretch-125%",
       h2: "text-h2 font-stretch-115% uppercase",
       h3: "text-h3 font-stretch-115%",
@@ -25,6 +26,7 @@ export const headingVariants = cva("font-sans hyphens-auto", {
       number: "text-number font-stretch-125% tabular-nums",
       stat: "text-stat font-stretch-115% tabular-nums",
       marquee: "text-marquee font-stretch-125% uppercase",
+      node: "text-node font-stretch-115%",
     },
   },
   defaultVariants: {

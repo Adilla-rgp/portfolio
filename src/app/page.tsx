@@ -1,7 +1,7 @@
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import { LensProvider } from "@/components/lens/LensProvider";
 import { lensParam } from "@/content/lens";
 import { parseLens } from "@/lib/lens";
-import { HomeFooter } from "@/sections/home/HomeFooter";
 import { HomeHero } from "@/sections/home/HomeHero";
 import { ThresholdSection } from "@/sections/home/ThresholdSection";
 import { TraceSection } from "@/sections/home/TraceSection";
@@ -22,7 +22,7 @@ export default async function Home({ searchParams }: HomeProps) {
         <ThresholdSection />
         <WorkSection />
       </main>
-      <HomeFooter />
+      <SiteFooter />
     </LensProvider>
   );
 }
