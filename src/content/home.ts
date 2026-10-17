@@ -42,13 +42,6 @@ export const homeContent = {
     kicker: "02 — Uma decisão do Cosmo",
     title: "Arraste o limiar",
     body: "O tutor reaproveita respostas quando dois pedidos são parecidos o bastante. Limiar baixo economiza chamadas ao LLM, mas devolve feedback errado. Onde você cortaria?",
-    stats: [
-      { id: "hits", label: "Acertos de cache", value: "[—%]", accent: true },
-      { id: "wrong", label: "Reuso errado", value: "[—%]", accent: false },
-    ],
-    verdict: "[frase que muda conforme a zona do limiar]",
-    chartPlaceholder: "[peça interativa: gráfico do limiar de Jaccard]",
-    controlsPlaceholder: "[peça interativa: controle do limiar e legenda]",
   },
   work: {
     id: "trabalho",

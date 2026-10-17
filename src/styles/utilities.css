@@ -120,3 +120,23 @@
 @utility fade-in-sibling {
   --fade-delay: var(--stagger-sibling);
 }
+
+/* Threshold chart. The handle, its dots and its label are drawn at the origin
+   and moved by custom properties (viewBox units) that the component sets on
+   the <svg> while dragging, so React never re-renders during a drag. CSS px in
+   an SVG transform are user units. */
+@utility chart-at-handle {
+  transform: translateX(calc(var(--handle-x) * 1px));
+}
+
+@utility chart-at-hit {
+  transform: translate(calc(var(--handle-x) * 1px), calc(var(--hit-y) * 1px));
+}
+
+@utility chart-at-wrong {
+  transform: translate(calc(var(--handle-x) * 1px), calc(var(--wrong-y) * 1px));
+}
+
+@utility chart-at-label {
+  transform: translateX(calc(var(--label-x) * 1px));
+}
