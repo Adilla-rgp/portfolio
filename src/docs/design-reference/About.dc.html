@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Sobre — Ádilla Gomes</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;background:#0B0B0C}
+a{color:#F2EFE8;text-decoration:none}a:hover{color:#FF5A1F}
+button{font:inherit}
+@keyframes rise{from{transform:translateY(105%)}to{transform:translateY(0)}}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.rise{display:block;animation:rise 1.1s cubic-bezier(.2,.8,.2,1) both}
+.fade{animation:fade .9s cubic-bezier(.2,.8,.2,1) both}
+</style>
+</helmet>
+<div style="background: #0B0B0C; color: #F2EFE8; font-family: 'Archivo', sans-serif">
+
+<header style="border-bottom: 1px solid #26262A">
+<div style="max-width: 1360px; margin: 0 auto; padding: 22px 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.06em">
+<a href="Home.dc.html" style="font-weight: 700">ÁDILLA GOMES</a>
+<nav style="display: flex; flex-wrap: wrap; gap: 28px"><a href="Home.dc.html">← HOME</a><a href="#stack">STACK</a><a href="#trajetoria">TRAJETÓRIA</a></nav>
+</div>
+</header>
+
+<main>
+<section style="max-width: 1360px; margin: 0 auto; padding: 88px 40px 72px; display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-end">
+<div style="flex: 3 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 28px">
+<div class="fade" style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.08em; color: {{accent}}">SOBRE — SÃO LUÍS, MARANHÃO</div>
+<h1 style="margin: 0; font-size: clamp(52px, 8.6vw, 128px); line-height: 0.9; font-weight: 850; font-stretch: 125%; letter-spacing: -0.035em; text-transform: uppercase">
+<span style="display: block; overflow: hidden; padding-bottom: 0.04em"><span class="rise" style="animation-delay: .1s">Quem está</span></span>
+<span style="display: block; overflow: hidden; padding-bottom: 0.04em"><span class="rise" style="animation-delay: .25s">por trás<span style="color: {{accent}}">.</span></span></span>
+</h1>
+<p class="fade" style="animation-delay: .6s; margin: 0; max-width: 640px; font-size: 21px; line-height: 1.5; color: #C9C5BC">Estudante de Ciência da Computação na UFMA e desenvolvedora no Laboratório TeleMídia, onde construo o Cosmo, um tutor inteligente com IA. Faço pesquisa aplicada em IA na iniciação científica e gosto de sistemas que dá para medir.</p>
+</div>
+<div class="fade" style="animation-delay: .8s; flex: 1 1 260px; display: flex; flex-direction: column; gap: 16px; align-items: flex-start">
+<div aria-label="Foto" style="width: 140px; height: 140px; border-radius: 50%; border: 1px dashed #4A4741; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #9A968E">[FOTO]</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<a href="#cv" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 20px; border-radius: 999px; background: {{accent}}; color: #0B0B0C; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.04em">CV · PT-BR ↓</a>
+<a href="#cv" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 20px; border-radius: 999px; border: 1px solid #3A3A40; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.04em">CV · EN ↓</a>
+</div>
+</div>
+</section>
+
+<section aria-label="Números" style="border-top: 1px solid #26262A; border-bottom: 1px solid #26262A">
+<div style="max-width: 1360px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))">
+<div style="padding: 36px 24px 36px 0; display: flex; flex-direction: column; gap: 10px"><span style="font-size: 72px; line-height: 0.9; font-weight: 900; font-stretch: 125%; letter-spacing: -0.04em">{{years}}<span style="color: {{accent}}">+</span></span><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em; color: #9A968E">ANOS DESENVOLVENDO</span></div>
+<div style="padding: 36px 24px 36px 0; display: flex; flex-direction: column; gap: 10px"><span style="font-size: 72px; line-height: 0.9; font-weight: 900; font-stretch: 125%; letter-spacing: -0.04em">{{prodCount}}</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em; color: #9A968E">PROJETOS EM PRODUÇÃO</span></div>
+<div style="padding: 36px 24px 36px 0; display: flex; flex-direction: column; gap: 10px"><span style="font-size: 72px; line-height: 0.9; font-weight: 900; font-stretch: 125%; letter-spacing: -0.04em">SBIE</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em; color: #9A968E">ARTIGO 2026, EM AVALIAÇÃO</span></div>
+<div style="padding: 36px 24px 36px 0; display: flex; flex-direction: column; gap: 10px"><span style="font-size: 72px; line-height: 0.9; font-weight: 900; font-stretch: 125%; letter-spacing: -0.04em">2027</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em; color: #9A968E">FORMATURA PREVISTA</span></div>
+</div>
+</section>
+
+<section id="stack" style="max-width: 1360px; margin: 0 auto; padding: 120px 40px; display: flex; flex-direction: column; gap: 40px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.08em; color: {{accent}}">01 — STACK</div>
+<h2 style="margin: 0; font-size: clamp(40px, 5vw, 72px); line-height: 0.95; font-weight: 800; font-stretch: 115%; letter-spacing: -0.03em; text-transform: uppercase">Sem barra de %.</h2>
+</div>
+<p style="margin: 0; max-width: 440px; font-size: 18px; line-height: 1.55; color: #C9C5BC">Toque numa tecnologia para ver onde ela trabalhou de verdade. Ou toque num projeto para ver do que ele é feito.</p>
+</div>
+<div style="overflow-x: auto">
+<div style="position: relative; width: 1200px; height: 640px; margin: 0 auto">
+<svg width="1200" height="640" viewBox="0 0 1200 640" aria-hidden="true" style="position: absolute; inset: 0">
+<sc-for list="{{links}}" as="l" hint-placeholder-count="20">
+<path d="{{l.d}}" fill="none" stroke="{{l.stroke}}" stroke-width="{{l.sw}}" opacity="{{l.o}}" stroke-dasharray="{{l.dash}}" stroke-dashoffset="{{l.off}}"></path>
+</sc-for>
+</svg>
+<sc-for list="{{techs}}" as="tk" hint-placeholder-count="14">
+<button type="button" onClick="{{tk.pick}}" onMouseEnter="{{tk.pick}}" aria-pressed="{{tk.on}}" style="{{tk.style}}">{{tk.label}}</button>
+</sc-for>
+<sc-for list="{{projs}}" as="pj" hint-placeholder-count="5">
+<button type="button" onClick="{{pj.pick}}" onMouseEnter="{{pj.pick}}" aria-pressed="{{pj.on}}" style="{{pj.style}}"><span style="font-size: 22px; font-weight: 800; font-stretch: 115%; letter-spacing: -0.02em">{{pj.label}}</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.06em; opacity: 0.8">{{pj.sub}}</span></button>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section id="trajetoria" style="border-top: 1px solid #26262A; background: #0F0F11">
+<div style="max-width: 1360px; margin: 0 auto; padding: 120px 40px; display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.08em; color: {{accent}}">02 — TRAJETÓRIA</div>
+<h2 style="margin: 0; font-size: clamp(40px, 5vw, 72px); line-height: 0.95; font-weight: 800; font-stretch: 115%; letter-spacing: -0.03em; text-transform: uppercase">Arraste o tempo.</h2>
+</div>
+<span style="font-size: clamp(64px, 8vw, 120px); line-height: 0.85; font-weight: 900; font-stretch: 125%; letter-spacing: -0.05em; color: {{accent}}">{{yearLabel}}</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 14px">
+<div style="position: relative; height: 4px; background: #26262A; border-radius: 2px"><span style="{{fillStyle}}"></span></div>
+<label style="display: flex; flex-direction: column; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #9A968E">
+<span>Ano: {{yearLabel}}</span>
+<input type="range" min="2020" max="2028" step="0.05" value="{{year}}" onInput="{{onYear}}" style="width: 100%; accent-color: {{accent}}; min-height: 32px">
+</label>
+<div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #9A968E"><span>2020</span><span>2022</span><span>2024</span><span>2026</span><span>2028</span></div>
+</div>
+<ol style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px">
+<sc-for list="{{events}}" as="ev" hint-placeholder-count="8">
+<li style="{{ev.style}}">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em; color: {{ev.dateColor}}">{{ev.when}}</span>
+<span style="font-size: 20px; font-weight: 700; font-stretch: 110%; line-height: 1.2">{{ev.title}}</span>
+<span style="font-size: 15px; line-height: 1.5; color: #A9A59D">{{ev.body}}</span>
+</li>
+</sc-for>
+</ol>
+</div>
+</section>
+
+<section aria-label="Fora do código" style="max-width: 1360px; margin: 0 auto; padding: 120px 40px; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 20px">
+<div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.08em; color: {{accent}}">03 — FORA DO CÓDIGO</div>
+<h2 style="margin: 0; font-size: clamp(40px, 5vw, 72px); line-height: 0.95; font-weight: 800; font-stretch: 115%; letter-spacing: -0.03em; text-transform: uppercase">Liderança.</h2>
+</div>
+<div style="flex: 2 1 560px; min-width: 0; display: flex; flex-direction: column; border-top: 1px solid #3A3A40">
+<div style="display: flex; flex-wrap: wrap; gap: 12px 40px; padding: 28px 0; border-bottom: 1px solid #3A3A40; align-items: baseline">
+<span style="flex: 1 1 260px; font-size: 30px; font-weight: 800; font-stretch: 115%; letter-spacing: -0.02em; text-transform: uppercase">Connection</span>
+<span style="flex: 2 1 300px; font-size: 17px; line-height: 1.55; color: #C9C5BC">Diretora de Projetos na empresa júnior. [Uma linha sobre o que você entregou ou coordenou.]</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px 40px; padding: 28px 0; border-bottom: 1px solid #3A3A40; align-items: baseline">
+<span style="flex: 1 1 260px; font-size: 30px; font-weight: 800; font-stretch: 115%; letter-spacing: -0.02em; text-transform: uppercase">Dacomp</span>
+<span style="flex: 2 1 300px; font-size: 17px; line-height: 1.55; color: #C9C5BC">Diretora de Educação do diretório acadêmico, criando minicursos de programação para alunos de Ciência da Computação.</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px 40px; padding: 28px 0; border-bottom: 1px solid #3A3A40; align-items: baseline">
+<span style="flex: 1 1 260px; font-size: 30px; font-weight: 800; font-stretch: 115%; letter-spacing: -0.02em; text-transform: uppercase">Monitoria</span>
+<span style="flex: 2 1 300px; font-size: 17px; line-height: 1.55; color: #C9C5BC">Monitora de Algoritmos I na UFMA, a mesma disciplina que hoje o Cosmo atende.</span>
+</div>
+</div>
+</section>
+
+<footer style="border-top: 1px solid #26262A">
+<div style="max-width: 1360px; margin: 0 auto; padding: 56px 40px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 24px">
+<a href="Home.dc.html" style="font-size: clamp(36px, 5vw, 64px); font-weight: 900; font-stretch: 125%; letter-spacing: -0.04em; text-transform: uppercase">Ver o trabalho <span style="color: {{accent}}">→</span></a>
+<nav aria-label="Contato" style="display: flex; flex-wrap: wrap; gap: 32px; font-family: 'JetBrains Mono', monospace; font-size: 14px; letter-spacing: 0.04em">
+<a href="https://cal.com/adilla-gomes">CAL.COM ↗</a><a href="https://github.com/Adilla-rgp">GITHUB ↗</a><a href="https://linkedin.com/in/adilla-gomes">LINKEDIN ↗</a>
+</nav>
+</div>
+</footer>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#FF5A1F","options":["#FF5A1F","#C6FF3D","#3D7BFF"]},"$preview":{"width":1440,"height":3300}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    this.t0 = performance.now();
+    this.last = 0;
+    const tick = (ts) => {
+      if (ts - this.last > 33) { this.last = ts; this.setState({ t: (ts - this.t0) / 1000 }); }
+      this.raf = requestAnimationFrame(tick);
+    };
+    this.raf = requestAnimationFrame(tick);
+  }
+  componentWillUnmount() { cancelAnimationFrame(this.raf); }
+  renderVals() {
+    const accent = this.props.accent ?? '#FF5A1F';
+    const t = this.state.t || 0;
+    const clamp = (v) => Math.max(0, Math.min(1, v));
+    const ease = (v) => 1 - Math.pow(1 - v, 3);
+
+    // count-up
+    const k = ease(clamp((t - 0.6) / 1.4));
+    const years = Math.round(3 * k);
+    const prodCount = Math.round(2 * k);
+
+    // stack graph
+    const TECH = ['Python', 'TypeScript', 'FastAPI', 'LangGraph', 'API do Claude', 'Gemini', 'PostgreSQL', 'Prisma', 'Next.js', 'React', 'Pandas', 'SQL', 'dbt', 'Power BI'];
+    const PROJ = [
+      { id: 'cosmo', label: 'Cosmo', sub: 'TUTOR COM IA' },
+      { id: 'gal', label: 'Gallifrey', sub: 'MISSÕES' },
+      { id: 'doc', label: 'Documento → sinal', sub: 'EXTRAÇÃO COM LLM' },
+      { id: 'rec', label: 'Recomendação', sub: 'PESQUISA' },
+      { id: 'bi', label: 'Análise & BI', sub: '[ONDE USOU]' }
+    ];
+    const USES = {
+      'Python': ['cosmo', 'doc', 'rec'], 'TypeScript': ['cosmo', 'gal'], 'FastAPI': ['cosmo', 'doc'], 'LangGraph': ['cosmo'],
+      'API do Claude': ['cosmo'], 'Gemini': ['doc'], 'PostgreSQL': ['cosmo', 'gal'], 'Prisma': ['gal'], 'Next.js': ['cosmo'],
+      'React': ['gal'], 'Pandas': ['rec'], 'SQL': ['bi', 'cosmo'], 'dbt': ['bi'], 'Power BI': ['bi']
+    };
+    const sel = this.state.sel || { type: 'tech', id: 'Python' };
+    const ty = (i) => 20 + i * 44;
+    const py = (j) => 40 + j * 122;
+    const techOn = (name) => sel.type === 'tech' ? sel.id === name : (USES[name] || []).indexOf(sel.id) >= 0;
+    const projOn = (id) => sel.type === 'proj' ? sel.id === id : (USES[sel.id] || []).indexOf(id) >= 0;
+    const links = [];
+    TECH.forEach((name, i) => {
+      (USES[name] || []).forEach((pid) => {
+        const j = PROJ.findIndex((p) => p.id === pid);
+        const on = sel.type === 'tech' ? sel.id === name : sel.id === pid;
+        const x1 = 200, y1 = ty(i) + 18, x2 = 900, y2 = py(j) + 36;
+        links.push({
+          d: 'M' + x1 + ' ' + y1 + ' C 560 ' + y1 + ', 560 ' + y2 + ', ' + x2 + ' ' + y2,
+          stroke: on ? accent : '#3A3A40', sw: on ? 2.5 : 1, o: on ? 1 : 0.6,
+          dash: on ? '10 8' : '0', off: on ? (-t * 50).toFixed(1) : '0'
+        });
+      });
+    });
+    const techs = TECH.map((name, i) => {
+      const on = techOn(name);
+      return {
+        label: name, on: on ? 'true' : 'false',
+        pick: () => { if (sel.type !== 'tech' || sel.id !== name) this.setState({ sel: { type: 'tech', id: name } }); },
+        style: 'position: absolute; left: 0; top: ' + ty(i) + 'px; width: 200px; height: 36px; padding: 0 16px; border-radius: 999px; cursor: pointer; text-align: left; font-family: \'JetBrains Mono\', monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.02em; transition: all .25s; ' +
+          (on ? 'background: ' + accent + '; color: #0B0B0C; border: 1px solid ' + accent : 'background: #111113; color: #9A968E; border: 1px solid #2E2E33')
+      };
+    });
+    const projs = PROJ.map((p, j) => {
+      const on = projOn(p.id);
+      return {
+        label: p.label, sub: p.sub, on: on ? 'true' : 'false',
+        pick: () => { if (sel.type !== 'proj' || sel.id !== p.id) this.setState({ sel: { type: 'proj', id: p.id } }); },
+        style: 'position: absolute; left: 900px; top: ' + py(j) + 'px; width: 300px; height: 72px; padding: 0 20px; border-radius: 14px; cursor: pointer; text-align: left; display: flex; flex-direction: column; justify-content: center; gap: 4px; transition: all .25s; ' +
+          (on ? 'background: #F2EFE8; color: #0B0B0C; border: 1px solid #F2EFE8' : 'background: #111113; color: #6E6A63; border: 1px solid #2E2E33')
+      };
+    });
+
+    // timeline
+    const auto = this.state.year == null;
+    const year = auto ? 2020 + 7.95 * ease(clamp((t - 0.8) / 5)) : this.state.year;
+    const EV = [
+      { y: 2020.0, when: '2020 — 2022', title: 'Técnico em Informática', body: 'Ensino médio integrado ao técnico no IFMA.' },
+      { y: 2024.0, when: '[ANO]', title: 'Ciência da Computação', body: 'Entrada no curso na UFMA.' },
+      { y: 2025.2, when: 'MAR — AGO 2025', title: 'Monitora de Algoritmos I', body: 'Ajudando turmas na disciplina que o Cosmo atende hoje.' },
+      { y: 2025.5, when: '[INÍCIO]', title: 'Laboratório TeleMídia', body: 'Desenvolvimento do Cosmo e iniciação científica (PIBIC e PIBITI).' },
+      { y: 2025.9, when: '[PERÍODO]', title: 'Pesquisa em recomendação', body: 'Análise e preparação de dados para um recomendador com BERT4Rec.' },
+      { y: 2026.4, when: '2026', title: 'Artigo no SBIE', body: 'O Cosmo vira artigo completo, hoje em avaliação.' },
+      { y: 2026.78, when: 'OUT 2026', title: 'Gallifrey em produção', body: 'O módulo de missões entra no ar para os alunos.' },
+      { y: 2027.95, when: 'DEZ 2027', title: 'Formatura prevista', body: 'Bacharelado em Ciência da Computação, UFMA.' }
+    ];
+    const events = EV.map((e) => {
+      const lit = year >= e.y;
+      const cur = lit && year - e.y < 0.5;
+      return {
+        when: e.when, title: e.title, body: e.body,
+        dateColor: lit ? accent : '#6E6A63',
+        style: 'display: flex; flex-direction: column; gap: 8px; padding: 22px; border-radius: 14px; transition: all .35s; ' +
+          (cur ? 'background: #F2EFE8; color: #0B0B0C; border: 1px solid #F2EFE8; transform: translateY(-4px)'
+            : lit ? 'background: #141416; color: #F2EFE8; border: 1px solid #3A3A40'
+            : 'background: transparent; color: #4A4741; border: 1px dashed #2E2E33; opacity: 0.6')
+      };
+    });
+    return {
+      accent, years, prodCount, links, techs, projs,
+      year: year.toFixed(2),
+      yearLabel: String(Math.floor(year)),
+      fillStyle: 'position: absolute; left: 0; top: 0; bottom: 0; border-radius: 2px; background: ' + accent + '; width: ' + ((year - 2020) / 8 * 100).toFixed(2) + '%',
+      onYear: (e) => this.setState({ year: Number(e.target.value) }),
+      events
+    };
+  }
+}
+</script>
+</body>
+</html>

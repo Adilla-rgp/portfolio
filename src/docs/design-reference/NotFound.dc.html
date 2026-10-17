@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>404 — Sinal perdido</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;background:#0B0B0C}
+a{color:#F2EFE8;text-decoration:none}a:hover{color:#FF5A1F}
+@keyframes glitch{0%,92%,100%{transform:none}93%{transform:translate(-6px,2px)}95%{transform:translate(5px,-3px)}97%{transform:translate(-2px,1px)}}
+.glitch{display:inline-block;animation:glitch 3.2s steps(1) infinite}
+</style>
+</helmet>
+<section aria-label="Página não encontrada" onPointerMove="{{onMove}}" onPointerLeave="{{onLeave}}" style="position: relative; min-height: 900px; overflow: hidden; background: #0B0B0C; color: #F2EFE8; font-family: 'Archivo', sans-serif">
+<svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%">
+<sc-for list="{{dots}}" as="d" hint-placeholder-count="40">
+<circle cx="{{d.x}}" cy="{{d.y}}" r="{{d.r}}" fill="{{d.fill}}" opacity="{{d.o}}"></circle>
+</sc-for>
+</svg>
+<div style="position: relative; min-height: 900px; box-sizing: border-box; max-width: 1360px; margin: 0 auto; padding: 32px 40px 56px; display: flex; flex-direction: column; pointer-events: none">
+<a href="Home.dc.html" style="pointer-events: auto; align-self: flex-start; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.06em">ÁDILLA GOMES</a>
+<div style="margin: auto 0; display: flex; flex-direction: column; gap: 24px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.08em; color: {{accent}}">ERRO 404 · GET {{path}}</span>
+<h1 style="margin: 0; font-size: clamp(120px, 26vw, 380px); line-height: 0.8; font-weight: 900; font-stretch: 125%; letter-spacing: -0.06em"><span class="glitch">4<span style="color: {{accent}}">0</span>4</span></h1>
+<p style="margin: 0; font-size: clamp(28px, 3.4vw, 48px); line-height: 1; font-weight: 800; font-stretch: 120%; letter-spacing: -0.02em; text-transform: uppercase">Sinal perdido.</p>
+<p style="margin: 0; max-width: 460px; font-size: 18px; line-height: 1.55; color: #C9C5BC">Esta rota só tem ruído. Passe o mouse e tente juntar alguma coisa, ou volte para onde o sinal é forte.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; pointer-events: auto">
+<a href="Home.dc.html" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 26px; border-radius: 999px; background: {{accent}}; color: #0B0B0C; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700; letter-spacing: 0.04em">← VOLTAR PARA A HOME</a>
+<a href="About.dc.html" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 26px; border-radius: 999px; border: 1px solid #3A3A40; background: #0B0B0C; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700; letter-spacing: 0.04em">QUEM SOU EU</a>
+</div>
+</div>
+</div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#FF5A1F","options":["#FF5A1F","#C6FF3D","#3D7BFF"]},"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    this.t0 = performance.now();
+    this.last = 0;
+    const tick = (ts) => {
+      if (ts - this.last > 33) { this.last = ts; this.setState({ t: (ts - this.t0) / 1000 }); }
+      this.raf = requestAnimationFrame(tick);
+    };
+    this.raf = requestAnimationFrame(tick);
+  }
+  componentWillUnmount() { cancelAnimationFrame(this.raf); }
+  renderVals() {
+    const accent = this.props.accent ?? '#FF5A1F';
+    const t = this.state.t || 0;
+    if (!this.pts) {
+      let seed = 11;
+      const rnd = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+      this.pts = [];
+      for (let i = 0; i < 160; i++) this.pts.push({ x: rnd() * 1440, y: rnd() * 900, ph: rnd() * 6.28, sp: 0.6 + rnd() * 1.4 });
+    }
+    const m = this.state.mouse;
+    const dots = this.pts.map((d) => {
+      let x = d.x + 26 * Math.sin(t * d.sp + d.ph);
+      let y = d.y + 26 * Math.cos(t * d.sp * 0.8 + d.ph);
+      let near = 0;
+      if (m) {
+        const dx = m.x - x, dy = m.y - y;
+        const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+        if (dist < 260) {
+          near = (260 - dist) / 260;
+          x += dx * near * 0.75;
+          y += dy * near * 0.75;
+        }
+      }
+      return { x: x.toFixed(1), y: y.toFixed(1), r: (1.6 + near * 2.4).toFixed(2), fill: near > 0.3 ? accent : '#F2EFE8', o: (0.3 + near * 0.6).toFixed(2) };
+    });
+    return {
+      accent, dots, path: '/[rota]',
+      onMove: (e) => {
+        const r = e.currentTarget.getBoundingClientRect();
+        const s = Math.max(r.width / 1440, r.height / 900);
+        const ox = (r.width - 1440 * s) / 2, oy = (r.height - 900 * s) / 2;
+        this.setState({ mouse: { x: (e.clientX - r.left - ox) / s, y: (e.clientY - r.top - oy) / s } });
+      },
+      onLeave: () => this.setState({ mouse: null })
+    };
+  }
+}
+</script>
+</body>
+</html>

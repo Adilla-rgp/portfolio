@@ -1,0 +1,53 @@
+:root {
+  /* Colors */
+
+  --background: #050816;
+  --background-secondary: #0b1120;
+
+  --surface: #111827;
+
+  --card: #161b2e;
+
+  --primary: #7c3aed;
+
+  --primary-hover: #8b5cf6;
+
+  --primary-light: #a78bfa;
+
+  --primary-glow: #c4b5fd;
+
+  --text-primary: #f8fafc;
+
+  --text-secondary: #a1a1aa;
+
+  --text-muted: #71717a;
+
+  --border: rgba(255,255,255,.08);
+
+  --border-purple: rgba(124,58,237,.18);
+
+  /* Radius */
+
+  --radius-sm: 8px;
+
+  --radius-md: 12px;
+
+  --radius-lg: 18px;
+
+  --radius-xl: 28px;
+
+  /* Shadows */
+
+  --shadow-purple:
+    0 0 50px rgba(124,58,237,.28);
+
+  /* Motion */
+
+  --duration-fast: .15s;
+
+  --duration-normal: .25s;
+
+  --duration-slow: .4s;
+
+  --duration-page: .7s;
+}

@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Gallifrey</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;background:#0B0B0C}
+a{color:#F2EFE8;text-decoration:none}a:hover{color:#FF5A1F}
+button{font:inherit}
+@keyframes rise{from{transform:translateY(105%)}to{transform:translateY(0)}}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+.rise{display:block;animation:rise 1.1s cubic-bezier(.2,.8,.2,1) both}
+.fade{animation:fade .9s cubic-bezier(.2,.8,.2,1) both}
+.pop{animation:pop .35s cubic-bezier(.2,.8,.2,1) both}
+</style>
+</helmet>
+<div style="background: #0B0B0C; color: #F2EFE8; font-family: 'Archivo', sans-serif">
+
+<header style="border-bottom: 1px solid #26262A">
+<div style="max-width: 1360px; margin: 0 auto; padding: 22px 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.06em">
+<a href="Home.dc.html" style="font-weight: 700">ÁDILLA GOMES</a>
+<nav style="display: flex; gap: 28px"><a href="Home.dc.html">← HOME</a><a href="Case.dc.html">COSMO</a></nav>
+</div>
+</header>
+
+<main>
+<section style="max-width: 1360px; margin: 0 auto; padding: 88px 40px 64px; display: flex; flex-direction: column; gap: 28px">
+<div class="fade" style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.08em; color: {{accent}}">MÓDULO DO COSMO — <span style="color: #47D17C">● EM PRODUÇÃO</span></div>
+<h1 style="margin: 0; font-size: clamp(72px, 14vw, 210px); line-height: 0.85; font-weight: 900; font-stretch: 125%; letter-spacing: -0.05em; text-transform: uppercase">
+<span style="display: block; overflow: hidden; padding-bottom: 0.03em"><span class="rise" style="animation-delay: .1s">Gallifrey<span style="color: {{accent}}">.</span></span></span>
+</h1>
+<p class="fade" style="animation-delay: .5s; margin: 0; max-width: 640px; font-size: 21px; line-height: 1.5; color: #C9C5BC">Missões de questões de Python para Algoritmos I. Jogue uma abaixo, depois vire a chave e veja o que o sistema registra enquanto o aluno joga.</p>
+</section>
+
+<section aria-label="Missão jogável" style="border-top: 1px solid #26262A; border-bottom: 1px solid #26262A; background: #0F0F11">
+<div style="max-width: 1360px; margin: 0 auto; padding: 72px 40px 96px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em">
+<span style="padding: 8px 14px; border-radius: 999px; background: #F2EFE8; color: #0B0B0C; font-weight: 700">PLANETA · LISTAS</span>
+<span style="color: #9A968E">{{progressLabel}}</span>
+</div>
+<div role="group" aria-label="Ponto de vista" style="display: flex; border: 1px solid #3A3A40; border-radius: 999px; padding: 4px; gap: 4px">
+<button type="button" aria-pressed="{{studentPressed}}" onClick="{{setStudent}}" style="{{studentStyle}}">VISÃO DO ALUNO</button>
+<button type="button" aria-pressed="{{systemPressed}}" onClick="{{setSystem}}" style="{{systemStyle}}">VISÃO DO SISTEMA</button>
+</div>
+</div>
+<div style="display: flex; gap: 6px">
+<sc-for list="{{dots}}" as="d" hint-placeholder-count="3"><span style="{{d.style}}"></span></sc-for>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch">
+<div style="flex: 1.4 1 520px; min-width: 0; border: 1px solid #26262A; border-radius: 18px; background: #111113; padding: 32px; display: flex; flex-direction: column; gap: 24px">
+<sc-if value="{{playing}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em; color: #9A968E">QUESTÃO {{qNum}}</span>
+<sc-if value="{{systemView}}" hint-placeholder-val="{{ false }}"><span class="pop" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; padding: 6px 12px; border-radius: 999px; border: 1px solid {{accent}}; color: {{accent}}">BLOOM · {{q.bloom}} · INVISÍVEL PRO ALUNO</span></sc-if>
+</div>
+<h2 style="margin: 0; font-size: 28px; line-height: 1.25; font-weight: 700; font-stretch: 105%">{{q.prompt}}</h2>
+<pre style="margin: 0; padding: 20px 22px; border-radius: 12px; background: #0B0B0C; border: 1px solid #26262A; font-family: 'JetBrains Mono', monospace; font-size: 16px; line-height: 1.7; color: #F2EFE8; white-space: pre; overflow-x: auto">{{q.code}}</pre>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<sc-for list="{{options}}" as="o" hint-placeholder-count="4">
+<button type="button" onClick="{{o.pick}}" disabled="{{o.locked}}" style="{{o.style}}"><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; opacity: 0.7">{{o.letter}}</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 700">{{o.text}}</span></button>
+</sc-for>
+</div>
+<sc-if value="{{answered}}" hint-placeholder-val="{{ false }}">
+<div class="pop" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 22px; border-radius: 12px; background: {{feedbackBg}}; color: #0B0B0C">
+<span style="display: flex; flex-direction: column; gap: 4px; max-width: 560px"><span style="font-size: 22px; font-weight: 900; font-stretch: 120%; text-transform: uppercase">{{feedbackTitle}}</span><span style="font-size: 16px; line-height: 1.45">{{q.explain}}</span></span>
+<button type="button" onClick="{{next}}" style="min-height: 48px; padding: 0 22px; border-radius: 999px; border: 0; background: #0B0B0C; color: #F2EFE8; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; cursor: pointer">{{nextLabel}}</button>
+</div>
+</sc-if>
+</div>
+</sc-if>
+<sc-if value="{{finished}}" hint-placeholder-val="{{ false }}">
+<div class="pop" style="display: flex; flex-direction: column; gap: 20px; align-items: flex-start; padding: 24px 0">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em; color: #9A968E">MISSÃO CONCLUÍDA</span>
+<span style="font-size: clamp(80px, 10vw, 160px); line-height: 0.85; font-weight: 900; font-stretch: 125%; letter-spacing: -0.05em"><span style="color: {{accent}}">{{score}}</span>/3</span>
+<span style="font-size: 19px; line-height: 1.5; color: #C9C5BC; max-width: 480px">{{finalText}}</span>
+<button type="button" onClick="{{restart}}" style="min-height: 52px; padding: 0 26px; border-radius: 999px; border: 0; background: {{accent}}; color: #0B0B0C; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700; letter-spacing: 0.04em; cursor: pointer">↺ JOGAR DE NOVO</button>
+</div>
+</sc-if>
+</div>
+
+<div style="{{sidePanelStyle}}">
+<sc-if value="{{systemView}}" hint-placeholder-val="{{ false }}">
+<div class="pop" style="display: flex; flex-direction: column; gap: 16px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em; color: {{accent}}">O QUE O BACK-END REGISTRA</span>
+<pre style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.7; color: #F2EFE8; white-space: pre-wrap; overflow-wrap: anywhere">{{payload}}</pre>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9A968E">[campos ilustrativos: ajustar ao schema real]</span>
+</div>
+</sc-if>
+<sc-if value="{{studentView}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.06em; color: #9A968E">DECISÕES DE PRODUTO</span>
+<div style="display: flex; flex-direction: column; gap: 14px">
+<span style="font-size: 17px; line-height: 1.45"><span style="color: {{accent}}">→</span> Cada missão tem um único planeta. Sem misturar tópicos.</span>
+<span style="font-size: 17px; line-height: 1.45"><span style="color: {{accent}}">→</span> O nível de Bloom guia o sistema, mas não aparece para o aluno.</span>
+<span style="font-size: 17px; line-height: 1.45"><span style="color: {{accent}}">→</span> Na v1, prática voluntária. O checkpoint obrigatório fica para depois.</span>
+</div>
+<a href="Case.dc.html" style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; color: {{accent}}">POR QUÊ? LER NO DIÁRIO →</a>
+</div>
+</sc-if>
+</div>
+</div>
+</div>
+</section>
+
+<section aria-label="Do protótipo à produção" style="max-width: 1360px; margin: 0 auto; padding: 120px 40px; display: flex; flex-direction: column; gap: 56px">
+<h2 style="margin: 0; font-size: clamp(40px, 5vw, 72px); line-height: 0.95; font-weight: 800; font-stretch: 115%; letter-spacing: -0.03em; text-transform: uppercase">Do protótipo<br>à produção.</h2>
+<div style="position: relative; padding-top: 32px">
+<span aria-hidden="true" style="position: absolute; left: 0; right: 0; top: 0; height: 3px; background: #26262A"></span>
+<span aria-hidden="true" style="{{shipFill}}"></span>
+<ol style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px">
+<sc-for list="{{ship}}" as="s" hint-placeholder-count="5">
+<li style="display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.06em; color: {{s.numColor}}">{{s.num}}</span>
+<span style="{{s.titleStyle}}">{{s.title}}</span>
+<span style="font-size: 16px; line-height: 1.5; color: #C9C5BC">{{s.body}}</span>
+</li>
+</sc-for>
+</ol>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; padding: 6px 12px; border: 1px solid #3A3A40; border-radius: 999px">Next.js</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; padding: 6px 12px; border: 1px solid #3A3A40; border-radius: 999px">TypeScript</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; padding: 6px 12px; border: 1px solid #3A3A40; border-radius: 999px">Clean Architecture</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; padding: 6px 12px; border: 1px solid #3A3A40; border-radius: 999px">Prisma</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; padding: 6px 12px; border: 1px solid #3A3A40; border-radius: 999px">PostgreSQL</span>
+</div>
+<a href="Home.dc.html" style="align-self: flex-start; display: inline-flex; align-items: center; min-height: 52px; padding: 0 26px; border-radius: 999px; border: 1px solid #3A3A40; font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700; letter-spacing: 0.04em">← VOLTAR PARA A HOME</a>
+</section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#FF5A1F","options":["#FF5A1F","#C6FF3D","#3D7BFF"]},"$preview":{"width":1440,"height":2350}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    this.t0 = performance.now();
+    this.last = 0;
+    const tick = (ts) => {
+      if (ts - this.last > 50) { this.last = ts; this.setState({ t: (ts - this.t0) / 1000 }); }
+      this.raf = requestAnimationFrame(tick);
+    };
+    this.raf = requestAnimationFrame(tick);
+  }
+  componentWillUnmount() { cancelAnimationFrame(this.raf); }
+  renderVals() {
+    const accent = this.props.accent ?? '#FF5A1F';
+    const t = this.state.t || 0;
+    const Q = [
+      { prompt: 'O que este código imprime?', bloom: 'LEMBRAR', code: 'nums = [4, 8, 15]\nprint(nums[-1])',
+        opts: ['4', '15', '-1', 'IndexError'], ok: 1, explain: 'Índice -1 acessa o último elemento da lista.' },
+      { prompt: 'E este? Repare na segunda linha.', bloom: 'ENTENDER', code: 'x = [1, 2, 3]\ny = x\ny.append(4)\nprint(len(x))',
+        opts: ['3', '4', 'None', 'Erro'], ok: 1, explain: 'y = x não copia a lista: as duas variáveis apontam para o mesmo objeto.' },
+      { prompt: 'Qual é a saída?', bloom: 'APLICAR', code: 'nums = [3, 1, 2]\nnums.sort()\nprint(nums[0] + nums[-1])',
+        opts: ['5', '4', '3', '[1, 3]'], ok: 1, explain: 'Depois do sort a lista é [1, 2, 3]; 1 + 3 = 4.' }
+    ];
+    const qi = this.state.qi || 0;
+    const answers = this.state.answers || [];
+    const picked = this.state.picked;
+    const finished = qi >= Q.length;
+    const q = Q[Math.min(qi, Q.length - 1)];
+    const answered = picked != null;
+    const correct = answered && picked === q.ok;
+    const sys = this.state.view === 'system';
+    const L = ['A', 'B', 'C', 'D'];
+    const options = q.opts.map((text, i) => {
+      let style = 'min-height: 64px; padding: 0 18px; border-radius: 12px; display: flex; align-items: center; gap: 14px; text-align: left; transition: all .25s; cursor: ' + (answered ? 'default' : 'pointer') + '; ';
+      if (answered && i === q.ok) style += 'background: #47D17C; color: #0B0B0C; border: 1px solid #47D17C';
+      else if (answered && i === picked) style += 'background: ' + accent + '; color: #0B0B0C; border: 1px solid ' + accent;
+      else if (answered) style += 'background: transparent; color: #4A4741; border: 1px solid #26262A';
+      else style += 'background: #0B0B0C; color: #F2EFE8; border: 1px solid #3A3A40';
+      return { letter: L[i], text, locked: answered, pick: () => { if (!answered) this.setState({ picked: i, pickedAt: t }); } };
+    });
+    const score = answers.filter((a) => a).length;
+    const dots = Q.map((_, i) => {
+      const done = i < answers.length;
+      const bg = done ? (answers[i] ? '#47D17C' : accent) : (i === qi ? '#F2EFE8' : '#26262A');
+      return { style: 'flex: 1; height: 6px; border-radius: 3px; transition: background .3s; background: ' + bg };
+    });
+    const lastIdx = answered ? qi : (answers.length ? answers.length - 1 : null);
+    const lastQ = lastIdx != null ? Q[lastIdx] : null;
+    const lastPick = answered ? picked : (this.state.lastPick != null ? this.state.lastPick : null);
+    const payload = lastQ && lastPick != null
+      ? JSON.stringify({ evento: 'tentativa', topico: 'listas', questao: lastIdx + 1, bloom: lastQ.bloom.toLowerCase(), resposta: lastQ.opts[lastPick], correta: lastPick === lastQ.ok, sequencia_acertos: score + (answered && correct ? 1 : 0) }, null, 2)
+      : JSON.stringify({ evento: 'missao_iniciada', topico: 'listas', questoes: Q.length, niveis_bloom: Q.map((x) => x.bloom.toLowerCase()) }, null, 2);
+    const pill = (on) => 'min-height: 36px; padding: 0 16px; border: 0; border-radius: 999px; cursor: pointer; font-family: \'JetBrains Mono\', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; ' + (on ? 'background: ' + accent + '; color: #0B0B0C' : 'background: transparent; color: #9A968E');
+    const SH = [
+      ['PROTÓTIPO', 'Front em React e Vite num repositório separado, com back-end simulado no navegador.'],
+      ['PORTAR', 'Levar o front para o padrão do Cosmo: Next.js e TypeScript.'],
+      ['BACK-END', 'Criar o serviço dentro da Clean Architecture do Cosmo, com Prisma e PostgreSQL.'],
+      ['STAGE', 'Testes do orientador e da equipe da UFMA antes de liberar.'],
+      ['PRODUÇÃO', 'No ar para os alunos em outubro de 2026.']
+    ];
+    const sp = Math.min(1, ((t - 0.8) % 7) / 5);
+    const reached = Math.floor(sp * 5 - 0.001);
+    const ship = SH.map(([title, body], i) => {
+      const on = i <= reached;
+      return {
+        num: '0' + (i + 1), title, body,
+        numColor: on ? accent : '#6E6A63',
+        titleStyle: 'font-size: 30px; font-weight: 800; font-stretch: 120%; letter-spacing: -0.02em; transition: color .3s; color: ' + (on ? '#F2EFE8' : '#4A4741')
+      };
+    });
+    return {
+      accent, q, options, dots, score, payload, ship,
+      qNum: (Math.min(qi, Q.length - 1) + 1) + ' / ' + Q.length,
+      progressLabel: finished ? 'CONCLUÍDA' : 'QUESTÃO ' + (qi + 1) + ' DE ' + Q.length,
+      playing: !finished, finished, answered,
+      feedbackBg: correct ? '#47D17C' : accent,
+      feedbackTitle: correct ? 'Isso!' : 'Quase.',
+      nextLabel: qi === Q.length - 1 ? 'VER RESULTADO →' : 'PRÓXIMA →',
+      next: () => this.setState({ qi: qi + 1, answers: answers.concat([correct]), lastPick: picked, picked: null }),
+      restart: () => this.setState({ qi: 0, answers: [], picked: null, lastPick: null }),
+      finalText: score === 3 ? 'Planeta dominado. Vire para a visão do sistema e veja o que ficou registrado.' : 'Cada tentativa fica registrada com o nível de Bloom da questão. Vire para a visão do sistema.',
+      systemView: sys, studentView: !sys,
+      studentPressed: sys ? 'false' : 'true', systemPressed: sys ? 'true' : 'false',
+      studentStyle: pill(!sys), systemStyle: pill(sys),
+      setStudent: () => this.setState({ view: 'student' }),
+      setSystem: () => this.setState({ view: 'system' }),
+      sidePanelStyle: 'flex: 1 1 320px; min-width: 0; border-radius: 18px; padding: 28px; transition: all .3s; ' + (sys ? 'background: #0B0B0C; border: 1px solid ' + accent : 'background: #111113; border: 1px solid #26262A'),
+      shipFill: 'position: absolute; left: 0; top: 0; height: 3px; background: ' + accent + '; box-shadow: 0 0 16px ' + accent + '88; width: ' + (sp * 100).toFixed(1) + '%'
+    };
+  }
+}
+</script>
+</body>
+</html>
