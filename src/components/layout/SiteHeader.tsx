@@ -25,11 +25,16 @@ interface HeaderLinkProps {
   children: ReactNode;
 }
 
-/** Routes go through next/link (prefetch, client navigation); anchors stay plain. */
+/**
+ * Routes go through next/link (client navigation); anchors stay plain.
+ * Viewport prefetch is off: the header is on screen at load, so it would fetch
+ * and evaluate the other pages' JS while the Home is still starting up (it
+ * cost about 13 points of mobile Lighthouse performance). Hover still prefetches.
+ */
 function HeaderLink({ href, className, children }: HeaderLinkProps) {
   if (href.startsWith("/")) {
     return (
-      <Link href={href} className={className}>
+      <Link href={href} prefetch={false} className={className}>
         {children}
       </Link>
     );

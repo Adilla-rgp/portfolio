@@ -10,6 +10,8 @@ export const site = {
   description:
     "Construo os sistemas por trás de produtos com IA: APIs, filas, bancos e agentes em produção. E levo modelos e dados do notebook para produção, sempre com uma forma de medir se funcionam.",
   locale: "pt-BR",
+  ogLocale: "pt_BR",
+  ogImageAlt: "Do ruído ao sistema. — Ádilla Gomes",
   timeZone: "America/Fortaleza",
   links,
   nav: {

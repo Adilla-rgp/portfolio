@@ -5,6 +5,8 @@ import { HydrationMarker } from "@/components/layout/HydrationMarker";
 import { MotionProvider } from "@/components/layout/MotionProvider";
 import { site } from "@/content/site";
 import { cn } from "@/lib/cn";
+import { baseOpenGraph } from "@/lib/metadata";
+import { siteUrl } from "@/lib/siteUrl";
 import "@/styles/globals.css";
 
 const archivo = Archivo({
@@ -22,6 +24,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: siteUrl,
   title: {
     default: site.title,
     template: `%s — ${site.name}`,
@@ -30,11 +33,12 @@ export const metadata: Metadata = {
   authors: [{ name: site.name, url: site.links.github }],
   creator: site.name,
   openGraph: {
-    type: "website",
-    locale: "pt_BR",
-    siteName: site.name,
+    ...baseOpenGraph,
     title: site.title,
     description: site.description,
+  },
+  twitter: {
+    card: "summary_large_image",
   },
 };
 

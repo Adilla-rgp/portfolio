@@ -1,5 +1,6 @@
 export const aboutContent = {
   meta: {
+    path: "/sobre",
     title: "Sobre",
     description:
       "Estudante de Ciência da Computação na UFMA e desenvolvedora no Laboratório TeleMídia. Stack, trajetória e liderança fora do código.",
