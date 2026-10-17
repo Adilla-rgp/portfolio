@@ -3,6 +3,7 @@
 ## Project
 Portfolio built with Next.js for Ádilla Gomes: back-end + AI/data in one site.
 The objective is a production-level portfolio with clean architecture, reusable components and exceptional UI/UX.
+Site language is pt-BR. All copy lives in src/content/, never hardcoded in components.
 
 > **Visual source of truth: [`docs/DESIGN.md`](docs/DESIGN.md).** It defines the concept, tokens, typography,
 > layout, primitives, motion, routes, content rules and the implementation roadmap. It overrides anything in this
@@ -56,7 +57,7 @@ Always:
 - use named exports (except where Next.js requires a default export: pages, layouts)
 - use interfaces for props
 - avoid duplicated code
-- avoid inline styles
+- avoid inline styles (see "Never" for the runtime-value exception)
 - keep components small
 
 Comments:
@@ -140,6 +141,7 @@ Every page section follows:
 - Infinite CSS loops (marquee, blink): keyframes in `src/styles/animations.css` only.
 - Per-frame loops (canvas, SVG): `useRafTicker` (~30fps, pauses off-screen).
 - Always respect `prefers-reduced-motion` (rules in DESIGN.md "Movimento").
+- Per-frame work must not re-render React trees. Canvas draws imperatively; SVG and DOM updates go through refs or CSS variables. If useRafTicker exposes t as state, keep the subscribing component a small leaf.
 
 ---
 
@@ -169,6 +171,13 @@ groups and charts, 44px touch targets, proper heading hierarchy, AA contrast, `p
 
 ---
 
+# Git
+- Conventional Commits (`feat:`, `fix:`, `chore:`, `refactor:`, `docs:`), one logical change per commit, messages in Portuguese.
+- Commit messages, code comments, docs and PR descriptions never mention AI tools or code assistants; no co-author trailers. Never commit agent config files (they are excluded locally in `.git/info/exclude`).
+- Before each commit, check with `git log -1` that the message has none of these references.
+
+---
+
 # Error Handling
 - Never silence TypeScript errors
 - Never disable ESLint rules to bypass an issue
@@ -186,7 +195,7 @@ Prepare the codebase (without requiring major refactoring) for:
 ---
 
 # Never
-- Never use inline styles
+- Never use inline styles for static styling. Exception: runtime values that change continuously (animation progress, chart positions, pointer coordinates) go through CSS custom properties set via style={{ "--x": value }} and consumed by classes, or direct canvas drawing.
 - Never duplicate components or abstractions
 - Never create magic numbers
 - Never hardcode colors or typography
