@@ -1,7 +1,20 @@
 /*
- * CSS-only loops (marquee, blink). Entrances use Framer Motion variants from
+ * CSS animations: loops (marquee, blink) and the RevealText title entrance,
+ * which must run without JS. Section entrances use Framer Motion variants from
  * src/lib/motion.ts; per-frame loops use useRafTicker.
  */
+:root {
+  /* RevealText — DESIGN.md: 1.1s, ease-out-expo, 0.15s stagger. */
+  --reveal-duration: 1.1s;
+  --reveal-delay: 0.15s;
+  --reveal-stagger: 0.15s;
+}
+
+@keyframes rise {
+  from { transform: translateY(105%); }
+  to { transform: translateY(0); }
+}
+
 @theme {
   --animate-marquee: marquee 38s linear infinite;
   --animate-marquee-fast: marquee 22s linear infinite;

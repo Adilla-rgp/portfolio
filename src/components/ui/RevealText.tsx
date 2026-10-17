@@ -1,49 +1,27 @@
-"use client";
-
-import { forwardRef, type ReactNode } from "react";
-import { motion, useReducedMotion, type HTMLMotionProps } from "framer-motion";
-import { fadeReduced, rise, staggerChildren } from "@/lib/motion";
+import { forwardRef, type ComponentPropsWithoutRef, type ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
-const DEFAULT_DELAY_S = 0.15;
-
 export interface RevealTextProps
-  extends Omit<
-    HTMLMotionProps<"span">,
-    "children" | "ref" | "initial" | "animate" | "variants"
-  > {
-  /** Each entry is one masked line. */
+  extends Omit<ComponentPropsWithoutRef<"span">, "children"> {
+  /** Each entry is one masked line (up to 5 get a staggered delay). */
   lines: readonly ReactNode[];
-  /** Seconds before the first line starts rising. */
-  delay?: number;
 }
 
 /**
- * Line-by-line reveal. Place inside a `Heading` so the semantics stay on the
- * heading element; this only renders spans.
+ * Line-by-line rise, pure CSS (`reveal-line` / `reveal-rise` in utilities.css),
+ * so it renders on the server and plays without hydration. Place it inside a
+ * `Heading` so the semantics stay on the heading element.
  */
 export const RevealText = forwardRef<HTMLSpanElement, RevealTextProps>(
-  function RevealText({ lines, delay = DEFAULT_DELAY_S, className, ...props }, ref) {
-    const reducedMotion = useReducedMotion();
-    const lineVariants = reducedMotion ? fadeReduced : rise;
-
+  function RevealText({ lines, className, ...props }, ref) {
     return (
-      <motion.span
-        ref={ref}
-        className={cn("block", className)}
-        initial="hidden"
-        animate="visible"
-        variants={staggerChildren(reducedMotion ? 0 : delay)}
-        {...props}
-      >
+      <span ref={ref} className={cn("block", className)} {...props}>
         {lines.map((line, index) => (
           <span key={index} className="reveal-line">
-            <motion.span className="block" variants={lineVariants}>
-              {line}
-            </motion.span>
+            <span className="reveal-rise">{line}</span>
           </span>
         ))}
-      </motion.span>
+      </span>
     );
   },
 );

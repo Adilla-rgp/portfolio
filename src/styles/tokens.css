@@ -36,14 +36,17 @@
 }
 
 /* Typography scale — DESIGN.md "Tipografia". Font-stretch has no theme
-   namespace in Tailwind v4, so it lives on the Heading variants. */
+   namespace in Tailwind v4, so it lives on the Heading variants.
+   Minimums are lowered from DESIGN.md where the widest real word would overflow
+   a 360px phone (320px of content): "SISTEMA." (display), "GALLIFREY"
+   (display-xl) and "RECOMENDAÇÃO" (project), measured with Archivo. */
 @theme {
-  --text-display: clamp(3.5rem, 10.4vw, 9.75rem);
+  --text-display: clamp(3.125rem, 10.4vw, 9.75rem);
   --text-display--line-height: 0.9;
   --text-display--letter-spacing: -0.035em;
   --text-display--font-weight: 850;
 
-  --text-display-xl: clamp(5rem, 17vw, 15.625rem);
+  --text-display-xl: clamp(2.75rem, 18.5vw - 1.4rem, 15.625rem); /* = 17vw at 1440px */
   --text-display-xl--line-height: 0.82;
   --text-display-xl--letter-spacing: -0.05em;
   --text-display-xl--font-weight: 900;
@@ -58,7 +61,7 @@
   --text-h3--letter-spacing: -0.02em;
   --text-h3--font-weight: 800;
 
-  --text-project: clamp(2.25rem, 5.6vw, 5.25rem);
+  --text-project: clamp(1.75rem, 5.6vw, 5.25rem);
   --text-project--line-height: 0.95;
   --text-project--letter-spacing: -0.03em;
   --text-project--font-weight: 800;

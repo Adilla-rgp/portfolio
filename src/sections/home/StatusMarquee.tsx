@@ -1,7 +1,6 @@
 import { LocalClock } from "@/components/layout/LocalClock";
 import { LensName } from "@/components/lens/LensCopy";
 import { Marquee } from "@/components/ui/Marquee";
-import { StatusDot } from "@/components/ui/StatusDot";
 import { Text } from "@/components/ui/Typography/Text";
 import { homeContent } from "@/content/home";
 import { site } from "@/content/site";
@@ -15,9 +14,6 @@ export function StatusMarquee() {
       className="border-t border-line bg-bg"
       itemClassName="py-3.5"
     >
-      <Text as="span" size="mono" className="inline-flex items-center gap-2">
-        <StatusDot blink /> {status.apiOnline}
-      </Text>
       <Text as="span" size="mono">
         {status.clockLabel}{" "}
         <LocalClock

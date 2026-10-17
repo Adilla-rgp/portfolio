@@ -4,8 +4,9 @@ import { cn } from "@/lib/cn";
 
 // Font-stretch has no theme namespace in Tailwind v4, so the width axis is set
 // here; size, line-height, tracking and weight come from the --text-* tokens.
-// wrap-break-word: wide display words (e.g. "RECOMENDAÇÃO") exceed narrow phones.
-export const headingVariants = cva("font-sans wrap-break-word", {
+// hyphens-auto relies on <html lang="pt-BR"> for the dictionary; it is the
+// fallback for words still too wide after the token minimums.
+export const headingVariants = cva("font-sans hyphens-auto", {
   variants: {
     tone: {
       default: "text-fg",

@@ -20,7 +20,6 @@ export const homeContent = {
   },
   status: {
     ariaLabel: "Status ao vivo",
-    apiOnline: "API online",
     clockLabel: "São Luís",
     clockFallback: "--:--:--",
     items: [
@@ -36,7 +35,7 @@ export const homeContent = {
     id: "trace",
     kicker: "01 — O sistema",
     title: "Esta página, por dentro",
-    body: "O site roda numa API minha. Dispare a requisição e veja cada etapa acontecer. Depois esquente o cache e compare.",
+    body: "Uma requisição a esta página, etapa por etapa. Dispare e veja cada etapa acontecer. Depois esquente o cache e compare.",
     controlsPlaceholder: "[peça interativa: disparar GET /home · cache frio/quente]",
     panelPlaceholder: "[peça interativa: trace de 5 etapas]",
   },

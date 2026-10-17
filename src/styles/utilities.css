@@ -1,8 +1,29 @@
-/* RevealText line mask; the bottom padding keeps descenders from being clipped. */
+/* RevealText. Each line is a mask; its child rises from behind it. The line
+   index comes from :nth-child so the stagger needs no inline style, and the
+   whole entrance is CSS, so the title is server-rendered and never waits on
+   hydration. The padding keeps accents (Í) and descenders from being clipped
+   by the tight display line-height; the negative margin cancels it in layout. */
 @utility reveal-line {
   display: block;
   overflow: hidden;
-  padding-bottom: 0.04em;
+  padding-block: 0.12em 0.04em;
+  margin-top: -0.12em;
+  --reveal-line: 0;
+
+  &:nth-child(2) { --reveal-line: 1; }
+  &:nth-child(3) { --reveal-line: 2; }
+  &:nth-child(4) { --reveal-line: 3; }
+  &:nth-child(5) { --reveal-line: 4; }
+}
+
+@utility reveal-rise {
+  display: block;
+  animation: rise var(--reveal-duration) var(--ease-out-expo) both;
+  animation-delay: calc(var(--reveal-delay) + var(--reveal-line, 0) * var(--reveal-stagger));
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
 }
 
 @utility animation-paused {
