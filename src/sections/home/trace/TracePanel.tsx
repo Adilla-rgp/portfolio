@@ -1,10 +1,11 @@
 "use client";
 
-import { forwardRef, type ReactNode } from "react";
+import { forwardRef, useState, type ReactNode } from "react";
+import { useReducedMotion } from "framer-motion";
 import { useLens } from "@/components/lens/LensProvider";
 import { Card } from "@/components/ui/Card";
 import { Text } from "@/components/ui/Typography/Text";
-import { httpReasonPhrases, traceContent } from "@/content/trace";
+import { describeTraceResult, httpReasonPhrases, traceContent } from "@/content/trace";
 import { cn } from "@/lib/cn";
 import { cssVars } from "@/lib/cssVars";
 import type { TraceSummary, WaterfallRow } from "@/lib/trace";
@@ -23,6 +24,11 @@ const stackedCell = "col-start-1 row-start-1";
 export const TracePanel = forwardRef<HTMLDivElement, TracePanelProps>(
   function TracePanel({ rows, summary, runKey, isPaused }, ref) {
     const { lens } = useLens();
+    const reducedMotion = useReducedMotion();
+    // The run whose status animation has ended. Under reduced motion there is
+    // no animation, so the result is final as soon as playback is unpaused.
+    const [finishedRunKey, setFinishedRunKey] = useState<string | null>(null);
+    const isFinished = !isPaused && (reducedMotion || finishedRunKey === runKey);
     const statusText =
       summary.statusCode !== undefined
         ? `${summary.statusCode} ${httpReasonPhrases[summary.statusCode] ?? ""}`.trim()
@@ -54,7 +60,11 @@ export const TracePanel = forwardRef<HTMLDivElement, TracePanelProps>(
             >
               {traceContent.running}
             </span>
-            <span className={cn(stackedCell, "trace-after")} style={cssVars({ "--at": summary.end })}>
+            <span
+              className={cn(stackedCell, "trace-after")}
+              style={cssVars({ "--at": summary.end })}
+              onAnimationEnd={() => setFinishedRunKey(runKey)}
+            >
               {statusText}
             </span>
           </Text>
@@ -75,6 +85,12 @@ export const TracePanel = forwardRef<HTMLDivElement, TracePanelProps>(
             {summary.cacheHit ? traceContent.cacheHit : traceContent.cacheMiss}
           </SummaryItem>
         </dl>
+
+        {/* Announces only the final result. The keyed span is a new node per
+            run, so repeating an identical result is announced again. */}
+        <p aria-live="polite" className="sr-only">
+          {isFinished && <span key={runKey}>{describeTraceResult(summary)}</span>}
+        </p>
 
         <Text size="codeSm" tone="muted" className="mt-3">
           {traceContent.simulationNote}

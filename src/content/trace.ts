@@ -39,6 +39,19 @@ export const traceContent = {
   simulationNote: "simulação: os valores reais entram quando a API estiver no ar",
 } as const;
 
+/** Screen-reader summary announced once a run finishes. */
+export function describeTraceResult({
+  cacheHit,
+  dbQueries,
+}: {
+  cacheHit?: boolean;
+  dbQueries: number;
+}): string {
+  const cache = cacheHit ? "Cache hit" : "Cache miss";
+  const queries = dbQueries === 1 ? "1 consulta ao banco" : `${dbQueries} consultas ao banco`;
+  return `Requisição concluída. ${cache}, ${queries}.`;
+}
+
 /** Reason phrases for the root span's `http.response.status_code`. */
 export const httpReasonPhrases: Readonly<Record<number, string>> = {
   200: "OK",
