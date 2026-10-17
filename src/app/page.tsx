@@ -1,22 +1,28 @@
-import { Container } from "@/components/ui/Container";
-import { Section } from "@/components/ui/Section";
-import { Heading } from "@/components/ui/Typography/Heading";
-import { Kicker } from "@/components/ui/Typography/Kicker";
-import { Text } from "@/components/ui/Typography/Text";
+import { LensProvider } from "@/components/lens/LensProvider";
+import { lensParam } from "@/content/lens";
+import { parseLens } from "@/lib/lens";
+import { HomeFooter } from "@/sections/home/HomeFooter";
+import { HomeHero } from "@/sections/home/HomeHero";
+import { ThresholdSection } from "@/sections/home/ThresholdSection";
+import { TraceSection } from "@/sections/home/TraceSection";
+import { WorkSection } from "@/sections/home/WorkSection";
 
-// Placeholder until roadmap step 3 (static Home).
-export default function Home() {
+interface HomeProps {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}
+
+export default async function Home({ searchParams }: HomeProps) {
+  const initialLens = parseLens((await searchParams)[lensParam]);
+
   return (
-    <Section bordered={false}>
-      <Container className="flex flex-col gap-6">
-        <Kicker>Em construção</Kicker>
-        <Heading as="h1" size="display">
-          Do ruído
-          <br />
-          ao sistema<span className="text-signal">.</span>
-        </Heading>
-        <Text size="lg">A Home chega na etapa 3 do roteiro.</Text>
-      </Container>
-    </Section>
+    <LensProvider initialLens={initialLens}>
+      <main>
+        <HomeHero />
+        <TraceSection />
+        <ThresholdSection />
+        <WorkSection />
+      </main>
+      <HomeFooter />
+    </LensProvider>
   );
 }

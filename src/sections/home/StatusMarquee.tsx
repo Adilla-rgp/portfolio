@@ -1,0 +1,40 @@
+import { LocalClock } from "@/components/layout/LocalClock";
+import { LensName } from "@/components/lens/LensCopy";
+import { Marquee } from "@/components/ui/Marquee";
+import { StatusDot } from "@/components/ui/StatusDot";
+import { Text } from "@/components/ui/Typography/Text";
+import { homeContent } from "@/content/home";
+import { site } from "@/content/site";
+
+const { status } = homeContent;
+
+export function StatusMarquee() {
+  return (
+    <Marquee
+      aria-label={status.ariaLabel}
+      className="border-t border-line bg-bg"
+      itemClassName="py-3.5"
+    >
+      <Text as="span" size="mono" className="inline-flex items-center gap-2">
+        <StatusDot blink /> {status.apiOnline}
+      </Text>
+      <Text as="span" size="mono">
+        {status.clockLabel}{" "}
+        <LocalClock
+          timeZone={site.timeZone}
+          locale={site.locale}
+          fallback={status.clockFallback}
+        />
+      </Text>
+      {status.items.map((item) => (
+        <Text key={item} as="span" size="mono">
+          {item}
+        </Text>
+      ))}
+      <Text as="span" size="mono" tone="signal">
+        {status.lensPrefix}
+        <LensName />
+      </Text>
+    </Marquee>
+  );
+}

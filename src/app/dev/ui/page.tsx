@@ -224,7 +224,7 @@ export default function UiPage() {
               <span key={item}>{item}</span>
             ))}
           </Marquee>
-          <Marquee speed="slow" itemClassName="gap-16">
+          <Marquee speed="fast" itemClassName="gap-16">
             <Heading as="span" size="displayXl" className="uppercase">
               Vamos conversar <span className="text-signal">→</span>
             </Heading>

@@ -1,0 +1,63 @@
+import { LensCopy } from "@/components/lens/LensCopy";
+import { LensSwitch } from "@/components/lens/LensSwitch";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { Button } from "@/components/ui/Button";
+import { Container } from "@/components/ui/Container";
+import { PiecePlaceholder } from "@/components/ui/PiecePlaceholder";
+import { RevealText } from "@/components/ui/RevealText";
+import { Section } from "@/components/ui/Section";
+import { Accent } from "@/components/ui/Typography/Accent";
+import { Heading } from "@/components/ui/Typography/Heading";
+import { Kicker } from "@/components/ui/Typography/Kicker";
+import { Text } from "@/components/ui/Typography/Text";
+import { homeContent } from "@/content/home";
+import { StatusMarquee } from "./StatusMarquee";
+
+const { hero } = homeContent;
+const [firstLine, lastLine] = hero.titleLines;
+
+export function HomeHero() {
+  return (
+    <Section
+      spacing="none"
+      bordered={false}
+      aria-label={hero.ariaLabel}
+      className="flex min-h-hero flex-col overflow-hidden border-b border-line"
+    >
+      <div className="relative flex flex-1 flex-col">
+        <SiteHeader actions={<LensSwitch />} />
+
+        <Container id={hero.id} className="flex flex-col gap-7 pt-14">
+          <Kicker>
+            <LensCopy values={hero.kicker} />
+          </Kicker>
+          <Heading as="h1" size="display">
+            <RevealText
+              lines={[
+                firstLine,
+                <>
+                  {lastLine}
+                  <Accent>.</Accent>
+                </>,
+              ]}
+            />
+          </Heading>
+          <Text size="lg" className="max-w-130">
+            <LensCopy values={hero.intro} />
+          </Text>
+        </Container>
+
+        <Container className="mt-auto flex flex-wrap items-end justify-between gap-4 pt-10 pb-7">
+          <Button as="a" href={hero.cta.href} size="lg">
+            {hero.cta.label}
+          </Button>
+          {/* The particle canvas will sit behind the whole hero; its replay
+              button takes this slot. */}
+          <PiecePlaceholder label={hero.particlesPlaceholder} className="min-h-11 py-2" />
+        </Container>
+
+        <StatusMarquee />
+      </div>
+    </Section>
+  );
+}

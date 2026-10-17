@@ -8,3 +8,15 @@
 @utility animation-paused {
   animation-play-state: paused;
 }
+
+/* Height-animatable disclosure: grid rows go from 0fr to 1fr, so the content
+   needs no measured height. The child must have overflow hidden. */
+@utility collapsible {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s var(--ease-out-expo);
+}
+
+@utility collapsible-open {
+  grid-template-rows: 1fr;
+}

@@ -7,12 +7,18 @@ export const textVariants = cva("font-sans", {
     tone: {
       soft: "text-fg-soft",
       muted: "text-muted",
+      fg: "text-fg",
+      signal: "text-signal",
       /** Takes the parent color, e.g. inside `Card variant="lit"`. */
       inherit: "text-inherit",
     },
     size: {
       body: "text-body",
       lg: "text-body-lg",
+      /** Mono labels (DESIGN.md "Label"). */
+      label: "font-mono text-mono-sm uppercase tracking-label",
+      mono: "font-mono text-mono uppercase tracking-label",
+      monoLg: "font-mono text-mono-lg uppercase tracking-button",
     },
   },
   defaultVariants: {
@@ -21,7 +27,7 @@ export const textVariants = cva("font-sans", {
   },
 });
 
-type TextTag = "p" | "span" | "div" | "li" | "figcaption";
+type TextTag = "p" | "span" | "div" | "li" | "dt" | "dd" | "figcaption";
 
 export interface TextProps
   extends ComponentPropsWithoutRef<"p">,

@@ -4,12 +4,16 @@ import { cn } from "@/lib/cn";
 
 // Font-stretch has no theme namespace in Tailwind v4, so the width axis is set
 // here; size, line-height, tracking and weight come from the --text-* tokens.
-export const headingVariants = cva("font-sans", {
+// wrap-break-word: wide display words (e.g. "RECOMENDAÇÃO") exceed narrow phones.
+export const headingVariants = cva("font-sans wrap-break-word", {
   variants: {
     tone: {
       default: "text-fg",
       /** Takes the parent color, e.g. inside `Card variant="lit"`. */
       inherit: "text-inherit",
+      /** Inactive large items, e.g. collapsed project names. */
+      dim: "text-dim",
+      signal: "text-signal",
     },
     size: {
       display: "text-display font-stretch-125% uppercase",
@@ -18,6 +22,8 @@ export const headingVariants = cva("font-sans", {
       h3: "text-h3 font-stretch-115%",
       project: "text-project font-stretch-120% uppercase",
       number: "text-number font-stretch-125% tabular-nums",
+      stat: "text-stat font-stretch-115% tabular-nums",
+      marquee: "text-marquee font-stretch-125% uppercase",
     },
   },
   defaultVariants: {
@@ -26,7 +32,7 @@ export const headingVariants = cva("font-sans", {
   },
 });
 
-type HeadingTag = "h1" | "h2" | "h3" | "h4" | "p" | "span";
+type HeadingTag = "h1" | "h2" | "h3" | "h4" | "p" | "span" | "dd";
 
 export interface HeadingProps
   extends ComponentPropsWithoutRef<"h2">,

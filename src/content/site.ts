@@ -10,4 +10,15 @@ export const site = {
     linkedin: "https://www.linkedin.com/in/adilla-gomes",
     cal: "https://cal.com/adilla-gomes",
   },
+  nav: {
+    label: "Principal",
+    homeHref: "#topo",
+    items: [
+      { label: "Sistema", href: "#trace" },
+      { label: "Trabalho", href: "#trabalho" },
+      // /sobre is not built yet (roadmap step 5).
+      { label: "Sobre", href: "#" },
+      { label: "Contato", href: "#contato" },
+    ],
+  },
 } as const;

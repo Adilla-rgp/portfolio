@@ -4,7 +4,7 @@
  */
 @theme {
   --animate-marquee: marquee 38s linear infinite;
-  --animate-marquee-slow: marquee 60s linear infinite;
+  --animate-marquee-fast: marquee 22s linear infinite;
   --animate-blink: blink 1.4s steps(2) infinite;
 
   @keyframes marquee {
