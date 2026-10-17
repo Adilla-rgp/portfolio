@@ -147,3 +147,12 @@
 @utility chart-at-label {
   transform: translateX(calc(var(--label-x) * 1px));
 }
+
+/* Soft bg-colored glow behind text that sits over the hero particles, so the
+   wave crest never cuts through the letters. */
+@utility text-halo {
+  text-shadow:
+    0 0 0.5rem var(--color-bg),
+    0 0 1rem var(--color-bg),
+    0 0 1.5rem var(--color-bg);
+}

@@ -16,7 +16,7 @@ export const homeContent = {
         "Levo modelos e dados do notebook para produção, sempre com uma forma de medir se funcionam. Passe o mouse no sinal.",
     },
     cta: { label: "Ver o trabalho ↓", href: "#trabalho" },
-    particlesPlaceholder: "[peça interativa: partículas do ruído ao sinal]",
+    replay: "↺ Voltar ao ruído",
   },
   status: {
     ariaLabel: "Status ao vivo",

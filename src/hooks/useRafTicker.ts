@@ -7,15 +7,22 @@ const DEFAULT_FPS = 30;
 const MS_PER_SECOND = 1000;
 
 interface UseRafTickerOptions {
-  /** Upper bound on state updates per second. */
+  /** Upper bound on ticks per second. */
   fps?: number;
   enabled?: boolean;
+  /**
+   * Imperative mode: called every tick with the running time in seconds, and
+   * `t` is never stored in state, so nothing re-renders per frame. Use it for
+   * canvas drawing. Without it, `t` is exposed as state (keep that component a
+   * small leaf).
+   */
+  onFrame?: (t: number) => void;
 }
 
 interface UseRafTickerResult<T extends Element> {
   /** Attach to the animated element; ticking pauses while it is off-screen. */
   ref: RefObject<T | null>;
-  /** Seconds of running time. Does not advance while paused. */
+  /** Seconds of running time (state mode only). Does not advance while paused. */
   t: number;
   isRunning: boolean;
   /** True under `prefers-reduced-motion`; render the settled state instead. */
@@ -25,11 +32,19 @@ interface UseRafTickerResult<T extends Element> {
 export function useRafTicker<T extends Element = HTMLElement>({
   fps = DEFAULT_FPS,
   enabled = true,
+  onFrame,
 }: UseRafTickerOptions = {}): UseRafTickerResult<T> {
   const ref = useRef<T>(null);
   const reducedMotion = useReducedMotion() ?? false;
   const [isVisible, setIsVisible] = useState(false);
+  const [isPageVisible, setIsPageVisible] = useState(true);
   const [t, setT] = useState(0);
+  const elapsedRef = useRef(0);
+  const onFrameRef = useRef(onFrame);
+
+  useEffect(() => {
+    onFrameRef.current = onFrame;
+  }, [onFrame]);
 
   useEffect(() => {
     const element = ref.current;
@@ -43,7 +58,13 @@ export function useRafTicker<T extends Element = HTMLElement>({
     return () => observer.disconnect();
   }, []);
 
-  const isRunning = enabled && isVisible && !reducedMotion;
+  useEffect(() => {
+    const update = () => setIsPageVisible(document.visibilityState === "visible");
+    document.addEventListener("visibilitychange", update);
+    return () => document.removeEventListener("visibilitychange", update);
+  }, []);
+
+  const isRunning = enabled && isVisible && isPageVisible && !reducedMotion;
 
   useEffect(() => {
     if (!isRunning) return;
@@ -58,9 +79,11 @@ export function useRafTicker<T extends Element = HTMLElement>({
       last = now;
 
       if (pending >= frameInterval) {
-        const elapsed = pending / MS_PER_SECOND;
+        elapsedRef.current += pending / MS_PER_SECOND;
         pending = 0;
-        setT((previous) => previous + elapsed);
+        const frame = onFrameRef.current;
+        if (frame) frame(elapsedRef.current);
+        else setT(elapsedRef.current);
       }
 
       frameId = requestAnimationFrame(tick);
