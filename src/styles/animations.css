@@ -16,6 +16,12 @@
   --fade-duration: 0.9s;
   --fade-offset: 0.75rem;
   --stagger-sibling: 0.15s;
+  /* Safety net: reveal entrances if the page never hydrates. */
+  --fade-fallback-delay: 2.5s;
+}
+
+@keyframes fade-fallback {
+  to { opacity: 1; }
 }
 
 @keyframes fade {

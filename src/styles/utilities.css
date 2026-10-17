@@ -102,6 +102,13 @@
     opacity: 0;
   }
 
+  /* If JS breaks after the <head> script, the page never hydrates and no
+     observer ever runs: reveal everything after --fade-fallback-delay. Once
+     HydrationMarker sets data-hydrated, the observer owns the entrance. */
+  [data-js]:not([data-hydrated]) &:not(.fade-in-visible) {
+    animation: fade-fallback 0s var(--fade-fallback-delay) forwards;
+  }
+
   &.fade-in-visible {
     animation: fade var(--fade-duration) var(--ease-out-expo) var(--fade-delay, 0s) both;
   }

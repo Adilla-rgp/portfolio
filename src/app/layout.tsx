@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { Archivo, JetBrains_Mono } from "next/font/google";
+import { HydrationMarker } from "@/components/layout/HydrationMarker";
 import { MotionProvider } from "@/components/layout/MotionProvider";
 import { site } from "@/content/site";
 import { cn } from "@/lib/cn";
@@ -51,7 +52,8 @@ const markJsScript = "document.documentElement.setAttribute('data-js','')";
 
 export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
   return (
-    // suppressHydrationWarning: the script below adds data-js to <html> before React hydrates.
+    // suppressHydrationWarning: data-js (head script) and data-hydrated
+    // (HydrationMarker) are set on <html> outside React's render.
     <html
       lang={site.locale}
       className={cn(archivo.variable, jetbrainsMono.variable)}
@@ -61,6 +63,7 @@ export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
         <script dangerouslySetInnerHTML={{ __html: markJsScript }} />
       </head>
       <body>
+        <HydrationMarker />
         <MotionProvider>{children}</MotionProvider>
       </body>
     </html>

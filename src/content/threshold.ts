@@ -56,6 +56,8 @@ export const thresholdContent = {
       { value: 0, label: "0" },
     ],
     xTitle: "similaridade de Jaccard mínima",
+    /** Narrow layout: fewer labels so each can be larger. */
+    compactXTicks: [0.5, 0.7, 0.95],
   },
   rangeLabel: "Limiar",
   legend: {

@@ -110,6 +110,7 @@
   --spacing-gutter-sm: 1.25rem; /* 20px, celular */
   --spacing-section: 7.5rem;   /* 120px */
   --spacing-hero: 53.75rem;    /* 860px, abertura da Home */
+  --container-chart-wide: 40rem; /* threshold chart switches to its wide layout */
 }
 
 /* Final footprint of the interactive pieces, reserved so the layout does not
