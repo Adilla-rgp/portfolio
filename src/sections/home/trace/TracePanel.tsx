@@ -169,7 +169,9 @@ function SummaryItem({ label, isAccent = false, children }: SummaryItemProps) {
         as="dd"
         size="monoValue"
         tone={isAccent ? "signal" : "fg"}
-        className={cn(isAccent && "uppercase")}
+        // Three columns leave ~90px each on a 360px phone; a smaller size keeps
+        // values like "[— ms]" on one line.
+        className={cn("whitespace-nowrap max-md:text-body-lg", isAccent && "uppercase")}
       >
         {children}
       </Text>
