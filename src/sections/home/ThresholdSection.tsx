@@ -8,7 +8,6 @@ import { Heading } from "@/components/ui/Typography/Heading";
 import { Kicker } from "@/components/ui/Typography/Kicker";
 import { Text } from "@/components/ui/Typography/Text";
 import { homeContent } from "@/content/home";
-import { stagger } from "@/lib/motion";
 
 const { threshold } = homeContent;
 
@@ -45,7 +44,7 @@ export function ThresholdSection() {
             {threshold.verdict}
           </Text>
         </FadeIn>
-        <FadeIn delay={stagger.sibling} className="flex min-w-0 grow-13 basis-140 flex-col gap-4">
+        <FadeIn delay="sibling" className="flex min-w-0 grow-13 basis-140 flex-col gap-4">
           <PiecePlaceholder label={threshold.chartPlaceholder} className="aspect-chart" />
           <PiecePlaceholder label={threshold.controlsPlaceholder} className="h-chart-controls" />
         </FadeIn>

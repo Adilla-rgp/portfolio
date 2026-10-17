@@ -11,7 +11,6 @@ import {
   traceStages,
   type TraceMode,
 } from "@/content/trace";
-import { stagger } from "@/lib/motion";
 import { buildWaterfall, getSharedScale, summarizeTrace } from "@/lib/trace";
 import { TracePanel } from "./TracePanel";
 
@@ -63,7 +62,7 @@ export function TraceDemo({ intro }: TraceDemoProps) {
           />
         </div>
       </FadeIn>
-      <FadeIn delay={stagger.sibling} className="min-w-0 grow-7 basis-140">
+      <FadeIn delay="sibling" className="min-w-0 grow-7 basis-140">
         <TracePanel
           ref={panelRef}
           rows={rows}

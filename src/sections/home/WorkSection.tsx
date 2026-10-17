@@ -5,7 +5,6 @@ import { Section } from "@/components/ui/Section";
 import { Heading } from "@/components/ui/Typography/Heading";
 import { Text } from "@/components/ui/Typography/Text";
 import { homeContent } from "@/content/home";
-import { stagger } from "@/lib/motion";
 import { WorkList } from "./WorkList";
 
 const { work } = homeContent;
@@ -21,7 +20,7 @@ export function WorkSection() {
             <LensName />
           </Text>
         </FadeIn>
-        <FadeIn delay={stagger.sibling}>
+        <FadeIn delay="sibling">
           <WorkList />
         </FadeIn>
       </Container>

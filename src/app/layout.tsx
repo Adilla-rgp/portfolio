@@ -45,9 +45,21 @@ interface RootLayoutProps {
   children: ReactNode;
 }
 
+// Runs before first paint so CSS can hold entrances back only when JS is
+// available (see `fade-in` in utilities.css). Kept tiny and synchronous.
+const markJsScript = "document.documentElement.setAttribute('data-js','')";
+
 export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
   return (
-    <html lang={site.locale} className={cn(archivo.variable, jetbrainsMono.variable)}>
+    // suppressHydrationWarning: the script below adds data-js to <html> before React hydrates.
+    <html
+      lang={site.locale}
+      className={cn(archivo.variable, jetbrainsMono.variable)}
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: markJsScript }} />
+      </head>
       <body>
         <MotionProvider>{children}</MotionProvider>
       </body>

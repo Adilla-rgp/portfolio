@@ -92,3 +92,31 @@
     grid-template-columns: 9.375rem minmax(0, 1fr) 4.375rem;
   }
 }
+
+/* FadeIn. Content is visible by default; it is only held back when the inline
+   script in the root layout has marked <html data-js> before first paint, so
+   without JS (or before it runs) nothing is hidden. FadeIn adds
+   `fade-in-visible` once the block scrolls into view. */
+@utility fade-in {
+  [data-js] &:not(.fade-in-visible) {
+    opacity: 0;
+  }
+
+  &.fade-in-visible {
+    animation: fade var(--fade-duration) var(--ease-out-expo) var(--fade-delay, 0s) both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-js] &:not(.fade-in-visible) {
+      opacity: 1;
+    }
+
+    &.fade-in-visible {
+      animation: none;
+    }
+  }
+}
+
+@utility fade-in-sibling {
+  --fade-delay: var(--stagger-sibling);
+}

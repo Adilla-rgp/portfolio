@@ -1,33 +1,78 @@
 "use client";
 
-import { forwardRef } from "react";
-import { motion, useReducedMotion, type HTMLMotionProps } from "framer-motion";
-import { fade, fadeReduced, inViewOnce } from "@/lib/motion";
+import {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type ComponentPropsWithoutRef,
+} from "react";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/cn";
+
+/** Fires once a quarter of the block is on screen. */
+const IN_VIEW_THRESHOLD = 0.25;
+
+export const fadeInVariants = cva("fade-in", {
+  variants: {
+    delay: {
+      none: "",
+      /** Second column of a section, `--stagger-sibling` after the first. */
+      sibling: "fade-in-sibling",
+    },
+  },
+  defaultVariants: {
+    delay: "none",
+  },
+});
 
 export interface FadeInProps
-  extends Omit<
-    HTMLMotionProps<"div">,
-    "initial" | "animate" | "whileInView" | "viewport" | "variants" | "custom"
-  > {
-  /** Seconds, e.g. `stagger.sibling` for a second column. */
-  delay?: number;
-}
+  extends ComponentPropsWithoutRef<"div">,
+    VariantProps<typeof fadeInVariants> {}
 
-/** `fade` entrance, played once when the block scrolls into view. */
+/**
+ * CSS `fade` entrance, played once when the block scrolls into view. The
+ * content is never hidden without JS or under reduced motion (see `fade-in` in
+ * utilities.css).
+ */
 export const FadeIn = forwardRef<HTMLDivElement, FadeInProps>(function FadeIn(
-  { delay = 0, ...props },
-  ref,
+  { delay, className, ...props },
+  forwardedRef,
 ) {
-  const reducedMotion = useReducedMotion();
+  const localRef = useRef<HTMLDivElement | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  const ref = useCallback(
+    (node: HTMLDivElement | null) => {
+      localRef.current = node;
+      if (typeof forwardedRef === "function") forwardedRef(node);
+      else if (forwardedRef) forwardedRef.current = node;
+    },
+    [forwardedRef],
+  );
+
+  useEffect(() => {
+    const element = localRef.current;
+    if (!element || isVisible) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: IN_VIEW_THRESHOLD },
+    );
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [isVisible]);
 
   return (
-    <motion.div
+    <div
       ref={ref}
-      initial="hidden"
-      whileInView="visible"
-      viewport={inViewOnce}
-      variants={reducedMotion ? fadeReduced : fade}
-      custom={reducedMotion ? 0 : delay}
+      className={cn(fadeInVariants({ delay }), isVisible && "fade-in-visible", className)}
       {...props}
     />
   );

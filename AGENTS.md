@@ -137,7 +137,7 @@ Every page section follows:
 ---
 
 # Animations
-- Entrances: Framer Motion, with variants from `src/lib/motion.ts`. Never duplicate animation objects.
+- Section entrances (`FadeIn`, `RevealText`) use CSS keyframes and must leave content visible without JS. `src/lib/motion.ts` (Framer Motion) is for interaction transitions. Never duplicate animation objects.
 - Infinite CSS loops (marquee, blink): keyframes in `src/styles/animations.css` only.
 - Per-frame loops (canvas, SVG): `useRafTicker` (~30fps, pauses off-screen).
 - Always respect `prefers-reduced-motion` (rules in DESIGN.md "Movimento").
