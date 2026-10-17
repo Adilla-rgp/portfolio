@@ -11,6 +11,7 @@ const twMerge = extendTailwindMerge({
         "display",
         "display-xl",
         "display-page",
+        "display-code",
         "h2",
         "h3",
         "project",

@@ -19,6 +19,7 @@ export const headingVariants = cva("font-sans hyphens-auto", {
     size: {
       display: "text-display font-stretch-125% uppercase",
       displayPage: "text-display-page font-stretch-125% uppercase",
+      displayCode: "text-display-code font-stretch-125%",
       displayXl: "text-display-xl font-stretch-125%",
       h2: "text-h2 font-stretch-115% uppercase",
       h3: "text-h3 font-stretch-115%",

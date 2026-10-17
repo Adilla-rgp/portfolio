@@ -57,6 +57,12 @@
   --text-display-xl--letter-spacing: -0.05em;
   --text-display-xl--font-weight: 900;
 
+  /* The 404 code: three characters, so it can stay huge on a phone. */
+  --text-display-code: clamp(7.5rem, 26vw, 23.75rem);
+  --text-display-code--line-height: 0.8;
+  --text-display-code--letter-spacing: -0.06em;
+  --text-display-code--font-weight: 900;
+
   --text-h2: clamp(2.5rem, 5vw, 4.5rem);
   --text-h2--line-height: 0.95;
   --text-h2--letter-spacing: -0.03em;

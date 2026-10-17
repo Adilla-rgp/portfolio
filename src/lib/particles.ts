@@ -1,8 +1,10 @@
 /**
- * Noise → signal particle field for the Home hero, after
- * docs/design-reference/Home.dc.html. Pure geometry: the component owns the
- * canvas and the clock. The reference is authored on a 1440×800 board; widths
- * are normalized to it so the wave keeps the same number of cycles at any size.
+ * Particle fields, pure geometry: the component owns the canvas and the clock.
+ * - wave: noise → signal for the Home hero (docs/design-reference/Home.dc.html);
+ * - attract: loose drifting dots that gather around the pointer and never form
+ *   the wave, for the 404 (NotFound.dc.html).
+ * The Home reference is authored on a 1440×800 board; widths are normalized to
+ * it so the wave keeps the same number of cycles at any size.
  */
 
 import { clamp01, easeOutCubic } from "@/lib/easing";
@@ -58,6 +60,21 @@ export interface DrawnParticle {
   radius: number;
   opacity: number;
   isHot: boolean;
+}
+
+/** 404 field: drifting noise pulled toward the pointer. */
+export const driftConfig = {
+  seed: 11,
+  drift: { amplitude: 26, speedMin: 0.6, speedRange: 1.4, ySpeedRatio: 0.8 },
+  pointer: { radius: 260, pull: 0.75, hotThreshold: 0.3 },
+  dot: { radius: 1.6, radiusGain: 2.4, opacity: 0.3, opacityGain: 0.6 },
+} as const;
+
+export interface DriftParticle {
+  x: number;
+  y: number;
+  phase: number;
+  speed: number;
 }
 
 const SEED = 7;
@@ -150,5 +167,47 @@ export function placeParticle(
     radius: dot.radius + progress * dot.radiusGain + heat * dot.hotGain,
     opacity: dot.opacity + progress * dot.opacityGain,
     isHot: heat > pointerConfig.hotThreshold,
+  };
+}
+
+export function createDriftParticles(width: number, height: number): DriftParticle[] {
+  const random = createRandom(driftConfig.seed);
+  const { speedMin, speedRange } = driftConfig.drift;
+  return Array.from({ length: particleCount(width) }, () => ({
+    x: random() * width,
+    y: random() * height,
+    phase: random() * FULL_TURN,
+    speed: speedMin + random() * speedRange,
+  }));
+}
+
+export function placeDriftParticle(
+  particle: DriftParticle,
+  t: number,
+  pointer: Pointer | null,
+): DrawnParticle {
+  const { drift, pointer: pointerConfig, dot } = driftConfig;
+  let x = particle.x + drift.amplitude * Math.sin(t * particle.speed + particle.phase);
+  let y =
+    particle.y + drift.amplitude * Math.cos(t * particle.speed * drift.ySpeedRatio + particle.phase);
+
+  let near = 0;
+  if (pointer) {
+    const dx = pointer.x - x;
+    const dy = pointer.y - y;
+    const distance = Math.hypot(dx, dy) || 1;
+    if (distance < pointerConfig.radius) {
+      near = (pointerConfig.radius - distance) / pointerConfig.radius;
+      x += dx * near * pointerConfig.pull;
+      y += dy * near * pointerConfig.pull;
+    }
+  }
+
+  return {
+    x,
+    y,
+    radius: dot.radius + near * dot.radiusGain,
+    opacity: dot.opacity + near * dot.opacityGain,
+    isHot: near > pointerConfig.hotThreshold,
   };
 }

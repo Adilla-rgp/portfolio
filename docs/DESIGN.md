@@ -85,7 +85,7 @@ Todas com `forwardRef`, repasse de `...props` nativas, `className` via `cn()` e 
   - Variantes `signal` (fundo signal, texto bg), `outline` (borda `line-strong`) e `ghost`.
   - Tamanhos `md` (44px) e `lg` (52px). Opção `asChild` ou `as="a"`.
 - **Segmented:** grupo de pills dentro de uma borda pill, `role="group"` e `aria-pressed`. Usado na lente, em cache frio/quente, aluno/sistema e bidirecional.
-- **Heading:** prop `as` com `h2` como padrão, e prop `size` (`display | displayPage | displayXl | h2 | h3`). `displayPage` é a abertura das páginas internas (8,6vw, até 128px, como em `About.dc.html`).
+- **Heading:** prop `as` com `h2` como padrão, e prop `size` (`display | displayPage | displayCode | displayXl | h2 | h3`). `displayPage` é a abertura das páginas internas (8,6vw, até 128px, como em `About.dc.html`); `displayCode` é o "404" (26vw, de 120 a 380px, como em `NotFound.dc.html`).
 - **Text:** prop `as` com `p` como padrão, e prop `tone` (`soft | muted`).
 - **Kicker:** mono, signal, uppercase.
 - **Section:** recebe `id` e `tone` (`bg | sunken`); a borda de cima é opcional.

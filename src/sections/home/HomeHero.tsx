@@ -10,7 +10,7 @@ import { Heading } from "@/components/ui/Typography/Heading";
 import { Kicker } from "@/components/ui/Typography/Kicker";
 import { Text } from "@/components/ui/Typography/Text";
 import { homeContent } from "@/content/home";
-import { HeroParticlesLazy } from "./hero/HeroParticlesLazy";
+import { HeroParticles } from "./hero/HeroParticles";
 import { ParticlesControl } from "./hero/ParticlesControl";
 import { ReplayButton } from "./hero/ReplayButton";
 import { StatusMarquee } from "./StatusMarquee";
@@ -27,7 +27,7 @@ export function HomeHero() {
       className="flex min-h-hero touch-pan-y flex-col overflow-hidden border-b border-line"
     >
       <ParticlesControl>
-        <HeroParticlesLazy />
+        <HeroParticles />
         <div className="relative flex flex-1 flex-col">
           <SiteHeader actions={<LensSwitch />} />
 
