@@ -21,6 +21,7 @@ export const stackContent = {
 } as const;
 
 export const stackProjects = [
+  { id: "meridiano", label: "Meridiano", sub: "Viagens em grupo" },
   { id: "cosmo", label: "Cosmo", sub: "Tutor com IA" },
   { id: "gallifrey", label: "Gallifrey", sub: "Missões" },
   { id: "documento-sinal", label: "Documento → sinal", sub: "Extração com LLM" },
@@ -29,16 +30,16 @@ export const stackProjects = [
 ] as const satisfies readonly StackProject[];
 
 export const stackTechs = [
-  { name: "Python", usedIn: ["cosmo", "documento-sinal", "recomendacao"] },
-  { name: "TypeScript", usedIn: ["cosmo", "gallifrey"] },
-  { name: "FastAPI", usedIn: ["cosmo", "documento-sinal"] },
+  { name: "Python", usedIn: ["cosmo", "documento-sinal", "recomendacao", "meridiano"] },
+  { name: "TypeScript", usedIn: ["cosmo", "gallifrey", "meridiano"] },
+  { name: "FastAPI", usedIn: ["cosmo", "documento-sinal", "meridiano"] },
   { name: "LangGraph", usedIn: ["cosmo"] },
   { name: "API do Claude", usedIn: ["cosmo"] },
   { name: "Gemini", usedIn: ["documento-sinal"] },
-  { name: "PostgreSQL", usedIn: ["cosmo", "gallifrey"] },
+  { name: "PostgreSQL", usedIn: ["cosmo", "gallifrey", "meridiano"] },
   { name: "Prisma", usedIn: ["gallifrey"] },
   { name: "Next.js", usedIn: ["cosmo"] },
-  { name: "React", usedIn: ["gallifrey"] },
+  { name: "React", usedIn: ["gallifrey", "meridiano"] },
   { name: "Pandas", usedIn: ["recomendacao"] },
   { name: "SQL", usedIn: ["bi", "cosmo"] },
   { name: "dbt", usedIn: ["bi"] },
