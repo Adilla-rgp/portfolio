@@ -6,7 +6,7 @@ import { Tag } from "@/components/ui/Tag";
 import { Heading } from "@/components/ui/Typography/Heading";
 import { Text } from "@/components/ui/Typography/Text";
 import type { Lens } from "@/content/lens";
-import { getProjectHref, projects, projectStatusLabel } from "@/content/projects";
+import { getProjectHref, isExternalHref, projects, projectStatusLabel } from "@/content/projects";
 import { cn } from "@/lib/cn";
 
 const INDEX_DIGITS = 2;
@@ -37,11 +37,16 @@ export function WorkList() {
         const nameId = `${baseId}-${project.id}-name`;
         const descriptionId = `${baseId}-${project.id}-description`;
         const open = () => setOpenItem({ lens, index });
+        const href = getProjectHref(project);
+        const externalProps = isExternalHref(href)
+          ? { target: "_blank", rel: "noopener noreferrer" }
+          : {};
 
         return (
           <li key={project.id}>
             <a
-              href={getProjectHref(project)}
+              href={href}
+              {...externalProps}
               aria-labelledby={nameId}
               aria-describedby={descriptionId}
               onMouseEnter={open}
