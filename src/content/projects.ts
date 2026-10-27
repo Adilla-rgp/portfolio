@@ -1,11 +1,12 @@
 import type { ByLens } from "@/content/lens";
 
-export type ProjectStatus = "producao" | "construcao" | "pesquisa";
+export type ProjectStatus = "producao" | "construcao" | "pesquisa" | "demonstracao";
 
 export const projectStatusLabel: Record<ProjectStatus, string> = {
   producao: "Em produção",
   construcao: "Em construção",
   pesquisa: "Pesquisa",
+  demonstracao: "Demonstração",
 };
 
 interface ProjectLensCopy {
@@ -17,9 +18,9 @@ export interface Project {
   id: string;
   name: string;
   status: ProjectStatus;
-  /** Final route of the case page. */
+  /** Final route of the case page, or an external URL (e.g. a live demo) until one exists. */
   route: string;
-  /** False until the case page exists; links then point to `#`. */
+  /** False until `route` leads somewhere; links then point to `#`. */
   isPublished: boolean;
   /** Position in the work list for each lens (1 = first). */
   order: ByLens<number>;
@@ -28,12 +29,32 @@ export interface Project {
 
 export const projects = [
   {
+    id: "meridiano",
+    name: "Meridiano",
+    status: "demonstracao",
+    route: "https://meridiano2.vercel.app",
+    isPublished: true,
+    order: { backend: 1, dados: 1 },
+    copy: {
+      backend: {
+        description:
+          "Motor de decisão em Python e API em FastAPI que calculam a viagem mais justa para um grupo, com privacidade de orçamento garantida por testes.",
+        tags: ["FastAPI", "PostgreSQL", "SQLAlchemy"],
+      },
+      dados: {
+        description:
+          "Texto livre vira restrições estruturadas, com conjunto de avaliação próprio e linha de base publicada; a IA interpreta, o motor decide.",
+        tags: ["Python", "LLM", "Avaliação"],
+      },
+    },
+  },
+  {
     id: "cosmo",
     name: "Cosmo",
     status: "producao",
     route: "/projetos/cosmo",
     isPublished: false,
-    order: { backend: 1, dados: 2 },
+    order: { backend: 2, dados: 3 },
     copy: {
       backend: {
         description:
@@ -53,7 +74,7 @@ export const projects = [
     status: "construcao",
     route: "/projetos/documento-sinal",
     isPublished: false,
-    order: { backend: 3, dados: 1 },
+    order: { backend: 4, dados: 2 },
     copy: {
       backend: {
         description:
@@ -73,7 +94,7 @@ export const projects = [
     status: "producao",
     route: "/projetos/gallifrey",
     isPublished: false,
-    order: { backend: 2, dados: 4 },
+    order: { backend: 3, dados: 5 },
     copy: {
       backend: {
         description:
@@ -93,7 +114,7 @@ export const projects = [
     status: "pesquisa",
     route: "/projetos/recomendacao",
     isPublished: false,
-    order: { backend: 4, dados: 3 },
+    order: { backend: 5, dados: 4 },
     copy: {
       backend: {
         description: "Modelo de recomendação exposto como endpoint de inferência.",
@@ -112,4 +133,8 @@ export const unpublishedHref = "#";
 
 export function getProjectHref(project: Project): string {
   return project.isPublished ? project.route : unpublishedHref;
+}
+
+export function isExternalHref(href: string): boolean {
+  return /^https?:\/\//.test(href);
 }
