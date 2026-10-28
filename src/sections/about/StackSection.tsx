@@ -6,10 +6,14 @@ import { Heading } from "@/components/ui/Typography/Heading";
 import { Kicker } from "@/components/ui/Typography/Kicker";
 import { Text } from "@/components/ui/Typography/Text";
 import { aboutContent } from "@/content/about";
+import { projects } from "@/content/projects";
 import { stackProjects, stackTechs } from "@/content/stack";
+import { visibleStack } from "@/lib/stackMap";
 import { StackMap } from "./stack/StackMap";
 
 const { stack } = aboutContent;
+const hiddenProjectIds = projects.filter((project) => !project.isListed).map((project) => project.id);
+const visible = visibleStack(stackTechs, stackProjects, hiddenProjectIds);
 
 export function StackSection() {
   return (
@@ -26,7 +30,7 @@ export function StackSection() {
           <Text className="max-w-110">{stack.body}</Text>
         </FadeIn>
         <FadeIn delay="sibling">
-          <StackMap techs={stackTechs} projects={stackProjects} />
+          <StackMap techs={visible.techs} projects={visible.projects} />
         </FadeIn>
       </Container>
     </Section>

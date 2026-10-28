@@ -40,3 +40,21 @@ export function linkPath(x1: number, y1: number, x2: number, y2: number): string
   const mid = (x1 + x2) / 2;
   return `M${x1} ${y1} C ${mid} ${y1}, ${mid} ${y2}, ${x2} ${y2}`;
 }
+
+/**
+ * Drops projects hidden from the site (`isListed: false` in projects.ts) and
+ * any technology left with nowhere to point. Stack entries that are not
+ * projects (e.g. "Análise & BI") always stay.
+ */
+export function visibleStack(
+  techs: readonly StackTech[],
+  projects: readonly StackProject[],
+  hiddenIds: readonly string[],
+): { techs: StackTech[]; projects: StackProject[] } {
+  return {
+    projects: projects.filter((project) => !hiddenIds.includes(project.id)),
+    techs: techs
+      .map((tech) => ({ ...tech, usedIn: tech.usedIn.filter((id) => !hiddenIds.includes(id)) }))
+      .filter((tech) => tech.usedIn.length > 0),
+  };
+}
