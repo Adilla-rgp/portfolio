@@ -21,3 +21,20 @@ export function yearFraction(year: number): number {
 export function currentEventIndex(events: readonly TimelineEvent[], year: number): number {
   return events.findLastIndex((event) => event.at <= year);
 }
+
+/**
+ * Milestones that start at the same point as the current one, so events that
+ * begin together (two roles from the same month) light up together.
+ */
+export function isCurrentEvent(
+  events: readonly TimelineEvent[],
+  index: number,
+  current: number,
+): boolean {
+  return current >= 0 && events[index].at === events[current].at;
+}
+
+export function currentEvents(events: readonly TimelineEvent[], year: number): TimelineEvent[] {
+  const current = currentEventIndex(events, year);
+  return events.filter((_, index) => isCurrentEvent(events, index, current));
+}

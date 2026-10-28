@@ -17,6 +17,10 @@ export const buttonVariants = cva(
         ghost: "text-fg-soft hover:bg-raised hover:text-fg",
         /** The selected item in a set, inverted onto bone like `Card variant="lit"`. */
         lit: "border border-fg bg-fg text-bg",
+        /** Correct answer in a set of options. */
+        ok: "border border-ok bg-ok text-bg",
+        /** Sits on a signal or ok surface, e.g. inside `Card variant="signal"`. */
+        dark: "bg-bg text-fg hover:bg-raised hover:text-fg",
       },
       size: {
         md: "min-h-11 px-5 text-mono-sm",

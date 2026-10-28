@@ -173,3 +173,24 @@
 @utility grid-cols-timeline {
   grid-template-columns: repeat(auto-fill, minmax(17.5rem, 1fr));
 }
+
+/* Bars sized by a runtime fraction (0–1) in --bar, set per element or
+   inherited from a parent that a ticker writes to. */
+@utility bar-x {
+  width: calc(var(--bar, 1) * 100%);
+}
+
+@utility bar-y {
+  height: calc(var(--bar, 1) * 100%);
+}
+
+/* Ordered steps (Gallifrey's road to production): as many 200px-or-wider
+   columns as fit, so five steps share one row on desktop. */
+@utility grid-cols-steps {
+  grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
+}
+
+/* Recommender predictions: rank, name, probability bar, percentage. */
+@utility grid-cols-prediction {
+  grid-template-columns: 2.5rem minmax(0, 13.75rem) minmax(0, 1fr) 3.5rem;
+}

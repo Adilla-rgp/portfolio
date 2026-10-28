@@ -9,6 +9,7 @@ export const textVariants = cva("font-sans", {
       muted: "text-muted",
       fg: "text-fg",
       signal: "text-signal",
+      ok: "text-ok",
       /** Takes the parent color, e.g. inside `Card variant="lit"`. */
       inherit: "text-inherit",
     },

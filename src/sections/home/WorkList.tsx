@@ -6,7 +6,12 @@ import { Tag } from "@/components/ui/Tag";
 import { Heading } from "@/components/ui/Typography/Heading";
 import { Text } from "@/components/ui/Typography/Text";
 import type { Lens } from "@/content/lens";
-import { getProjectHref, isExternalHref, projects, projectStatusLabel } from "@/content/projects";
+import {
+  getProjectHref,
+  isExternalHref,
+  listedProjects,
+  projectStatusLabel,
+} from "@/content/projects";
 import { cn } from "@/lib/cn";
 
 const INDEX_DIGITS = 2;
@@ -25,7 +30,7 @@ export function WorkList() {
   const openIndex = openItem.lens === lens ? openItem.index : 0;
 
   const ordered = useMemo(
-    () => [...projects].sort((a, b) => a.order[lens] - b.order[lens]),
+    () => [...listedProjects].sort((a, b) => a.order[lens] - b.order[lens]),
     [lens],
   );
 

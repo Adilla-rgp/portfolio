@@ -30,9 +30,9 @@ const twMerge = extendTailwindMerge({
       tracking: ["kicker", "label", "button"],
       radius: ["pill", "card", "item", "chip"],
       spacing: ["gutter", "gutter-sm", "section", "hero", "trace-panel"],
-      container: ["page"],
+      container: ["page", "diagram"],
       ease: ["out-expo"],
-      animate: ["marquee", "marquee-fast", "blink", "dash-flow", "glitch"],
+      animate: ["marquee", "marquee-fast", "blink", "dash-flow", "glitch", "pop", "glow-pulse"],
     },
   },
 });
