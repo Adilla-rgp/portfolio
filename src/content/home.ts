@@ -20,9 +20,10 @@ export const homeContent = {
     ariaLabel: "Status ao vivo",
     clockLabel: "São Luís",
     clockFallback: "--:--:--",
-    items: [
+    deployFallback: "local",
+    items: (deployId: string) => [
       "P95 [— ms]",
-      "Deploy [sha]",
+      `Deploy ${deployId}`,
       "Cosmo · em produção",
       "Gallifrey · em produção",
       "SBIE 2026 · em avaliação",

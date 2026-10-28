@@ -4,6 +4,7 @@ import { Marquee } from "@/components/ui/Marquee";
 import { Text } from "@/components/ui/Typography/Text";
 import { homeContent } from "@/content/home";
 import { site } from "@/content/site";
+import { getDeployId } from "@/lib/deploy";
 
 const { status } = homeContent;
 
@@ -22,7 +23,7 @@ export function StatusMarquee() {
           fallback={status.clockFallback}
         />
       </Text>
-      {status.items.map((item) => (
+      {status.items(getDeployId(status.deployFallback)).map((item) => (
         <Text key={item} as="span" size="mono">
           {item}
         </Text>
