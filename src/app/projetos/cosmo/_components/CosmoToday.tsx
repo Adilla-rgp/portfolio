@@ -6,12 +6,17 @@ import { Tag } from "@/components/ui/Tag";
 import { Accent } from "@/components/ui/Typography/Accent";
 import { Heading } from "@/components/ui/Typography/Heading";
 import { Text } from "@/components/ui/Typography/Text";
-import { cosmoCase } from "@/content/cases/cosmo";
+import { cosmoCase, type CaseLink } from "@/content/cases/cosmo";
 
 const { today } = cosmoCase;
 
-export function CosmoToday() {
-  const links = today.links.filter((link) => link.href !== null);
+interface CosmoTodayProps {
+  /** Links without a destination yet are left out, buttons and column both. */
+  links?: readonly CaseLink[];
+}
+
+export function CosmoToday({ links: allLinks = today.links }: CosmoTodayProps) {
+  const links = allLinks.filter((link): link is CaseLink & { href: string } => link.href !== null);
 
   return (
     <Section id={today.id}>
@@ -38,7 +43,7 @@ export function CosmoToday() {
               <Button
                 key={link.label}
                 as="a"
-                href={link.href ?? undefined}
+                href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 size="lg"

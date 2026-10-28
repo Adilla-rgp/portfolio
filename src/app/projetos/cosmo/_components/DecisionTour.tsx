@@ -12,6 +12,7 @@ import { useRafTicker } from "@/hooks/useRafTicker";
 import { cn } from "@/lib/cn";
 import { clamp01 } from "@/lib/easing";
 import { ArchitectureDiagram, describeLitParts } from "./ArchitectureDiagram";
+import { DecisionDetails } from "./DecisionDetails";
 
 /** Case.dc.html: each decision stays on screen for 6s during the tour. */
 const TOUR_STEP_SECONDS = 6;
@@ -178,90 +179,16 @@ export function DecisionTour({ decisions }: DecisionTourProps) {
           <ArchitectureDiagram lit={current.nodes} />
         </Card>
 
-        <article className="flex flex-wrap items-start gap-12">
-          <div className="flex min-w-0 grow basis-105 flex-col gap-5">
-            <Text as="span" size="mono" tone="signal">
-              {copy.decisionPrefix} {number} · {current.tag}
-            </Text>
-            <Heading as="h3" size="h3">
-              {current.title}
-            </Heading>
-            <Text size="lg">{current.context}</Text>
-          </div>
-
-          <div className="flex min-w-0 grow basis-120 flex-col gap-4">
-            <div className={cn("grid gap-3", current.alternative && "sm:grid-cols-2")}>
-              <OptionCard label={copy.chosen} body={current.choice} isLit={!showAlternative} />
-              {current.alternative && (
-                <OptionCard
-                  label={copy.notChosen}
-                  body={current.alternative}
-                  isLit={showAlternative}
-                />
-              )}
-            </div>
-            {current.alternative && (
-              <Button
-                variant="outline"
-                aria-pressed={showAlternative}
-                onClick={() => {
-                  setShowAlternative(!showAlternative);
-                  setIsTouring(false);
-                }}
-                className="self-start"
-              >
-                {showAlternative ? copy.flip.hide : copy.flip.show}
-              </Button>
-            )}
-            <dl
-              className={cn(
-                "grid gap-6 border-t border-line pt-5",
-                current.result && "sm:grid-cols-2",
-              )}
-            >
-              <Detail label={copy.tradeoff} body={current.tradeoff} />
-              {current.result && <Detail label={copy.result} body={current.result} />}
-            </dl>
-          </div>
-        </article>
+        <DecisionDetails
+          decision={current}
+          number={number}
+          showAlternative={showAlternative}
+          onToggleAlternative={() => {
+            setShowAlternative(!showAlternative);
+            setIsTouring(false);
+          }}
+        />
       </div>
-    </div>
-  );
-}
-
-interface OptionCardProps {
-  label: string;
-  body: string;
-  isLit: boolean;
-}
-
-function OptionCard({ label, body, isLit }: OptionCardProps) {
-  return (
-    <Card
-      variant={isLit ? "lit" : "outline"}
-      radius="item"
-      className={cn(
-        "flex flex-col gap-3 transition-colors duration-300",
-        !isLit && "border-dashed border-line-strong text-muted",
-      )}
-    >
-      <Text as="span" size="label" tone="inherit" className="font-bold">
-        {label}
-      </Text>
-      <Text as="span" tone="inherit">
-        {body}
-      </Text>
-    </Card>
-  );
-}
-
-function Detail({ label, body }: { label: string; body: string }) {
-  return (
-    <div className="flex flex-col gap-2">
-      <Text as="dt" size="label" tone="muted">
-        {label}
-      </Text>
-      <Text as="dd">{body}</Text>
     </div>
   );
 }

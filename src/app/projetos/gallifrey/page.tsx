@@ -9,7 +9,6 @@ import { Tag } from "@/components/ui/Tag";
 import { Accent } from "@/components/ui/Typography/Accent";
 import { Heading } from "@/components/ui/Typography/Heading";
 import { gallifreyCase, missionQuestions } from "@/content/cases/gallifrey";
-import { getProjectHref } from "@/content/projects";
 import { projectPageContent } from "@/content/projectPage";
 import { ensureProjectPage, getProject, projectMetadata } from "@/lib/projectPage";
 import { BackHomeLink } from "@/sections/project/BackHomeLink";
@@ -19,7 +18,13 @@ import { MissionPlayer } from "./_components/MissionPlayer";
 import { ShipLine } from "./_components/ShipLine";
 
 const project = getProject("gallifrey");
-const cosmoHref = getProjectHref(getProject("cosmo"));
+const cosmo = getProject("cosmo");
+/** Links to the Cosmo case only once it is published. */
+const cosmoHref = cosmo.isPublished ? cosmo.route : null;
+const navItems = [
+  gallifreyCase.homeNav,
+  ...(cosmoHref ? [{ label: gallifreyCase.cosmoNavLabel, href: cosmoHref }] : []),
+];
 const { hero, mission, ship } = gallifreyCase;
 const [firstShipLine, lastShipLine] = ship.titleLines;
 
@@ -32,7 +37,7 @@ export default function GallifreyPage() {
     <>
       <SiteHeader
         homeHref={projectPageContent.homeHref}
-        items={[gallifreyCase.homeNav, { label: gallifreyCase.cosmoNavLabel, href: cosmoHref }]}
+        items={navItems}
         className="border-b border-line"
       />
       <main>

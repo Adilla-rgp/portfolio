@@ -21,8 +21,8 @@ const copy = gallifreyCase.mission;
 
 interface MissionPlayerProps {
   questions: readonly MissionQuestion[];
-  /** Case page that explains the product decisions; `#` until it is published. */
-  whyHref: string;
+  /** Case page that explains the product decisions; null hides the link. */
+  whyHref: string | null;
 }
 
 type OptionState = "idle" | "correct" | "wrong" | "faded";
@@ -247,9 +247,14 @@ export function MissionPlayer({ questions, whyHref }: MissionPlayerProps) {
                   </Text>
                 ))}
               </ul>
-              <Link href={whyHref} className={cn(textVariants({ size: "monoLg", tone: "signal" }), "font-bold")}>
-                {copy.product.why}
-              </Link>
+              {whyHref && (
+                <Link
+                  href={whyHref}
+                  className={cn(textVariants({ size: "monoLg", tone: "signal" }), "font-bold")}
+                >
+                  {copy.product.why}
+                </Link>
+              )}
             </div>
           )}
         </Card>

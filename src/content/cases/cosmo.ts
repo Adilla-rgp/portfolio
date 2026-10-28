@@ -63,7 +63,7 @@ export const cosmoArchitecture = {
   ] satisfies readonly (readonly [CosmoNodeId, CosmoNodeId])[],
 } as const;
 
-interface CaseLink {
+export interface CaseLink {
   label: string;
   /** Hidden until there is a real destination. */
   href: string | null;
