@@ -9,6 +9,7 @@ export const tagVariants = cva(
       tone: {
         default: "border-line-strong text-fg-soft",
         signal: "border-signal text-signal",
+        lit: "border-fg bg-fg font-bold text-bg",
       },
     },
     defaultVariants: {

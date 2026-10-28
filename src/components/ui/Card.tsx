@@ -9,6 +9,10 @@ export const cardVariants = cva("border", {
       sunken: "border-line bg-sunken text-fg",
       /** The "current" item: inverted onto bone. */
       lit: "border-fg bg-fg text-bg",
+      /** Feedback and highlighted items on the signal color. */
+      signal: "border-signal bg-signal text-bg",
+      /** Feedback for a correct answer. */
+      ok: "border-ok bg-ok text-bg",
       /** Border only, for items sitting on a section background. */
       outline: "border-line bg-transparent text-fg",
     },

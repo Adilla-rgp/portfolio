@@ -60,6 +60,10 @@
   --animate-dash-flow: dash-flow 0.36s linear infinite;
   /* 404: a short jolt every few seconds. */
   --animate-glitch: glitch 3.2s steps(1) infinite;
+  /* Feedback and badges that appear after an answer. */
+  --animate-pop: pop 0.35s var(--ease-out-expo) both;
+  /* The [MASK] slot the recommender is about to fill. */
+  --animate-glow-pulse: glow-pulse 2s ease-in-out infinite;
 
   @keyframes marquee {
     from { transform: translateX(0); }
@@ -74,6 +78,16 @@
   @keyframes dash-flow {
     from { stroke-dashoffset: 0; }
     to { stroke-dashoffset: -18; }
+  }
+
+  @keyframes pop {
+    from { opacity: 0; transform: scale(0.85); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 0 0.625rem color-mix(in srgb, var(--color-signal) 45%, transparent); }
+    50% { box-shadow: 0 0 2.25rem color-mix(in srgb, var(--color-signal) 45%, transparent); }
   }
 
   @keyframes glitch {
