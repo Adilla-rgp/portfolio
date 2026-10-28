@@ -22,6 +22,11 @@ export interface Project {
   route: string;
   /** False until `route` leads somewhere; links then point to `#`. */
   isPublished: boolean;
+  /**
+   * False keeps the project out of the work list until it exists, without
+   * losing its copy or its place in each lens order.
+   */
+  isListed: boolean;
   /** Position in the work list for each lens (1 = first). */
   order: ByLens<number>;
   copy: ByLens<ProjectLensCopy>;
@@ -34,6 +39,7 @@ export const projects = [
     status: "demonstracao",
     route: "https://meridiano2.vercel.app",
     isPublished: true,
+    isListed: true,
     order: { backend: 1, dados: 1 },
     copy: {
       backend: {
@@ -54,6 +60,7 @@ export const projects = [
     status: "producao",
     route: "/projetos/cosmo",
     isPublished: false,
+    isListed: true,
     order: { backend: 2, dados: 3 },
     copy: {
       backend: {
@@ -74,6 +81,7 @@ export const projects = [
     status: "construcao",
     route: "/projetos/documento-sinal",
     isPublished: false,
+    isListed: false,
     order: { backend: 4, dados: 2 },
     copy: {
       backend: {
@@ -94,6 +102,7 @@ export const projects = [
     status: "producao",
     route: "/projetos/gallifrey",
     isPublished: false,
+    isListed: true,
     order: { backend: 3, dados: 5 },
     copy: {
       backend: {
@@ -114,6 +123,7 @@ export const projects = [
     status: "pesquisa",
     route: "/projetos/recomendacao",
     isPublished: false,
+    isListed: true,
     order: { backend: 5, dados: 4 },
     copy: {
       backend: {
@@ -130,6 +140,8 @@ export const projects = [
 ] as const satisfies readonly Project[];
 
 export const unpublishedHref = "#";
+
+export const listedProjects = projects.filter((project) => project.isListed);
 
 export function getProjectHref(project: Project): string {
   return project.isPublished ? project.route : unpublishedHref;
