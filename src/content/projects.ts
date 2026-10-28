@@ -150,3 +150,10 @@ export function getProjectHref(project: Project): string {
 export function isExternalHref(href: string): boolean {
   return /^https?:\/\//.test(href);
 }
+
+/** Routes of published project pages on this site (external demos excluded). */
+export function getPublishedProjectPaths(): string[] {
+  return projects
+    .filter((project) => project.isPublished && !isExternalHref(project.route))
+    .map((project) => project.route);
+}
