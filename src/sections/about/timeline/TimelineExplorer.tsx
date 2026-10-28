@@ -15,6 +15,8 @@ import { cssVars } from "@/lib/cssVars";
 import {
   autoplayYear,
   currentEventIndex,
+  currentEvents,
+  isCurrentEvent,
   timelineAutoplay,
   yearFraction,
 } from "@/lib/timeline";
@@ -31,8 +33,12 @@ const cardVariantByState = {
   future: "outline",
 } as const;
 
-function eventState(index: number, current: number): EventState {
-  if (index === current) return "current";
+function eventState(
+  events: readonly TimelineEvent[],
+  index: number,
+  current: number,
+): EventState {
+  if (isCurrentEvent(events, index, current)) return "current";
   return index < current ? "past" : "future";
 }
 
@@ -67,7 +73,7 @@ export function TimelineExplorer({ events }: TimelineExplorerProps) {
         if (document.activeElement !== rangeRef.current) rangeRef.current.value = String(year);
         rangeRef.current.setAttribute(
           "aria-valuetext",
-          timelineContent.describeValue(Math.floor(year), events[index]),
+          timelineContent.describeValue(Math.floor(year), currentEvents(events, year)),
         );
       }
       setCurrent(index);
@@ -117,7 +123,7 @@ export function TimelineExplorer({ events }: TimelineExplorerProps) {
             defaultValue={autoplayEnd}
             aria-valuetext={timelineContent.describeValue(
               Math.floor(autoplayEnd),
-              events[currentEventIndex(events, autoplayEnd)],
+              currentEvents(events, autoplayEnd),
             )}
             onInput={(event) => {
               setIsAutoplaying(false);
@@ -141,7 +147,7 @@ export function TimelineExplorer({ events }: TimelineExplorerProps) {
         className="grid grid-cols-timeline gap-3"
       >
         {events.map((event, index) => {
-          const state = eventState(index, current);
+          const state = eventState(events, index, current);
           return (
             <li key={event.title} aria-current={state === "current" ? "step" : undefined}>
               <Card
