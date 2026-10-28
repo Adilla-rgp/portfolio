@@ -59,7 +59,7 @@ export const projects = [
     name: "Cosmo",
     status: "producao",
     route: "/projetos/cosmo",
-    isPublished: false,
+    isPublished: true,
     isListed: true,
     order: { backend: 2, dados: 3 },
     copy: {
@@ -101,7 +101,7 @@ export const projects = [
     name: "Gallifrey",
     status: "producao",
     route: "/projetos/gallifrey",
-    isPublished: false,
+    isPublished: true,
     isListed: true,
     order: { backend: 3, dados: 5 },
     copy: {
@@ -122,7 +122,7 @@ export const projects = [
     name: "Recomendação sequencial",
     status: "pesquisa",
     route: "/projetos/recomendacao",
-    isPublished: false,
+    isPublished: true,
     isListed: true,
     order: { backend: 5, dados: 4 },
     copy: {
