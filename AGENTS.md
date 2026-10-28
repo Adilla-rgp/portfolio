@@ -31,6 +31,7 @@ Do not add 3D libraries (Three.js, Spline) or theme switching: DESIGN.md specifi
 - Build: `npm run build`
 - Lint: `npm run lint`
 - Type check: `npm run type-check`
+- Tests: `npm test` (Vitest, `src/**/*.test.ts`)
 
 > Update this section as scripts are added (tests, formatting, etc). Never guess a command — check `package.json` first.
 
