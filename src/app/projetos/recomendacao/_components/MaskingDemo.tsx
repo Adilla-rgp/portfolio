@@ -66,7 +66,7 @@ export function MaskingDemo() {
         />
       </div>
 
-      <ol ref={ref} aria-label={copy.sequenceLabel} className="grid grid-cols-4 gap-2 md:grid-cols-8">
+      <ol ref={ref} aria-label={copy.sequenceLabel} className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-8">
         {labels.map((label, position) => {
           const role = tokenRole(position, masked, bidirectional);
           const isHidden = role === "masked" && !frame.revealed;
@@ -84,7 +84,7 @@ export function MaskingDemo() {
                 <Text as="span" size="codeXs" tone="inherit" className="opacity-80">
                   {recommendationCase.demo.position(position)}
                 </Text>
-                <Text as="span" tone="inherit" className="font-bold wrap-anywhere">
+                <Text as="span" tone="inherit" className="font-bold hyphens-auto">
                   {isHidden ? recommendationCase.demo.mask : label}
                 </Text>
               </Card>

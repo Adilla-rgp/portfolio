@@ -145,9 +145,9 @@ export function DecisionTour({ decisions }: DecisionTourProps) {
               </span>
               <Heading
                 as="span"
-                size="stat"
+                size="node"
                 tone={isCurrent ? "default" : "dim"}
-                className="md:text-number"
+                className="tabular-nums sm:text-stat md:text-number"
               >
                 {decisionNumber(position)}
               </Heading>
