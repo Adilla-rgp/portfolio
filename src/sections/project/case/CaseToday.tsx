@@ -26,9 +26,11 @@ export function CaseToday({ today }: CaseTodayProps) {
             {today.title}
             <Accent>.</Accent>
           </Heading>
-          <Text size="lg" className="max-w-160">
-            {today.body}
-          </Text>
+          {today.body && (
+            <Text size="lg" className="max-w-160">
+              {today.body}
+            </Text>
+          )}
           <ul className="flex flex-wrap gap-2">
             {today.tags.map((tag) => (
               <li key={tag}>

@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import { cosmoCase } from "@/content/cases/cosmo";
 import { caseStudyContent } from "@/content/caseStudy";
 import { gallifreyCase, missionQuestions } from "@/content/cases/gallifrey";
+import { meridianoCase } from "@/content/cases/meridiano";
 import { recommendationCase, recommendationResearch } from "@/content/cases/recomendacao";
 import { agentDecisions, cosmoDecisions } from "@/content/decisions";
 import { lensParam, lenses } from "@/content/lens";
@@ -11,6 +12,7 @@ import { DecisionDetails } from "@/sections/project/case/DecisionDetails";
 import Home from "./page";
 import AgentsPage from "./projetos/agentes/page";
 import CosmoPage from "./projetos/cosmo/page";
+import MeridianoPage from "./projetos/meridiano/page";
 import GallifreyPage from "./projetos/gallifrey/page";
 import { MissionPlayer } from "./projetos/gallifrey/_components/MissionPlayer";
 import RecommendationPage from "./projetos/recomendacao/page";
@@ -130,6 +132,7 @@ describe("pages with today's content", () => {
   it.each([
     ["/projetos/cosmo", CosmoPage],
     ["/projetos/agentes", AgentsPage],
+    ["/projetos/meridiano", MeridianoPage],
     ["/projetos/gallifrey", GallifreyPage],
     ["/projetos/recomendacao", RecommendationPage],
     ["/sobre", AboutPage],
@@ -140,6 +143,13 @@ describe("pages with today's content", () => {
   it.each(lenses)("/ with lens %s renders no placeholder or empty value", async (lens) => {
     const page = await Home({ searchParams: Promise.resolve({ [lensParam]: lens }) });
     expectNoPlaceholders(html(page));
+  });
+
+  it("drops the decisions section of a case study that has none", () => {
+    expect(meridianoCase.decisions).toBeNull();
+    expect(html(<MeridianoPage />)).not.toContain(
+      `aria-label="${caseStudyContent.decisions.ariaLabel}"`,
+    );
   });
 
   it("labels the dataset on the recommendation page only when it is known", () => {

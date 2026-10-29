@@ -39,7 +39,7 @@ export const projects = [
     id: "meridiano",
     name: "Meridiano",
     status: "demonstracao",
-    route: "https://meridiano2.vercel.app",
+    route: "/projetos/meridiano",
     isPublished: true,
     isListed: true,
     order: { backend: 1, dados: 1 },

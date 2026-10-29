@@ -39,16 +39,18 @@ export function CaseStudyPage<NodeId extends string>({
           intro={hero.intro}
           aside={<CaseFacts project={project} facts={hero.facts} />}
         />
-        <Section tone="sunken" aria-label={caseStudyContent.decisions.ariaLabel} className="pt-18">
-          <Container>
-            <DecisionTour
-              title={decisions.title}
-              decisions={decisions.items}
-              architecture={content.architecture}
-              diagramName={decisions.diagramName}
-            />
-          </Container>
-        </Section>
+        {decisions && (
+          <Section tone="sunken" aria-label={caseStudyContent.decisions.ariaLabel} className="pt-18">
+            <Container>
+              <DecisionTour
+                title={decisions.title}
+                decisions={decisions.items}
+                architecture={decisions.architecture}
+                diagramName={decisions.diagramName}
+              />
+            </Container>
+          </Section>
+        )}
         <CaseToday today={content.today} />
       </main>
       <SiteFooter />

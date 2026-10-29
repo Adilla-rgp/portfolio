@@ -54,8 +54,8 @@ export const agentsCase: CaseStudy<AgentNodeId> = {
     title: "Três decisões",
     diagramName: "Arquitetura dos agentes tutores",
     items: agentDecisions,
+    architecture,
   },
-  architecture,
   today: {
     id: "hoje",
     title: "Onde está hoje",

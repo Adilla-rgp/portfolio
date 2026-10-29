@@ -48,9 +48,18 @@ export type CaseFact = { label: string; value: string } | { label: string; isSta
 export interface CaseToday {
   id: string;
   title: string;
-  body: string;
+  /** null leaves only the tags and links. */
+  body: string | null;
   tags: readonly string[];
   links: readonly CaseLink[];
+}
+
+export interface CaseDecisions<NodeId extends string = string> {
+  title: string;
+  /** Names the diagram for screen readers, e.g. "Arquitetura do Cosmo". */
+  diagramName: string;
+  items: readonly Decision<NodeId>[];
+  architecture: Architecture<NodeId>;
 }
 
 /** Everything a case study page needs; the layout lives in CaseStudyPage. */
@@ -64,13 +73,8 @@ export interface CaseStudy<NodeId extends string = string> {
     intro: string;
     facts: readonly CaseFact[];
   };
-  decisions: {
-    title: string;
-    /** Names the diagram for screen readers, e.g. "Arquitetura do Cosmo". */
-    diagramName: string;
-    items: readonly Decision<NodeId>[];
-  };
-  architecture: Architecture<NodeId>;
+  /** null hides the whole decisions section, diagram included. */
+  decisions: CaseDecisions<NodeId> | null;
   today: CaseToday;
 }
 

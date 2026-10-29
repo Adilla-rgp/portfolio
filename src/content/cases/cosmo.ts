@@ -65,8 +65,8 @@ export const cosmoCase: CaseStudy<CosmoNodeId> = {
     title: "Três decisões",
     diagramName: "Arquitetura do Cosmo",
     items: cosmoDecisions,
+    architecture,
   },
-  architecture,
   today: {
     id: "hoje",
     title: "Onde está hoje",
