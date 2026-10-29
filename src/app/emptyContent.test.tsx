@@ -5,7 +5,12 @@ import { caseStudyContent } from "@/content/caseStudy";
 import { gallifreyCase, missionQuestions } from "@/content/cases/gallifrey";
 import { meridianoCase } from "@/content/cases/meridiano";
 import { recommendationCase, recommendationResearch } from "@/content/cases/recomendacao";
-import { agentDecisions, cosmoDecisions, meridianoDecisions } from "@/content/decisions";
+import {
+  agentDecisions,
+  cosmoDecisions,
+  histoclickDecisions,
+  meridianoDecisions,
+} from "@/content/decisions";
 import { getProject } from "@/lib/projectPage";
 import { CaseStudyPage } from "@/sections/project/case/CaseStudyPage";
 import { CaseToday } from "@/sections/project/case/CaseToday";
@@ -15,6 +20,7 @@ import AgentsPage from "./projetos/agentes/page";
 import CosmoPage from "./projetos/cosmo/page";
 import MeridianoPage from "./projetos/meridiano/page";
 import GallifreyPage from "./projetos/gallifrey/page";
+import HistoclickPage from "./projetos/histoclick/page";
 import { MissionPlayer } from "./projetos/gallifrey/_components/MissionPlayer";
 import RecommendationPage from "./projetos/recomendacao/page";
 import { RoleSection } from "./projetos/recomendacao/_components/RoleSection";
@@ -26,7 +32,12 @@ import AboutPage from "./sobre/page";
  */
 
 const copy = caseStudyContent.decisions;
-const decisions = [...cosmoDecisions, ...agentDecisions, ...meridianoDecisions];
+const decisions = [
+  ...cosmoDecisions,
+  ...agentDecisions,
+  ...meridianoDecisions,
+  ...histoclickDecisions,
+];
 const noop = () => {};
 
 function html(element: React.ReactElement): string {
@@ -136,6 +147,7 @@ describe("pages with today's content", () => {
     ["/projetos/meridiano", MeridianoPage],
     ["/projetos/gallifrey", GallifreyPage],
     ["/projetos/recomendacao", RecommendationPage],
+    ["/projetos/histoclick", HistoclickPage],
     ["/sobre", AboutPage],
   ] as const)("%s renders no placeholder or empty value", (_, Page) => {
     expectNoPlaceholders(html(<Page />));

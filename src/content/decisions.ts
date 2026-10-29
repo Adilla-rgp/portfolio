@@ -1,5 +1,6 @@
 import type { AgentNodeId } from "@/content/cases/agentes";
 import type { CosmoNodeId } from "@/content/cases/cosmo";
+import type { HistoclickNodeId } from "@/content/cases/histoclick";
 import type { MeridianoNodeId } from "@/content/cases/meridiano";
 import type { Decision } from "@/content/caseStudy";
 
@@ -163,5 +164,39 @@ export const meridianoDecisions: readonly Decision<MeridianoNodeId>[] = [
     result:
       "Coberto por testes no motor e na API, que o CI roda em todo push contra um PostgreSQL de verdade.",
     nodes: ["api", "motor", "pg"],
+  },
+];
+
+/** The Histoclick decisions, in the order of the tour. */
+export const histoclickDecisions: readonly Decision<HistoclickNodeId>[] = [
+  {
+    id: "react-native",
+    tag: "Tecnologia",
+    short: "React Native",
+    title: "React Native em vez de Flutter",
+    context:
+      "O app precisava rodar em Android e iOS com uma única base de código e continuar sendo mantido depois do lançamento.",
+    choice: "React Native com Expo.",
+    alternative: "Flutter.",
+    tradeoff: null,
+    result:
+      "Reaproveitei o ecossistema de React e TypeScript que eu já dominava, com uma base estável de longo prazo.",
+    nodes: ["app"],
+  },
+  {
+    id: "mvp-atlas",
+    tag: "Produto",
+    short: "MVP",
+    title: "Lançar só o Atlas primeiro",
+    context:
+      "O projeto previa atlas, atividades, quiz, XP, ranking, progresso e assinatura.",
+    choice:
+      "Um MVP só com o Atlas: login, busca, filtros, as 35 patologias com lâminas, zoom e hotspots, curiosidades e perfil.",
+    alternative: "Lançar todas as funcionalidades de uma vez.",
+    tradeoff:
+      "Menos funcionalidades no lançamento, em troca de chegar às lojas mais cedo e validar o uso real.",
+    result:
+      "Protótipo aprovado sem pedidos de alteração. Atividades e gamificação ficam para a versão 2.",
+    nodes: ["app", "auth", "db", "storage"],
   },
 ];

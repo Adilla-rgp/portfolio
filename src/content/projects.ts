@@ -82,6 +82,17 @@ export const projects = [
     tags: ["BERT4Rec", "Python", "Pandas"],
   },
   {
+    id: "histoclick",
+    name: "Histoclick",
+    status: "construcao",
+    route: "/projetos/histoclick",
+    isPublished: false,
+    isListed: false,
+    description:
+      "App mobile de atlas de patologias bucais para o ensino de odontologia, com lâminas microscópicas interativas, busca e filtros. Fui a única desenvolvedora num projeto de 7 pessoas.",
+    tags: ["React Native", "Expo", "TypeScript"],
+  },
+  {
     id: "documento-sinal",
     name: "Documento → sinal",
     status: "construcao",
