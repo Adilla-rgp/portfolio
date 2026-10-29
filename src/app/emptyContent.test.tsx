@@ -6,7 +6,6 @@ import { gallifreyCase, missionQuestions } from "@/content/cases/gallifrey";
 import { meridianoCase } from "@/content/cases/meridiano";
 import { recommendationCase, recommendationResearch } from "@/content/cases/recomendacao";
 import { agentDecisions, cosmoDecisions, meridianoDecisions } from "@/content/decisions";
-import { lensParam, lenses } from "@/content/lens";
 import { getProject } from "@/lib/projectPage";
 import { CaseStudyPage } from "@/sections/project/case/CaseStudyPage";
 import { CaseToday } from "@/sections/project/case/CaseToday";
@@ -142,9 +141,8 @@ describe("pages with today's content", () => {
     expectNoPlaceholders(html(<Page />));
   });
 
-  it.each(lenses)("/ with lens %s renders no placeholder or empty value", async (lens) => {
-    const page = await Home({ searchParams: Promise.resolve({ [lensParam]: lens }) });
-    expectNoPlaceholders(html(page));
+  it("/ renders no placeholder or empty value", () => {
+    expectNoPlaceholders(html(<Home />));
   });
 
   it("drops the decisions section of a case study that has none", () => {

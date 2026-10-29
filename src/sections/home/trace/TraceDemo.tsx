@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { useInView } from "framer-motion";
-import { useLens } from "@/components/lens/LensProvider";
 import { Button } from "@/components/ui/Button";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Segmented } from "@/components/ui/Segmented";
@@ -46,7 +45,6 @@ interface TraceDemoProps {
  * the last recorded run instead, labeled as such.
  */
 export function TraceDemo({ intro }: TraceDemoProps) {
-  const { lens } = useLens();
   const [mode, setMode] = useState<TraceMode>("frio");
   const [requestedId, setRequestedId] = useState(0);
   const [run, setRun] = useState<Run | null>(null);
@@ -66,7 +64,7 @@ export function TraceDemo({ intro }: TraceDemoProps) {
       let result: RecordedTrace;
       let isRecorded = false;
       try {
-        result = await measureHomeRequest(lens, nextMode);
+        result = await measureHomeRequest(nextMode);
         saveLastRun(nextMode, result);
       } catch {
         result = loadLastRun(nextMode) ?? recordedTraces[nextMode];
@@ -77,7 +75,7 @@ export function TraceDemo({ intro }: TraceDemoProps) {
       setRun({ id, result, isRecorded });
       setLatestByMode((current) => ({ ...current, [nextMode]: result.trace }));
     },
-    [lens],
+    [],
   );
 
   useEffect(() => {
@@ -104,7 +102,7 @@ export function TraceDemo({ intro }: TraceDemoProps) {
   if (current?.isRecorded) note = traceContent.recordedNote(formatRecordedAt(current.result.recordedAt));
   else if (current) note = traceContent.liveNote;
 
-  const request = `${traceContent.requestPrefix}${lens}${mode === "frio" ? traceContent.coldSuffix : ""}`;
+  const request = `${traceContent.request}${mode === "frio" ? traceContent.coldSuffix : ""}`;
 
   return (
     <>

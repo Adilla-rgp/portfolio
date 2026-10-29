@@ -154,7 +154,6 @@ Every page section follows:
 
 # State
 Prefer local state. Lift state only when necessary. Avoid unnecessary global state.
-The portfolio lens lives in the URL (`?lente=dados`).
 
 ---
 

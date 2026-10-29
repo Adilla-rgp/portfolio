@@ -1,11 +1,9 @@
 "use client";
 
-import { useId, useMemo, useState } from "react";
-import { useLens } from "@/components/lens/LensProvider";
+import { useId, useState } from "react";
 import { Tag } from "@/components/ui/Tag";
 import { Heading } from "@/components/ui/Typography/Heading";
 import { Text } from "@/components/ui/Typography/Text";
-import type { Lens } from "@/content/lens";
 import {
   getProjectHref,
   isExternalHref,
@@ -16,32 +14,17 @@ import { cn } from "@/lib/cn";
 
 const INDEX_DIGITS = 2;
 
-interface OpenItem {
-  lens: Lens;
-  index: number;
-}
-
 export function WorkList() {
-  const { lens } = useLens();
   const baseId = useId();
-  // Scoped to the lens it was set under, so switching lens reopens the first
-  // item without an effect.
-  const [openItem, setOpenItem] = useState<OpenItem>({ lens, index: 0 });
-  const openIndex = openItem.lens === lens ? openItem.index : 0;
-
-  const ordered = useMemo(
-    () => [...listedProjects].sort((a, b) => a.order[lens] - b.order[lens]),
-    [lens],
-  );
+  const [openIndex, setOpenIndex] = useState(0);
 
   return (
     <ul className="border-t border-line-strong">
-      {ordered.map((project, index) => {
+      {listedProjects.map((project, index) => {
         const isOpen = index === openIndex;
-        const { description, tags } = project.copy[lens];
         const nameId = `${baseId}-${project.id}-name`;
         const descriptionId = `${baseId}-${project.id}-description`;
-        const open = () => setOpenItem({ lens, index });
+        const open = () => setOpenIndex(index);
         const href = getProjectHref(project);
         const externalProps = isExternalHref(href)
           ? { target: "_blank", rel: "noopener noreferrer" }
@@ -88,10 +71,10 @@ export function WorkList() {
                 <span className="overflow-hidden">
                   <span className="flex flex-wrap gap-x-12 gap-y-6 pt-5 pb-1 md:pl-18">
                     <Text as="span" size="lg" id={descriptionId} className="grow-2 basis-105">
-                      {description}
+                      {project.description}
                     </Text>
                     <span className="flex grow basis-60 flex-wrap content-start gap-2">
-                      {tags.map((tag) => (
+                      {project.tags.map((tag) => (
                         <Tag key={tag}>{tag}</Tag>
                       ))}
                     </span>

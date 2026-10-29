@@ -2,17 +2,10 @@ export const homeContent = {
   hero: {
     id: "topo",
     ariaLabel: "Abertura",
-    kicker: {
-      backend: "/backend — São Luís, BR",
-      dados: "/dados — São Luís, BR",
-    },
+    kicker: "Back-end · IA · Dados — São Luís, BR",
     titleLines: ["Do ruído", "ao sistema"],
-    intro: {
-      backend:
-        "Construo os sistemas por trás de produtos com IA: APIs, filas, bancos e agentes em produção. Passe o mouse no sinal.",
-      dados:
-        "Levo modelos e dados do notebook para produção, sempre com uma forma de medir se funcionam. Passe o mouse no sinal.",
-    },
+    intro:
+      "Construo sistemas de back-end e de IA que chegam à produção: APIs, bancos de dados e agentes com LLMs, sempre com uma forma de medir se funcionam. Passe o mouse no sinal.",
     cta: { label: "Ver o trabalho ↓", href: "#trabalho" },
     replay: "↺ Voltar ao ruído",
   },
@@ -27,7 +20,6 @@ export const homeContent = {
       "Gallifrey · em produção",
       "Liga · em produção",
     ],
-    lensPrefix: "Lente /",
   },
   trace: {
     id: "trace",
@@ -44,6 +36,5 @@ export const homeContent = {
   work: {
     id: "trabalho",
     title: "Trabalho",
-    orderPrefix: "Ordem da lente /",
   },
 } as const;

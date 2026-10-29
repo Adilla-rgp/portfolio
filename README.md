@@ -8,16 +8,6 @@ O conceito visual é **do ruído ao sistema**: partículas soltas que se organiz
 mostram o sistema por dentro e números que só aparecem quando existem de verdade. Métrica sem dado real fica
 como `[— ms]` até ser medida.
 
-## Duas lentes
-
-O mesmo conteúdo pode ser lido por duas lentes:
-
-- **`/backend`**: arquitetura, APIs, filas e bancos.
-- **`/dados`**: modelos, avaliação e dados.
-
-A lente muda a ordem dos projetos, o texto e as tags de cada um. Ela fica na URL (`/?lente=dados`), então cada
-candidatura pode ter o link com a lente certa.
-
 ## Stack
 
 - [Next.js 16](https://nextjs.org) (App Router) e React 19

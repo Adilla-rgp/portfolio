@@ -1,5 +1,4 @@
 import { LocalClock } from "@/components/layout/LocalClock";
-import { LensName } from "@/components/lens/LensCopy";
 import { Marquee } from "@/components/ui/Marquee";
 import { Text } from "@/components/ui/Typography/Text";
 import { homeContent } from "@/content/home";
@@ -28,10 +27,6 @@ export function StatusMarquee() {
           {item}
         </Text>
       ))}
-      <Text as="span" size="mono" tone="signal">
-        {status.lensPrefix}
-        <LensName />
-      </Text>
     </Marquee>
   );
 }

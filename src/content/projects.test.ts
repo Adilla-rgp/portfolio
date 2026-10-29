@@ -1,12 +1,26 @@
 import { describe, expect, it } from "vitest";
-import { lenses } from "@/content/lens";
 import { getPublishedProjectPaths, listedProjects, projects } from "@/content/projects";
 
-describe("work list order", () => {
-  it.each(lenses)("gives each listed project its own position in the /%s lens", (lens) => {
-    const positions = listedProjects.map((project) => project.order[lens]);
-    expect(new Set(positions).size).toBe(positions.length);
+const MAX_TAGS = 4;
+
+describe("work list", () => {
+  it("lists the projects in the order of the Home", () => {
+    expect(listedProjects.map((project) => project.id)).toEqual([
+      "cosmo",
+      "agentes",
+      "meridiano",
+      "gallifrey",
+      "recomendacao",
+    ]);
   });
+
+  it.each(projects.map((project) => [project.id, project] as const))(
+    "%s has one description and at most four tags",
+    (_, project) => {
+      expect(project.description.length).toBeGreaterThan(0);
+      expect(project.tags.length).toBeLessThanOrEqual(MAX_TAGS);
+    },
+  );
 });
 
 describe("getPublishedProjectPaths", () => {

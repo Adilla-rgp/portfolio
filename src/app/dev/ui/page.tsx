@@ -163,7 +163,7 @@ export default function UiPage() {
               <Tag>FastAPI</Tag>
               <Tag>Postgres</Tag>
               <Tag>Redis</Tag>
-              <Tag tone="signal">Lente /backend</Tag>
+              <Tag tone="signal">Qwen</Tag>
               <Tag>
                 <StatusDot blink /> Em produção
               </Tag>

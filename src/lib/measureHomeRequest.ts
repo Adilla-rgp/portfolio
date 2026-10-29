@@ -1,4 +1,3 @@
-import type { Lens } from "@/content/lens";
 import type { TraceMode } from "@/content/trace";
 import { homeApiUrl } from "@/lib/homeApi";
 import { parseServerTiming } from "@/lib/serverTiming";
@@ -54,9 +53,9 @@ function fallbackMarks(startedAt: number, headersAt: number, endAt: number): Res
  * The cold run adds a unique query, so neither the CDN nor the browser can
  * answer it from cache.
  */
-export async function measureHomeRequest(lens: Lens, mode: TraceMode): Promise<RecordedTrace> {
+export async function measureHomeRequest(mode: TraceMode): Promise<RecordedTrace> {
   const isCold = mode === "frio";
-  const url = homeApiUrl(window.location.href, lens, isCold ? String(Date.now()) : null);
+  const url = homeApiUrl(window.location.href, isCold ? String(Date.now()) : null);
 
   const startedAt = performance.now();
   const response = await fetch(url, { cache: isCold ? "no-store" : "default" });

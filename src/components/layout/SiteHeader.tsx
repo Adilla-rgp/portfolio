@@ -11,8 +11,6 @@ export interface SiteNavItem {
 }
 
 interface SiteHeaderProps {
-  /** Center slot, e.g. the lens switch on the Home. */
-  actions?: ReactNode;
   /** Target of the name link; an in-page anchor on the Home, `/` elsewhere. */
   homeHref?: string;
   items?: readonly SiteNavItem[];
@@ -47,7 +45,6 @@ function HeaderLink({ href, className, children }: HeaderLinkProps) {
 }
 
 export function SiteHeader({
-  actions,
   homeHref = site.nav.homeHref,
   items = site.nav.items,
   className,
@@ -61,7 +58,6 @@ export function SiteHeader({
         >
           {site.name}
         </HeaderLink>
-        {actions}
         <nav aria-label={site.nav.label}>
           <ul className="flex flex-wrap gap-x-7">
             {items.map((item) => (

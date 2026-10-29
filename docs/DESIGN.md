@@ -6,7 +6,7 @@ Os textos de `docs/design-reference` estão desatualizados. Para conteúdo, a fo
 
 ## Conceito
 
-**"Do ruído ao sistema."** Back-end + IA/dados num site só, com duas lentes (`backend` | `dados`) que reordenam e reescrevem os mesmos projetos.
+**"Do ruído ao sistema."** Back-end + IA/dados num site só, com um texto e uma ordem para os projetos.
 O site mostra o sistema em vez de descrevê-lo: entrada com partículas que viram um sinal, trace de requisição, gráficos que se arrastam e demos que funcionam de verdade.
 
 Regras de conteúdo:
@@ -86,7 +86,7 @@ Todas com `forwardRef`, repasse de `...props` nativas, `className` via `cn()` e 
 - **Button:** pill, fonte mono uppercase 700, `tracking:.04em`.
   - Variantes `signal` (fundo signal, texto bg), `outline` (borda `line-strong`) e `ghost`.
   - Tamanhos `md` (44px) e `lg` (52px). Opção `asChild` ou `as="a"`.
-- **Segmented:** grupo de pills dentro de uma borda pill, `role="group"` e `aria-pressed`. Usado na lente, em cache frio/quente, aluno/sistema e bidirecional.
+- **Segmented:** grupo de pills dentro de uma borda pill, `role="group"` e `aria-pressed`. Usado em cache frio/quente, nos exemplos e na triagem do cache, aluno/sistema e bidirecional.
 - **Heading:** prop `as` com `h2` como padrão, e prop `size` (`display | displayPage | displayCode | displayXl | h2 | h3`). `displayPage` é a abertura das páginas internas (8,6vw, até 128px, como em `About.dc.html`); `displayCode` é o "404" (26vw, de 120 a 380px, como em `NotFound.dc.html`).
 - **Text:** prop `as` com `p` como padrão, e prop `tone` (`soft | muted`).
 - **Kicker:** mono, signal, uppercase.
@@ -122,21 +122,19 @@ Todas com `forwardRef`, repasse de `...props` nativas, `className` via `cn()` e 
 Detalhes da Home:
 1. **Abertura** com 860px de altura:
    - Partículas que vão do ruído à onda e se afastam do mouse num raio de 160px.
-   - Título com RevealText e seletor de lente no topo.
+   - Título com RevealText.
    - CTA "VER O TRABALHO ↓" e botão "↺ VOLTAR AO RUÍDO".
    - Faixa (marquee) de status ao vivo com a hora real de São Luís (`America/Fortaleza`).
 2. **"Esta página, por dentro.":** trace real de `GET /api/home`, disparado por botão e medido no navegador (Resource Timing para DNS, TCP, TLS, espera e download; `Server-Timing` para as etapas internas; `x-vercel-cache` para o cache da CDN), animado com as durações reais. Cache frio fura a CDN com `?nocache=`; no quente, um HIT da CDN mostra as etapas do servidor como PULADO. Se o fetch falhar, mostra a última execução gravada, avisando que é uma gravação.
 3. **"Arraste o limiar.":** calculadora do cache dos agentes tutores. Dois campos de mensagem de erro (com exemplos num Segmented) viram tokens em chips, com a similaridade de Jaccard ao vivo, um limiar arrastável de 0,50 a 1,00 (marca em 0,85, o limiar usado) sincronizado com um `input range`, a triagem Expected/Got e o veredito anunciado por `aria-live`. Ao lado, o gráfico de barras da taxa de recuperação por tamanho da base, com dados reais.
-4. **"Trabalho":** lista com nomes gigantes. O item com hover ou foco se expande com descrição e tags, e a ordem e o texto dependem da lente.
+4. **"Trabalho":** lista com nomes gigantes. O item com hover ou foco se expande com descrição e tags.
 5. **Rodapé:** marquee gigante "VAMOS CONVERSAR →" e links para Cal.com, GitHub e LinkedIn.
-
-Persistir a lente na URL (`?lente=dados`), para que cada candidatura possa ter o link certo.
 
 ## Conteúdo
 
 Centralizar em `src/content/` (tipado, `as const`):
 - `site.ts`: links (github.com/Adilla-rgp, linkedin.com/in/adilla-gomes, cal.com/adilla-gomes).
-- `projects.ts`: texto por lente, tags por lente, ordem por lente, status e rota.
+- `projects.ts`: texto, até quatro tags, status e rota de cada projeto, na ordem da lista.
 - `decisions.ts`: as decisões de cada estudo de caso (Cosmo e agentes tutores).
 - `cases/*.ts`: o conteúdo de cada página de projeto; os estudos de caso seguem o tipo `CaseStudy` de `caseStudy.ts`.
 - `timeline.ts`: os marcos da página Sobre.
@@ -155,7 +153,7 @@ Os textos entre colchetes nas referências são placeholders a preencher.
 
 1. **Base:** commit do estado atual; renomear `master` para `main`; corrigir o import do CSS; limpar o `globals.css`; tokens no `@theme`; fontes; `lang`; metadata; remover `three`, `@react-three/*`, `next-themes` e `zod`; script `type-check`; atualizar o AGENTS.md para apontar para este arquivo.
 2. **Primitivas** + `lib/motion.ts` + `useRafTicker`.
-3. **Home estática:** layout, copy e lentes, sem as peças animadas.
+3. **Home estática:** layout e copy, sem as peças animadas.
 4. **Peças de assinatura da Home**, nesta ordem: RevealText e marquee, trace, gráfico do limiar, partículas.
 5. `/sobre` e `not-found`.
 6. **Páginas de projeto**, cada uma só quando o projeto real existir. A primeira é `/projetos/documento-sinal`.

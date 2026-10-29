@@ -31,8 +31,8 @@ export const traceContent = {
   rootName: "GET /api/home",
   rootService: "Navegador",
   panelLabel: "Trace da requisição GET /api/home",
-  requestPrefix: "GET /api/home?lente=",
-  coldSuffix: "&nocache=…",
+  request: "GET /api/home",
+  coldSuffix: "?nocache=…",
   running: "Em andamento…",
   noValue: "—",
   summary: {

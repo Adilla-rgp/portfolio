@@ -4,9 +4,10 @@ import { useState } from "react";
 import { Segmented } from "@/components/ui/Segmented";
 import { Text } from "@/components/ui/Typography/Text";
 
-const lensOptions = [
-  { value: "backend", label: "Back-end" },
-  { value: "dados", label: "IA & Dados" },
+const seriesOptions = [
+  { value: "geral", label: "Geral" },
+  { value: "sintaxe", label: "Sintaxe" },
+  { value: "logica", label: "Lógica" },
 ] as const;
 
 const cacheOptions = [
@@ -14,20 +15,20 @@ const cacheOptions = [
   { value: "quente", label: "Cache quente" },
 ] as const;
 
-type Lens = (typeof lensOptions)[number]["value"];
+type Series = (typeof seriesOptions)[number]["value"];
 type Cache = (typeof cacheOptions)[number]["value"];
 
 export function SegmentedDemo() {
-  const [lens, setLens] = useState<Lens>("backend");
+  const [series, setSeries] = useState<Series>("geral");
   const [cache, setCache] = useState<Cache>("frio");
 
   return (
     <div className="flex flex-wrap items-center gap-6">
       <Segmented
-        aria-label="Lente do portfólio"
-        options={lensOptions}
-        value={lens}
-        onValueChange={setLens}
+        aria-label="Tipo de erro"
+        options={seriesOptions}
+        value={series}
+        onValueChange={setSeries}
       />
       <Segmented
         aria-label="Estado do cache"
@@ -36,7 +37,7 @@ export function SegmentedDemo() {
         onValueChange={setCache}
       />
       <Text as="span" tone="muted" className="font-mono text-mono-sm">
-        lente={lens} · cache={cache}
+        série={series} · cache={cache}
       </Text>
     </div>
   );

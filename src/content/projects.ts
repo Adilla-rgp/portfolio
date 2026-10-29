@@ -1,5 +1,3 @@
-import type { ByLens } from "@/content/lens";
-
 export type ProjectStatus = "producao" | "construcao" | "pesquisa" | "demonstracao";
 
 export const projectStatusLabel: Record<ProjectStatus, string> = {
@@ -8,11 +6,6 @@ export const projectStatusLabel: Record<ProjectStatus, string> = {
   pesquisa: "Pesquisa",
   demonstracao: "Demonstração",
 };
-
-interface ProjectLensCopy {
-  description: string;
-  tags: readonly string[];
-}
 
 export interface Project {
   id: string;
@@ -24,38 +17,14 @@ export interface Project {
   route: string;
   /** False until `route` leads somewhere; links then point to `#`. */
   isPublished: boolean;
-  /**
-   * False keeps the project out of the work list until it exists, without
-   * losing its copy or its place in each lens order.
-   */
+  /** False keeps the project out of the work list until it exists, without losing its copy. */
   isListed: boolean;
-  /** Position in the work list for each lens (1 = first). */
-  order: ByLens<number>;
-  copy: ByLens<ProjectLensCopy>;
+  description: string;
+  /** At most four. */
+  tags: readonly string[];
 }
 
 export const projects = [
-  {
-    id: "meridiano",
-    name: "Meridiano",
-    status: "demonstracao",
-    route: "/projetos/meridiano",
-    isPublished: true,
-    isListed: true,
-    order: { backend: 1, dados: 1 },
-    copy: {
-      backend: {
-        description:
-          "Motor de decisão em Python e API em FastAPI que calculam a viagem mais justa para um grupo, com privacidade de orçamento garantida por testes.",
-        tags: ["FastAPI", "PostgreSQL", "SQLAlchemy"],
-      },
-      dados: {
-        description:
-          "Texto livre vira restrições estruturadas, com conjunto de avaliação próprio e linha de base publicada; o texto vira sugestão, o motor decide.",
-        tags: ["Python", "LLM", "Avaliação"],
-      },
-    },
-  },
   {
     id: "cosmo",
     name: "Cosmo",
@@ -63,19 +32,9 @@ export const projects = [
     route: "/projetos/cosmo",
     isPublished: true,
     isListed: true,
-    order: { backend: 2, dados: 5 },
-    copy: {
-      backend: {
-        description:
-          "Plataforma de questões de programação construída do zero com a equipe do laboratório: arquitetura, back-end em Node e TypeScript com Clean Architecture, Prisma e PostgreSQL, front em Next.js.",
-        tags: ["Node", "TypeScript", "PostgreSQL"],
-      },
-      dados: {
-        description:
-          "Plataforma onde alunos de programação resolvem exercícios; cada tentativa vira dado de aprendizagem.",
-        tags: ["dados de aprendizagem", "PostgreSQL"],
-      },
-    },
+    description:
+      "Plataforma de questões de programação construída do zero com a equipe do laboratório, de monólito a microsserviços em Node e TypeScript com Clean Architecture e PostgreSQL. Cada tentativa dos alunos vira dado de aprendizagem.",
+    tags: ["Node", "TypeScript", "PostgreSQL", "Clean Architecture"],
   },
   {
     id: "agentes",
@@ -85,40 +44,20 @@ export const projects = [
     route: "/projetos/agentes",
     isPublished: true,
     isListed: true,
-    order: { backend: 3, dados: 3 },
-    copy: {
-      backend: {
-        description:
-          "Agentes de IA que dão feedback em exercícios de Python, orquestrados com LangGraph e servidos por FastAPI, com estado por aluno e cache de respostas por similaridade.",
-        tags: ["LangGraph", "FastAPI", "Python"],
-      },
-      dados: {
-        description:
-          "Tutores com LLM avaliados com dados históricos de alunos; o cache reaproveita respostas quando dois pedidos são parecidos o bastante.",
-        tags: ["LLM", "agentes", "avaliação"],
-      },
-    },
+    description:
+      "Agentes de IA que orientam alunos em exercícios de Python, orquestrados com LangGraph e servidos por FastAPI, com um cache por similaridade que recuperou 96,85% dos erros em dados reais.",
+    tags: ["LangGraph", "FastAPI", "Qwen", "Python"],
   },
   {
-    id: "documento-sinal",
-    name: "Documento → sinal",
-    status: "construcao",
-    route: "/projetos/documento-sinal",
-    isPublished: false,
-    isListed: false,
-    order: { backend: 5, dados: 2 },
-    copy: {
-      backend: {
-        description:
-          "Pipeline que recebe documentos da CVM, extrai com LLM e entrega saída validada por API.",
-        tags: ["FastAPI", "fila", "validação"],
-      },
-      dados: {
-        description:
-          "Extração estruturada de fatos relevantes de FIIs com Gemini, medida campo a campo contra um gabarito.",
-        tags: ["Gemini", "saída estruturada", "eval"],
-      },
-    },
+    id: "meridiano",
+    name: "Meridiano",
+    status: "demonstracao",
+    route: "/projetos/meridiano",
+    isPublished: true,
+    isListed: true,
+    description:
+      "Motor de decisão em Python e API em FastAPI que calculam a viagem mais justa para um grupo, com privacidade de orçamento garantida por testes. O texto livre vira restrições estruturadas, medidas num conjunto de avaliação próprio com linha de base publicada: o texto vira sugestão, o motor decide.",
+    tags: ["Python", "FastAPI", "PostgreSQL", "LLM"],
   },
   {
     id: "gallifrey",
@@ -127,19 +66,9 @@ export const projects = [
     route: "/projetos/gallifrey",
     isPublished: true,
     isListed: true,
-    order: { backend: 4, dados: 6 },
-    copy: {
-      backend: {
-        description:
-          "Módulo de missões do Cosmo, levado de protótipo a produção dentro da Clean Architecture do back-end.",
-        tags: ["TypeScript", "Prisma", "PostgreSQL"],
-      },
-      dados: {
-        description:
-          "Questões de Python marcadas por nível da taxonomia de Bloom, usado como dado interno de progresso.",
-        tags: ["Bloom", "dados de aprendizagem"],
-      },
-    },
+    description:
+      "Microsserviço de missões de Python do Cosmo, levado do protótipo à produção, com questões classificadas pela taxonomia de Bloom para acompanhar o progresso dos alunos.",
+    tags: ["TypeScript", "Prisma", "PostgreSQL"],
   },
   {
     id: "recomendacao",
@@ -148,23 +77,26 @@ export const projects = [
     route: "/projetos/recomendacao",
     isPublished: true,
     isListed: true,
-    order: { backend: 6, dados: 4 },
-    copy: {
-      backend: {
-        description: "Modelo de recomendação exposto como endpoint de inferência.",
-        tags: ["inferência", "API"],
-      },
-      dados: {
-        description:
-          "Iniciação científica com BERT4Rec: prever o próximo item a partir da sequência de interações.",
-        tags: ["BERT4Rec", "recomendação"],
-      },
-    },
+    description:
+      "Pesquisa de recomendação educacional que combina BERT4Rec e metaheurísticas para montar trilhas de estudo, treinada com dados do Codeforces e de alunos da UFMA.",
+    tags: ["BERT4Rec", "Python", "Pandas"],
+  },
+  {
+    id: "documento-sinal",
+    name: "Documento → sinal",
+    status: "construcao",
+    route: "/projetos/documento-sinal",
+    isPublished: false,
+    isListed: false,
+    description:
+      "Pipeline que recebe documentos da CVM, extrai fatos relevantes de FIIs com Gemini em saída estruturada e entrega o resultado validado por API. A extração é medida campo a campo contra um gabarito.",
+    tags: ["Gemini", "FastAPI", "fila", "eval"],
   },
 ] as const satisfies readonly Project[];
 
 export const unpublishedHref = "#";
 
+/** In the order of the work list. */
 export const listedProjects = projects.filter((project) => project.isListed);
 
 export function getProjectHref(project: Project): string {

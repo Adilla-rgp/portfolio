@@ -1,5 +1,3 @@
-import { LensCopy } from "@/components/lens/LensCopy";
-import { LensSwitch } from "@/components/lens/LensSwitch";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -29,12 +27,10 @@ export function HomeHero() {
       <ParticlesControl>
         <HeroParticles />
         <div className="relative flex flex-1 flex-col">
-          <SiteHeader actions={<LensSwitch />} />
+          <SiteHeader />
 
           <Container id={hero.id} className="flex flex-col gap-7 pt-14">
-            <Kicker>
-              <LensCopy values={hero.kicker} />
-            </Kicker>
+            <Kicker>{hero.kicker}</Kicker>
             <Heading as="h1" size="display">
               <RevealText
                 lines={[
@@ -47,7 +43,7 @@ export function HomeHero() {
               />
             </Heading>
             <Text size="lg" className="max-w-130 text-halo">
-              <LensCopy values={hero.intro} />
+              {hero.intro}
             </Text>
           </Container>
 

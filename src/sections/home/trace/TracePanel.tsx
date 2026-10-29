@@ -15,7 +15,7 @@ import { cssVars } from "@/lib/cssVars";
 import type { TraceSummary, WaterfallRow } from "@/lib/trace";
 
 interface TracePanelProps {
-  /** Request line shown in the header, e.g. `GET /api/home?lente=backend`. */
+  /** Request line shown in the header, e.g. `GET /api/home?nocache=…`. */
   request: string;
   rows: readonly WaterfallRow[];
   /** null while the request is in flight. */
