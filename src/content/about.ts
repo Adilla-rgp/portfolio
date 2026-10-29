@@ -61,10 +61,6 @@ export const aboutContent = {
     title: "Liderança",
     items: [
       {
-        name: "Connection",
-        body: "Diretora de Projetos na empresa júnior.",
-      },
-      {
         name: "Dacomp",
         body: "Diretora de Educação do diretório acadêmico, criando minicursos de programação para alunos de Ciência da Computação.",
       },
