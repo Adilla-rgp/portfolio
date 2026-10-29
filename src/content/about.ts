@@ -23,7 +23,7 @@ export const aboutContent = {
     photo: {
       /** Shown once the file exists in public/; until then, no photo at all. */
       src: "/images/adilla-gomes.jpg",
-      alt: "Foto de Ádilla Gomes",
+      alt: "Ádilla Gomes",
     },
     cv: {
       ariaLabel: "Currículo",
