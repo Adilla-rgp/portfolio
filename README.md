@@ -1,109 +1,68 @@
-# Ádilla Gomes — portfólio
+# Portfólio — Ádilla Gomes
 
-Portfólio de Ádilla Gomes, desenvolvedora back-end com foco em IA e dados. O site junta as duas frentes num só
-lugar: sistemas em produção (APIs, filas, bancos, agentes) e modelos levados do notebook para produção, sempre
-com uma forma de medir se funcionam.
+**[byadilla.vercel.app](https://byadilla.vercel.app)**
 
-O conceito visual é **do ruído ao sistema**: partículas soltas que se organizam numa onda, peças interativas que
-mostram o sistema por dentro e números que só aparecem quando existem de verdade. Métrica sem dado real fica
-como `[— ms]` até ser medida.
+Portfólio de engenharia de software com foco em back-end, IA e dados. A ideia central é **mostrar o sistema em vez de descrevê-lo**: as peças da página são interativas e, sempre que possível, funcionam com dados reais.
+
+---
+
+## Destaques
+
+- **Trace de uma requisição real.** O botão dispara `GET /api/home` e mostra as etapas medidas no seu navegador: DNS, conexão, espera e download (Resource Timing), as etapas internas do servidor (`Server-Timing`) e se a resposta veio do cache da CDN (`x-vercel-cache`). Dá para comparar cache frio e quente.
+- **Calculadora do cache dos agentes tutores.** Compara duas mensagens de erro com similaridade de Jaccard, permite arrastar o limiar e mostra o caso em que o Jaccard falha (tokens iguais em ordem invertida) e a triagem que barra o falso positivo. O gráfico ao lado usa dados reais de 16.850 submissões.
+- **Estudos de caso por decisões.** Cada projeto é contado pelas decisões de engenharia: contexto, escolha, alternativa, trade-off e resultado, com o diagrama da arquitetura acendendo as partes envolvidas.
+- **Abertura em canvas 2D.** Partículas que saem do ruído e formam um sinal, reagindo ao ponteiro.
+
+Nenhum número é inventado: dado que não existe não aparece, e um teste falha se algum placeholder chegar a uma página.
+
+## Qualidade
+
+- PageSpeed Insights: 100 em Performance, Acessibilidade, Boas práticas e SEO, no desktop e no celular.
+- Testes de unidade e de conteúdo com Vitest, incluindo uma verificação que renderiza todas as páginas e procura campos vazios ou links quebrados.
+- CI com GitHub Actions a cada push e pull request: type-check, lint, testes e build.
+- Acessibilidade: controles nativos, navegação por teclado, `aria-live` nas peças interativas, contraste AA e `prefers-reduced-motion` respeitado em todas as animações.
+- Conteúdo visível sem JavaScript: títulos e entradas de seção são CSS renderizado no servidor, com rede de segurança caso a hidratação falhe.
 
 ## Stack
 
-- [Next.js 16](https://nextjs.org) (App Router) e React 19
-- TypeScript
-- Tailwind CSS v4, com os tokens em `@theme`
-- class-variance-authority para as variantes dos componentes
-- Framer Motion para transições de interação
-- Lucide para ícones
-- Vitest para os testes
+Next.js (App Router) · React · TypeScript · Tailwind CSS v4 · class-variance-authority · Framer Motion · Vitest · GitHub Actions · Vercel
 
-## Como rodar
+## Decisões de arquitetura
 
-Requer Node.js 20.9 ou mais recente.
-
-```bash
-npm install
-npm run dev        # http://localhost:3000
-```
-
-| Comando              | O que faz                          |
-| -------------------- | ---------------------------------- |
-| `npm run dev`        | servidor de desenvolvimento        |
-| `npm run build`      | build de produção                  |
-| `npm start`          | serve o build de produção          |
-| `npm run lint`       | ESLint                             |
-| `npm run type-check` | checagem de tipos (`tsc --noEmit`) |
-| `npm test`           | testes (Vitest)                    |
-
-O CI (`.github/workflows/ci.yml`) roda type-check, lint, testes e build em cada pull request.
-
-Variável de ambiente opcional: `NEXT_PUBLIC_SITE_URL`, a origem usada nos links canônicos, no Open Graph e no
-sitemap. Na Vercel, o domínio de produção é detectado sozinho até ela ser definida.
+- **Tokens como única fonte de estilo.** Cores, tipografia e espaçamentos ficam no `@theme` do Tailwind; a paleta padrão é desligada para impedir cores fora do sistema.
+- **Conteúdo separado do código.** Todo o texto do site vive em `src/content/`, tipado; os componentes só renderizam.
+- **Animação sem re-render.** Loops por frame desenham direto no canvas ou atualizam variáveis CSS via refs, com o loop pausado fora da tela.
+- **Template de estudo de caso.** As páginas de projeto compartilham um único componente alimentado por conteúdo; campos vazios somem em vez de virar placeholder.
 
 ## Estrutura
 
 ```
-docs/
-  DESIGN.md              fonte da verdade visual: conceito, tokens, tipografia, movimento, rotas
-  design-reference/      protótipos HTML de cada tela (especificação, não código)
 src/
-  app/                   rotas; componentes exclusivos de uma rota ficam em `_components/`
-  components/
-    ui/                  primitivas (Button, Card, Heading, Text, Segmented, RevealText…)
-    layout/              cabeçalho, rodapé e peças globais
-  content/               todo o texto do site, tipado (`as const`)
-  sections/              seções de cada página
-  hooks/                 useRafTicker e outros
-  lib/                   lógica pura (trace, linha do tempo, gráfico, partículas) e utilitários
-  styles/                tokens.css, animations.css, utilities.css, globals.css
+  app/          rotas e API (/api/home)
+  components/   primitivas de interface, layout e partículas
+  sections/     seções e o template de estudo de caso
+  content/      textos e dados do site
+  lib/          lógica pura (trace, cache, linha do tempo), com testes
+  hooks/        useRafTicker e afins
+  styles/       tokens, base e animações
+  types/        tipos compartilhados
+  assets/       fontes
+docs/
+  DESIGN.md           especificação visual
+  design-reference/   protótipos das telas
 ```
 
-Todo o texto vive em `src/content/`, nunca escrito direto nos componentes. Isso deixa o caminho aberto para
-internacionalização e para um CMS sem mexer na interface.
+## Rodando localmente
 
-## Decisões de arquitetura
+```bash
+npm install
+npm run dev          # http://localhost:3000
+npm run type-check
+npm run lint
+npm test
+npm run build
+```
 
-**Entradas em CSS, não em JavaScript.** Os títulos (`RevealText`) e as entradas das seções (`FadeIn`) são
-animações CSS. O título é renderizado no servidor e anima sem esperar a hidratação. O conteúdo só fica escondido
-quando um script mínimo no `<head>` confirma que há JavaScript, e uma rede de segurança revela tudo se a página
-nunca hidratar. Framer Motion fica para transições de interação.
+---
 
-**Partículas em `<canvas>` 2D.** A abertura desenha cerca de 150 pontos em canvas, sem Three.js e sem SVG. O
-desenho é imperativo: nada re-renderiza o React a cada quadro.
-
-**Um relógio para tudo que anima por quadro.** `useRafTicker` limita o `requestAnimationFrame` a cerca de 30fps
-e pausa quando o elemento sai da tela ou a aba fica oculta. Valores que mudam a cada quadro (progresso, posição
-de alça, altura de barra) chegam ao CSS por variáveis (`--progress`, `--handle-x`) escritas por ref, sem estado
-do React.
-
-**Tokens como única fonte de estilo.** Cores, escala tipográfica, espaçamentos e raios estão em
-`src/styles/tokens.css`, espelhando o `DESIGN.md`. A paleta padrão do Tailwind é desligada, então um componente
-só alcança as cores do sistema. Tamanhos de texto saem de `<Heading>`, `<Text>` e `<Kicker>`, nunca de
-utilitários soltos.
-
-**Primitivas reutilizáveis.** Cada primitiva em `components/ui/` usa `forwardRef`, repassa as props nativas,
-aceita `className` (mesclado com `cn()`) e declara variantes com CVA.
-
-**Conteúdo honesto por construção.** Projetos têm `isPublished` e `isListed`: páginas não publicadas ficam fora
-do sitemap e da lista, com `noindex`, e só abrem em desenvolvimento. Campos sem informação real são `null`, e a
-interface esconde o bloco correspondente em vez de mostrar um texto provisório.
-
-## Acessibilidade
-
-- Controles reais (`<button>`, `<a>`, `<input>`), navegação por teclado e alvos de toque de pelo menos 44px.
-- Gráficos e diagramas com `role="img"` e `aria-label` que descreve o estado atual. Gráficos arrastáveis têm um
-  `<input type="range">` equivalente.
-- Resultados de interações anunciados por regiões `aria-live`.
-- Hierarquia de títulos correta e `lang="pt-BR"`.
-- Contraste AA em todos os pares de cor dos tokens.
-- `prefers-reduced-motion`: sem partículas animadas, marquee ou loops, e transições de no máximo 150ms. As peças
-  mostram o estado final.
-
-## Performance
-
-- Peças pesadas (as partículas) carregam com `dynamic()`, depois do conteúdo principal.
-- Animações por quadro não re-renderizam árvores do React e pausam fora da tela.
-- O cabeçalho não pré-carrega as outras rotas ao aparecer na tela; o pré-carregamento acontece no hover.
-- Fontes com `next/font` (Archivo e JetBrains Mono), sem requisições externas em tempo de execução.
-- Imagens Open Graph geradas no build.
+[Portfólio](https://byadilla.vercel.app) · [LinkedIn](https://linkedin.com/in/adilla-gomes) · [GitHub](https://github.com/Adilla-rgp)
