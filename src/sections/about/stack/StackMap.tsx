@@ -180,6 +180,11 @@ export function StackMap({ techs, projects }: StackMapProps) {
               <Text as="span" size="label" tone={isOn ? "inherit" : "muted"}>
                 {project.sub}
               </Text>
+              {project.body && (
+                <Text as="span" tone={isOn ? "inherit" : "muted"} className="font-normal">
+                  {project.body}
+                </Text>
+              )}
             </Button>
           );
         })}
