@@ -166,7 +166,7 @@ class Component extends DCLogic {
     const prodCount = Math.round(2 * k);
 
     // stack graph
-    const TECH = ['Python', 'TypeScript', 'FastAPI', 'LangGraph', 'API do Claude', 'Gemini', 'PostgreSQL', 'Prisma', 'Next.js', 'React', 'Pandas', 'SQL', 'dbt', 'Power BI'];
+    const TECH = ['Python', 'TypeScript', 'FastAPI', 'LangGraph', 'Qwen', 'Gemini', 'PostgreSQL', 'Prisma', 'Next.js', 'React', 'Pandas', 'SQL', 'dbt', 'Power BI'];
     const PROJ = [
       { id: 'cosmo', label: 'Cosmo', sub: 'TUTOR COM IA' },
       { id: 'gal', label: 'Gallifrey', sub: 'MISSÕES' },
@@ -176,7 +176,7 @@ class Component extends DCLogic {
     ];
     const USES = {
       'Python': ['cosmo', 'doc', 'rec'], 'TypeScript': ['cosmo', 'gal'], 'FastAPI': ['cosmo', 'doc'], 'LangGraph': ['cosmo'],
-      'API do Claude': ['cosmo'], 'Gemini': ['doc'], 'PostgreSQL': ['cosmo', 'gal'], 'Prisma': ['gal'], 'Next.js': ['cosmo'],
+      'Qwen': ['cosmo'], 'Gemini': ['doc'], 'PostgreSQL': ['cosmo', 'gal'], 'Prisma': ['gal'], 'Next.js': ['cosmo'],
       'React': ['gal'], 'Pandas': ['rec'], 'SQL': ['bi', 'cosmo'], 'dbt': ['bi'], 'Power BI': ['bi']
     };
     const sel = this.state.sel || { type: 'tech', id: 'Python' };
