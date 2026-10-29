@@ -2,39 +2,40 @@ import type { TraceMode } from "@/content/trace";
 import type { RecordedTrace } from "@/lib/measureHomeRequest";
 
 /**
- * Real runs of the trace demo, captured from a browser against the local
- * production build (next start). Shown, labeled as a recording, only when the live request fails and this
+ * Real runs of the trace demo, captured from a browser against production
+ * (byadilla.vercel.app). Shown, labeled as a recording, only when the live request fails and this
  * browser has no run of its own stored.
  */
 export const recordedTraces: Record<TraceMode, RecordedTrace> = {
   "frio": {
     "trace": {
-      "traceId": "3668f8a9750e44e7944c92aeef2fdcfe",
+      "traceId": "c4db0729e2d9482ca97cbb218700991e",
       "name": "GET /api/home",
       "spans": [
         {
-          "traceId": "3668f8a9750e44e7944c92aeef2fdcfe",
+          "traceId": "c4db0729e2d9482ca97cbb218700991e",
           "spanId": "root",
           "name": "GET /api/home",
           "kind": "CLIENT",
-          "startTimeUnixNano": 1793288056983600000,
-          "endTimeUnixNano": 1793288056990600200,
+          "startTimeUnixNano": 1793288856920100000,
+          "endTimeUnixNano": 1793288857210000000,
           "attributes": {
             "service.name": "Navegador",
-            "http.response.status_code": 200
+            "http.response.status_code": 200,
+            "vercel.cache": "MISS"
           },
           "status": {
             "code": "OK"
           }
         },
         {
-          "traceId": "3668f8a9750e44e7944c92aeef2fdcfe",
+          "traceId": "c4db0729e2d9482ca97cbb218700991e",
           "spanId": "ttfb",
           "parentSpanId": "root",
           "name": "ttfb",
           "kind": "CLIENT",
-          "startTimeUnixNano": 1793288056984400100,
-          "endTimeUnixNano": 1793288056990300200,
+          "startTimeUnixNano": 1793288856922200300,
+          "endTimeUnixNano": 1793288857208000000,
           "attributes": {
             "service.name": "Rede + servidor"
           },
@@ -43,13 +44,13 @@ export const recordedTraces: Record<TraceMode, RecordedTrace> = {
           }
         },
         {
-          "traceId": "3668f8a9750e44e7944c92aeef2fdcfe",
+          "traceId": "c4db0729e2d9482ca97cbb218700991e",
           "spanId": "content",
           "parentSpanId": "ttfb",
           "name": "content",
           "kind": "SERVER",
-          "startTimeUnixNano": 1793288056987315200,
-          "endTimeUnixNano": 1793288056987362000,
+          "startTimeUnixNano": 1793288857065063000,
+          "endTimeUnixNano": 1793288857065110000,
           "attributes": {
             "service.name": "Next.js"
           },
@@ -58,13 +59,13 @@ export const recordedTraces: Record<TraceMode, RecordedTrace> = {
           }
         },
         {
-          "traceId": "3668f8a9750e44e7944c92aeef2fdcfe",
+          "traceId": "c4db0729e2d9482ca97cbb218700991e",
           "spanId": "serialize",
           "parentSpanId": "ttfb",
           "name": "serialize",
           "kind": "SERVER",
-          "startTimeUnixNano": 1793288056987362000,
-          "endTimeUnixNano": 1793288056987385000,
+          "startTimeUnixNano": 1793288857065110000,
+          "endTimeUnixNano": 1793288857065137200,
           "attributes": {
             "service.name": "Next.js"
           },
@@ -73,13 +74,13 @@ export const recordedTraces: Record<TraceMode, RecordedTrace> = {
           }
         },
         {
-          "traceId": "3668f8a9750e44e7944c92aeef2fdcfe",
+          "traceId": "c4db0729e2d9482ca97cbb218700991e",
           "spanId": "download",
           "parentSpanId": "root",
           "name": "download",
           "kind": "INTERNAL",
-          "startTimeUnixNano": 1793288056990300200,
-          "endTimeUnixNano": 1793288056990600200,
+          "startTimeUnixNano": 1793288857208000000,
+          "endTimeUnixNano": 1793288857210000000,
           "attributes": {
             "service.name": "Rede"
           },
@@ -89,36 +90,37 @@ export const recordedTraces: Record<TraceMode, RecordedTrace> = {
         }
       ]
     },
-    "recordedAt": "2026-10-29T15:34:16.993Z"
+    "recordedAt": "2026-10-29T15:47:37.214Z"
   },
   "quente": {
     "trace": {
-      "traceId": "b4faaa2a9c064994b1af77c8926eee51",
+      "traceId": "8a66d344e8e74157896544e46919dbd0",
       "name": "GET /api/home",
       "spans": [
         {
-          "traceId": "b4faaa2a9c064994b1af77c8926eee51",
+          "traceId": "8a66d344e8e74157896544e46919dbd0",
           "spanId": "root",
           "name": "GET /api/home",
           "kind": "CLIENT",
-          "startTimeUnixNano": 1793288061760700200,
-          "endTimeUnixNano": 1793288062008600000,
+          "startTimeUnixNano": 1793288863600700200,
+          "endTimeUnixNano": 1793288863654800100,
           "attributes": {
             "service.name": "Navegador",
-            "http.response.status_code": 200
+            "http.response.status_code": 200,
+            "vercel.cache": "HIT"
           },
           "status": {
             "code": "OK"
           }
         },
         {
-          "traceId": "b4faaa2a9c064994b1af77c8926eee51",
+          "traceId": "8a66d344e8e74157896544e46919dbd0",
           "spanId": "ttfb",
           "parentSpanId": "root",
           "name": "ttfb",
           "kind": "CLIENT",
-          "startTimeUnixNano": 1793288061763500000,
-          "endTimeUnixNano": 1793288062006000000,
+          "startTimeUnixNano": 1793288863602400300,
+          "endTimeUnixNano": 1793288863653200100,
           "attributes": {
             "service.name": "Rede + servidor"
           },
@@ -127,43 +129,13 @@ export const recordedTraces: Record<TraceMode, RecordedTrace> = {
           }
         },
         {
-          "traceId": "b4faaa2a9c064994b1af77c8926eee51",
-          "spanId": "content",
-          "parentSpanId": "ttfb",
-          "name": "content",
-          "kind": "SERVER",
-          "startTimeUnixNano": 1793288061884633600,
-          "endTimeUnixNano": 1793288061884803600,
-          "attributes": {
-            "service.name": "Next.js"
-          },
-          "status": {
-            "code": "OK"
-          }
-        },
-        {
-          "traceId": "b4faaa2a9c064994b1af77c8926eee51",
-          "spanId": "serialize",
-          "parentSpanId": "ttfb",
-          "name": "serialize",
-          "kind": "SERVER",
-          "startTimeUnixNano": 1793288061884803600,
-          "endTimeUnixNano": 1793288061884866800,
-          "attributes": {
-            "service.name": "Next.js"
-          },
-          "status": {
-            "code": "OK"
-          }
-        },
-        {
-          "traceId": "b4faaa2a9c064994b1af77c8926eee51",
+          "traceId": "8a66d344e8e74157896544e46919dbd0",
           "spanId": "download",
           "parentSpanId": "root",
           "name": "download",
           "kind": "INTERNAL",
-          "startTimeUnixNano": 1793288062006000000,
-          "endTimeUnixNano": 1793288062008600000,
+          "startTimeUnixNano": 1793288863653200100,
+          "endTimeUnixNano": 1793288863654800100,
           "attributes": {
             "service.name": "Rede"
           },
@@ -173,6 +145,6 @@ export const recordedTraces: Record<TraceMode, RecordedTrace> = {
         }
       ]
     },
-    "recordedAt": "2026-10-29T15:34:22.038Z"
+    "recordedAt": "2026-10-29T15:47:43.656Z"
   }
 };
