@@ -54,7 +54,7 @@ export const cosmoCase: CaseStudy<CosmoNodeId> = {
     kicker: "Estudo de caso — /backend",
     titleLines: ["Cosmo"],
     intro:
-      "Uma plataforma de questões de programação, no estilo do LeetCode, onde alunos da UFMA resolvem exercícios. Ajudei a construí-la do zero com a equipe do laboratório, desde quando era um monólito. Contada pelas escolhas que moldaram o sistema.",
+      "Uma plataforma de questões de programação onde alunos da UFMA resolvem exercícios. Ajudei a construí-la do zero com a equipe do laboratório, desde quando era um monólito. Contada pelas escolhas que moldaram o sistema.",
     facts: [
       { label: "Onde", value: "TeleMídia · UFMA" },
       { label: "Status", isStatus: true },
