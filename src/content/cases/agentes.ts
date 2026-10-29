@@ -67,7 +67,7 @@ export const agentsCase: CaseStudy<AgentNodeId> = {
     ],
   },
   decisions: {
-    title: "Três decisões",
+    title: "Quatro decisões",
     diagramName: "Arquitetura dos agentes tutores",
     items: agentDecisions,
     architecture,

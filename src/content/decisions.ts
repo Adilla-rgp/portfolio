@@ -54,6 +54,21 @@ export const cosmoDecisions: readonly Decision<CosmoNodeId>[] = [
 /** The tutoring agents decisions, in the order of the tour. */
 export const agentDecisions: readonly Decision<AgentNodeId>[] = [
   {
+    id: "modelo",
+    tag: "Infraestrutura",
+    short: "Qwen",
+    title: "Modelo open source no servidor do laboratório",
+    context:
+      "Os agentes precisavam de um LLM, mas a pesquisa tem orçamento pequeno, e a ferramenta precisa continuar funcionando depois que eu sair da universidade.",
+    choice:
+      "Usar uma versão de porte médio do Qwen, um modelo open source, rodando no servidor do próprio laboratório.",
+    alternative: "Usar a API de um modelo comercial pago.",
+    tradeoff:
+      "Sem custo por chamada e sem depender de um fornecedor externo, em troca de um modelo menor que os comerciais e de operar a infraestrutura dentro do laboratório.",
+    result: "O porte médio equilibrou velocidade e qualidade das respostas no hardware do laboratório.",
+    nodes: ["sintaxe", "logica", "contexto", "qwen"],
+  },
+  {
     id: "langgraph",
     tag: "Arquitetura",
     short: "LangGraph",
