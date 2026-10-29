@@ -89,11 +89,11 @@ export const agentDecisions: readonly Decision<AgentNodeId>[] = [
     short: "Cache CBR",
     title: "Cache de respostas por similaridade",
     context:
-      "Alunos diferentes erram o mesmo exercício de jeitos parecidos, e cada chamada ao LLM custa dinheiro e espera.",
+      "Alunos diferentes erram o mesmo exercício de jeitos parecidos, e cada chamada ao modelo ocupa o servidor do laboratório e faz o aluno esperar.",
     choice:
       "Cache baseado em casos: hash MD5 para pedidos idênticos e similaridade de Jaccard para os parecidos.",
     alternative: null,
-    tradeoff: "Barato e determinístico, mas reconhece semelhança de palavras, não de significado.",
+    tradeoff: "Leve e determinístico, mas reconhece semelhança de palavras, não de significado.",
     result: null,
     nodes: ["sup", "cache"],
   },
