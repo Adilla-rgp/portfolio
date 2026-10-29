@@ -70,7 +70,6 @@ export interface CaseLink {
 }
 
 const productLink: CaseLink = { label: "Ver o Cosmo ↗", href: null };
-const articleLink: CaseLink = { label: "Ler o artigo ↗", href: null };
 
 const nav: readonly SiteNavItem[] = [
   { label: projectPageContent.homeNavLabel, href: projectPageContent.homeHref },
@@ -93,7 +92,6 @@ export const cosmoCase = {
       where: { label: "Onde", value: "TeleMídia · UFMA" },
       status: { label: "Status" },
       role: { label: "Papel", value: "desenvolvimento e pesquisa" },
-      research: { label: "Pesquisa", value: "SBIE 2026, em avaliação" },
     },
   },
   decisions: {
@@ -116,6 +114,6 @@ export const cosmoCase = {
     title: "Onde está hoje",
     body: "Em produção com alunos de Algoritmos I. Os próximos passos são os agentes tutores e a avaliação com dados históricos anonimizados de alunos.",
     tags: ["LangGraph", "FastAPI", "API do Claude", "Node · TypeScript", "Prisma", "PostgreSQL", "Next.js"],
-    links: [productLink, articleLink],
+    links: [productLink],
   },
 } as const;

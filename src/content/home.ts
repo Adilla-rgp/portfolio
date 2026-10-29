@@ -25,7 +25,7 @@ export const homeContent = {
       `Deploy ${deployId}`,
       "Cosmo · em produção",
       "Gallifrey · em produção",
-      "SBIE 2026 · em avaliação",
+      "Liga · em produção",
     ],
     lensPrefix: "Lente /",
   },

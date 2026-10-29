@@ -67,12 +67,6 @@ export const timelineEvents = [
     body: "Construção dos agentes tutores inteligentes do Cosmo.",
   },
   {
-    at: 2026.4,
-    when: "2026",
-    title: "Artigo no SBIE",
-    body: "O Cosmo vira artigo completo, hoje em avaliação.",
-  },
-  {
     at: monthAt(2026, 10),
     when: "Out 2026",
     title: "Gallifrey em produção",

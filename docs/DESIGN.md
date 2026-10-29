@@ -11,6 +11,7 @@ O site mostra o sistema em vez de descrevê-lo: entrada com partículas que vira
 Regras de conteúdo:
 - **Nunca inventar números.** Métrica que não existe fica como `[— ms]`, `[—%]` e similares até ter dado real.
 - **Rotular o que é ilustrativo.** Curvas, modelos de brinquedo e documentos de exemplo ganham um aviso visível de que são ilustrativos.
+- **Sem artigo do SBIE.** O artigo saiu do portfólio: nada de marco na trajetória, número na /sobre, item no letreiro, fato de pesquisa ou botão "Ler o artigo" no Cosmo. Os protótipos em `docs/design-reference/` ainda o mostram; essas partes não devem ser implementadas.
 
 ## Tokens
 

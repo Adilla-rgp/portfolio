@@ -49,7 +49,8 @@ describe("Cosmo decisions", () => {
 });
 
 describe("Cosmo today", () => {
-  const [product, article] = cosmoCase.today.links;
+  const [product] = cosmoCase.today.links;
+  const article = { label: "Ler mais ↗", href: null };
 
   it("drops every link button, and their column, while no link has a destination", () => {
     const markup = html(

@@ -40,7 +40,7 @@ export const aboutContent = {
     items: [
       { id: "anos", value: 3, suffix: "+", label: "Anos desenvolvendo" },
       { id: "producao", value: 2, label: "Projetos em produção" },
-      { id: "sbie", text: "SBIE", label: "Artigo 2026, em avaliação" },
+      { id: "iniciacoes", value: 2, label: "Iniciações científicas" },
       { id: "formatura", text: "2027", label: "Formatura prevista" },
     ],
   },

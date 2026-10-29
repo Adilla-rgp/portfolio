@@ -38,7 +38,7 @@ function Fact({ label, children }: FactProps) {
 }
 
 function Facts() {
-  const { where, status, role, research } = hero.facts;
+  const { where, status, role } = hero.facts;
   return (
     <dl aria-label={projectPageContent.factsLabel} className="grid grid-cols-2 gap-x-10 gap-y-4">
       <Fact label={where.label}>{where.value}</Fact>
@@ -46,7 +46,6 @@ function Facts() {
         <ProjectStatus status={project.status} />
       </Fact>
       <Fact label={role.label}>{role.value}</Fact>
-      <Fact label={research.label}>{research.value}</Fact>
     </dl>
   );
 }
