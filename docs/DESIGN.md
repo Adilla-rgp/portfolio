@@ -1,7 +1,8 @@
 # DESIGN.md — Portfólio Ádilla Gomes
 
 Fonte da verdade do visual. Substitui qualquer orientação antiga de identidade roxa ou glassmorphism no AGENTS.md.
-As telas de referência estão em `docs/design-reference/*.dc.html`: são protótipos HTML com toda a lógica de interação em JS puro, dentro do bloco `<script type="text/x-dc">`. Use-as como especificação de layout, copy e comportamento. Não copie o formato: reimplemente em React/Next.
+As telas de referência estão em `docs/design-reference/*.dc.html`: são protótipos HTML com toda a lógica de interação em JS puro, dentro do bloco `<script type="text/x-dc">`. Use-as como especificação de layout e comportamento. Não copie o formato: reimplemente em React/Next.
+Os textos de `docs/design-reference` estão desatualizados. Para conteúdo, a fonte da verdade é `src/content/`. Os protótipos valem só para layout e comportamento.
 
 ## Conceito
 
