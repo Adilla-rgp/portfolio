@@ -125,7 +125,7 @@ Detalhes da Home:
    - Título com RevealText e seletor de lente no topo.
    - CTA "VER O TRABALHO ↓" e botão "↺ VOLTAR AO RUÍDO".
    - Faixa (marquee) de status ao vivo com a hora real de São Luís (`America/Fortaleza`).
-2. **"Esta página, por dentro.":** trace de 5 etapas animado, disparado por botão, com alternância de cache frio/quente (no quente, a etapa de banco aparece como PULADO).
+2. **"Esta página, por dentro.":** trace real de `GET /api/home`, disparado por botão e medido no navegador (Resource Timing para DNS, TCP, TLS, espera e download; `Server-Timing` para as etapas internas; `x-vercel-cache` para o cache da CDN), animado com as durações reais. Cache frio fura a CDN com `?nocache=`; no quente, um HIT da CDN mostra as etapas do servidor como PULADO. Se o fetch falhar, mostra a última execução gravada, avisando que é uma gravação.
 3. **"Arraste o limiar.":** gráfico em SVG com o limiar de Jaccard (0,50 a 0,95). Mostra a curva de acertos de cache (com área) e a de reuso errado (tracejada), com alça arrastável, um `input range` para acessibilidade, uma frase que muda conforme a zona e o aviso de que as curvas são ilustrativas.
 4. **"Trabalho":** lista com nomes gigantes. O item com hover ou foco se expande com descrição e tags, e a ordem e o texto dependem da lente.
 5. **Rodapé:** marquee gigante "VAMOS CONVERSAR →" e links para Cal.com, GitHub e LinkedIn.

@@ -33,7 +33,7 @@ export const homeContent = {
     id: "trace",
     kicker: "01 — O sistema",
     title: "Esta página, por dentro",
-    body: "Uma requisição a esta página, etapa por etapa. Dispare e veja cada etapa acontecer. Depois esquente o cache e compare.",
+    body: "Uma requisição real ao conteúdo desta página, medida etapa por etapa no seu navegador. Dispare e veja cada etapa acontecer. Depois esquente o cache e compare.",
   },
   threshold: {
     ariaLabel: "Gráfico explorável",

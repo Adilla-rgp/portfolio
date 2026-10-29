@@ -10,8 +10,8 @@ export type SpanStatusCode = "UNSET" | "OK" | "ERROR";
 export interface SpanAttributes {
   "service.name": string;
   "http.response.status_code"?: number;
-  "db.system"?: string;
-  "cache.hit"?: boolean;
+  /** Vercel CDN cache state (`x-vercel-cache`), absent outside Vercel. */
+  "vercel.cache"?: string;
 }
 
 export interface TraceSpan {
@@ -28,12 +28,7 @@ export interface TraceSpan {
 
 export interface Trace {
   traceId: string;
-  /** Root span name, e.g. `GET /home`. */
+  /** Root span name, e.g. `GET /api/home`. */
   name: string;
   spans: readonly TraceSpan[];
-  /**
-   * True for hand-made traces. Their timestamps only set bar proportions and
-   * must never be shown as durations.
-   */
-  isSimulated: boolean;
 }

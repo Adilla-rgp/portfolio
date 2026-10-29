@@ -2,17 +2,27 @@
 
 import { forwardRef, useState, type ReactNode } from "react";
 import { useReducedMotion } from "framer-motion";
-import { useLens } from "@/components/lens/LensProvider";
 import { Card } from "@/components/ui/Card";
 import { Text } from "@/components/ui/Typography/Text";
-import { describeTraceResult, httpReasonPhrases, traceContent } from "@/content/trace";
+import {
+  describeTraceResult,
+  formatDuration,
+  httpReasonPhrases,
+  traceContent,
+} from "@/content/trace";
 import { cn } from "@/lib/cn";
 import { cssVars } from "@/lib/cssVars";
 import type { TraceSummary, WaterfallRow } from "@/lib/trace";
 
 interface TracePanelProps {
+  /** Request line shown in the header, e.g. `GET /api/home?lente=backend`. */
+  request: string;
   rows: readonly WaterfallRow[];
-  summary: TraceSummary;
+  /** null while the request is in flight. */
+  summary: TraceSummary | null;
+  /** The figures come from a recorded run, not from this visit. */
+  isRecorded: boolean;
+  note: string;
   /** Changing it remounts the rows, which restarts the CSS playback. */
   runKey: string;
   /** Holds playback at the first frame until the panel has been seen. */
@@ -22,15 +32,15 @@ interface TracePanelProps {
 const stackedCell = "col-start-1 row-start-1";
 
 export const TracePanel = forwardRef<HTMLDivElement, TracePanelProps>(
-  function TracePanel({ rows, summary, runKey, isPaused }, ref) {
-    const { lens } = useLens();
+  function TracePanel({ request, rows, summary, isRecorded, note, runKey, isPaused }, ref) {
     const reducedMotion = useReducedMotion();
     // The run whose status animation has ended. Under reduced motion there is
     // no animation, so the result is final as soon as playback is unpaused.
     const [finishedRunKey, setFinishedRunKey] = useState<string | null>(null);
     const isFinished = !isPaused && (reducedMotion || finishedRunKey === runKey);
+    const end = summary?.end ?? 1;
     const statusText =
-      summary.statusCode !== undefined
+      summary?.statusCode !== undefined
         ? `${summary.statusCode} ${httpReasonPhrases[summary.statusCode] ?? ""}`.trim()
         : "";
 
@@ -49,20 +59,19 @@ export const TracePanel = forwardRef<HTMLDivElement, TracePanelProps>(
           )}
         >
           <Text as="span" size="codeSm" tone="muted">
-            {traceContent.requestPrefix}
-            {lens}
+            {request}
           </Text>
           <Text as="span" size="label" tone="signal" className="grid text-right">
             <span
               aria-hidden="true"
               className={cn(stackedCell, "trace-until")}
-              style={cssVars({ "--at": summary.end })}
+              style={cssVars({ "--at": end })}
             >
               {traceContent.running}
             </span>
             <span
               className={cn(stackedCell, "trace-after")}
-              style={cssVars({ "--at": summary.end })}
+              style={cssVars({ "--at": end })}
               onAnimationEnd={() => setFinishedRunKey(runKey)}
             >
               {statusText}
@@ -78,22 +87,26 @@ export const TracePanel = forwardRef<HTMLDivElement, TracePanelProps>(
 
         <dl className="mt-3.5 grid grid-cols-3 gap-4 border-t border-line pt-4.5">
           <SummaryItem label={traceContent.summary.total}>
-            {traceContent.summary.totalValue}
+            {summary ? formatDuration(summary.totalMs) : traceContent.noValue}
           </SummaryItem>
-          <SummaryItem label={traceContent.summary.dbQueries}>{summary.dbQueries}</SummaryItem>
+          <SummaryItem label={traceContent.summary.server}>
+            {summary?.serverMs != null ? formatDuration(summary.serverMs) : traceContent.noValue}
+          </SummaryItem>
           <SummaryItem label={traceContent.summary.cache} isAccent>
-            {summary.cacheHit ? traceContent.cacheHit : traceContent.cacheMiss}
+            {summary?.cache ?? traceContent.noValue}
           </SummaryItem>
         </dl>
 
         {/* Announces only the final result. The keyed span is a new node per
             run, so repeating an identical result is announced again. */}
         <p aria-live="polite" className="sr-only">
-          {isFinished && <span key={runKey}>{describeTraceResult(summary)}</span>}
+          {isFinished && summary && (
+            <span key={runKey}>{describeTraceResult({ ...summary, isRecorded })}</span>
+          )}
         </p>
 
         <Text size="codeSm" tone="muted" className="mt-3">
-          {traceContent.simulationNote}
+          {note}
         </Text>
       </Card>
     );
@@ -120,7 +133,7 @@ function TraceRow({ row }: TraceRowProps) {
       <span aria-hidden="true" className="relative block h-3.5 rounded-chip bg-raised">
         {!row.skipped && (
           <span
-            className={cn("trace-bar rounded-chip", row.kind === "other" ? "bg-fg/85" : "bg-signal")}
+            className={cn("trace-bar rounded-chip", row.kind === "server" ? "bg-signal" : "bg-fg/85")}
             style={cssVars({ "--bar-start": row.start, "--bar-width": row.width })}
           />
         )}
@@ -144,13 +157,8 @@ interface RowTag {
 }
 
 function getRowTag(row: WaterfallRow): RowTag {
-  if (row.skipped) return { label: traceContent.skipped, tone: "muted" };
-  if (row.kind === "cache") {
-    return row.cacheHit
-      ? { label: traceContent.cacheHit, tone: "signal" }
-      : { label: traceContent.cacheMiss, tone: "fg" };
-  }
-  return { label: traceContent.durationPlaceholder, tone: "muted" };
+  if (row.skipped) return { label: row.skippedLabel, tone: "muted" };
+  return { label: formatDuration(row.durationMs), tone: row.kind === "server" ? "signal" : "fg" };
 }
 
 interface SummaryItemProps {
@@ -170,7 +178,7 @@ function SummaryItem({ label, isAccent = false, children }: SummaryItemProps) {
         size="monoValue"
         tone={isAccent ? "signal" : "fg"}
         // Three columns leave ~90px each on a 360px phone; a smaller size keeps
-        // values like "[— ms]" on one line.
+        // values like "1.234 ms" on one line.
         className={cn("whitespace-nowrap max-md:text-body-lg", isAccent && "uppercase")}
       >
         {children}

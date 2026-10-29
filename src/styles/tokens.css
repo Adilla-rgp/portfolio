@@ -137,5 +137,5 @@
 /* Final footprint of the interactive pieces, reserved so the layout does not
    jump when they land (DESIGN.md roadmap step 4). */
 @theme {
-  --spacing-trace-panel: 29rem;     /* 5 spans + cabeçalho + rodapé do painel */
+  --spacing-trace-panel: 36rem;     /* 7 spans + cabeçalho + rodapé do painel */
 }
