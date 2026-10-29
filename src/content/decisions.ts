@@ -1,5 +1,6 @@
 import type { AgentNodeId } from "@/content/cases/agentes";
 import type { CosmoNodeId } from "@/content/cases/cosmo";
+import type { MeridianoNodeId } from "@/content/cases/meridiano";
 import type { Decision } from "@/content/caseStudy";
 
 /** The Cosmo decisions, in the order of the tour. */
@@ -108,5 +109,57 @@ export const agentDecisions: readonly Decision<AgentNodeId>[] = [
       "Contexto isolado e previsível; o que o aluno aprendeu em outro exercício fica de fora.",
     result: null,
     nodes: ["api", "sup", "mem"],
+  },
+];
+
+/** The Meridiano decisions, in the order of the tour. */
+export const meridianoDecisions: readonly Decision<MeridianoNodeId>[] = [
+  {
+    id: "parser",
+    tag: "IA",
+    short: "Parser",
+    title: "Texto livre por regras, LLM opcional",
+    context:
+      "Cada pessoa escreve do jeito dela (\"no máximo R$ 1.100, não curto frio\"), mas o motor precisa de limites e preferências estruturados.",
+    choice:
+      "Interpretar o texto atrás de uma interface, com regras simples como padrão e sem chave de LLM. Um parser por LLM é opcional, só preenche um formato fixo e, se falhar, cai nas regras. Nos dois casos, a pessoa confirma o rascunho antes de salvar, e o motor nunca recebe texto livre.",
+    alternative: "Usar um LLM como intérprete padrão.",
+    tradeoff:
+      "Sem custo por chamada, sem enviar o texto a um serviço externo e com o mesmo resultado a cada execução, em troca de uma cobertura limitada: apelidos de destino, valores em dinheiro, negações e datas ainda escapam das regras com frequência.",
+    result:
+      "No conjunto de teste, nunca usado em ajuste, as regras acertam 10 de 20 casos por inteiro e entre 80% e 100% de cada campo.",
+    nodes: ["front", "api", "parser"],
+  },
+  {
+    id: "consenso",
+    tag: "Motor",
+    short: "Consenso",
+    title: "Um score que protege quem sairia pior",
+    context:
+      "Numa votação, a maioria escolhe e alguém fica para trás sem explicação.",
+    choice:
+      "Limites eliminam planos antes de qualquer cálculo. Os que sobram são pontuados por (1 − α) · média + α · mínimo da satisfação de cada pessoa, com α escolhido por quem organiza (padrão 0,5). Cada pessoa vê a própria satisfação ao lado da melhor que teria em algum plano viável, o que mostra quem cedeu e quanto.",
+    alternative: "Escolher o plano pela média do grupo, como numa votação.",
+    tradeoff:
+      "Um plano um pouco pior para a média pode vencer quando ninguém fica muito para trás; o α deixa quem organiza calibrar essa troca.",
+    result:
+      "O motor é determinístico: a mesma viagem, em qualquer ordem, dá o mesmo resultado, e nenhum plano devolvido fere um limite. As duas garantias têm teste.",
+    nodes: ["api", "motor"],
+  },
+  {
+    id: "privacidade",
+    tag: "Privacidade",
+    short: "Orçamento",
+    title: "Orçamento confidencial, testado na API inteira",
+    context:
+      "O orçamento de cada pessoa entra no cálculo, mas mostrar o valor ao grupo, ou só dizer de quem é o limite, expõe a pessoa.",
+    choice:
+      "No motor, um limite de orçamento aparece para o grupo sem dono, as justificativas não falam de orçamento e o mapa de tensões nunca o usa. Na API, um teste percorre todas as rotas como quem organiza e como cada convidado, em quatro cenários, e procura o valor ou o dono do limite em toda resposta que não seja da própria pessoa.",
+    alternative: null,
+    tradeoff:
+      "Justificativas menos completas: \"cabe, mas no limite\" revelaria quase o valor. E, num grupo em que só uma pessoa declarou orçamento, quem souber disso por fora sabe de quem é o limite.",
+    result:
+      "Coberto por testes no motor e na API, que o CI roda em todo push contra um PostgreSQL de verdade.",
+    nodes: ["api", "motor", "pg"],
   },
 ];

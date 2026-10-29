@@ -5,8 +5,10 @@ import { caseStudyContent } from "@/content/caseStudy";
 import { gallifreyCase, missionQuestions } from "@/content/cases/gallifrey";
 import { meridianoCase } from "@/content/cases/meridiano";
 import { recommendationCase, recommendationResearch } from "@/content/cases/recomendacao";
-import { agentDecisions, cosmoDecisions } from "@/content/decisions";
+import { agentDecisions, cosmoDecisions, meridianoDecisions } from "@/content/decisions";
 import { lensParam, lenses } from "@/content/lens";
+import { getProject } from "@/lib/projectPage";
+import { CaseStudyPage } from "@/sections/project/case/CaseStudyPage";
 import { CaseToday } from "@/sections/project/case/CaseToday";
 import { DecisionDetails } from "@/sections/project/case/DecisionDetails";
 import Home from "./page";
@@ -25,7 +27,7 @@ import AboutPage from "./sobre/page";
  */
 
 const copy = caseStudyContent.decisions;
-const decisions = [...cosmoDecisions, ...agentDecisions];
+const decisions = [...cosmoDecisions, ...agentDecisions, ...meridianoDecisions];
 const noop = () => {};
 
 function html(element: React.ReactElement): string {
@@ -146,8 +148,8 @@ describe("pages with today's content", () => {
   });
 
   it("drops the decisions section of a case study that has none", () => {
-    expect(meridianoCase.decisions).toBeNull();
-    expect(html(<MeridianoPage />)).not.toContain(
+    const content = { ...meridianoCase, decisions: null };
+    expect(html(<CaseStudyPage project={getProject("meridiano")} content={content} />)).not.toContain(
       `aria-label="${caseStudyContent.decisions.ariaLabel}"`,
     );
   });

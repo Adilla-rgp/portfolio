@@ -51,7 +51,7 @@ export const projects = [
       },
       dados: {
         description:
-          "Texto livre vira restrições estruturadas, com conjunto de avaliação próprio e linha de base publicada; a IA interpreta, o motor decide.",
+          "Texto livre vira restrições estruturadas, com conjunto de avaliação próprio e linha de base publicada; o texto vira sugestão, o motor decide.",
         tags: ["Python", "LLM", "Avaliação"],
       },
     },
