@@ -203,3 +203,4 @@ Prepare the codebase (without requiring major refactoring) for:
 - Never invent metrics (show `—` or hide the field; published pages carry no bracketed placeholders) or present illustrative data as real
 - Never ignore TypeScript errors
 - Never move files without justification
+- Never kill processes by name (taskkill /IM, killall, pkill). Only stop processes you started, by PID or by the port they use.
