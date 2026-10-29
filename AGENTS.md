@@ -8,7 +8,7 @@ Site language is pt-BR. All copy lives in src/content/, never hardcoded in compo
 > **Visual source of truth: [`docs/DESIGN.md`](docs/DESIGN.md).** It defines the concept, tokens, typography,
 > layout, primitives, motion, routes, content rules and the implementation roadmap. It overrides anything in this
 > file about visual identity. The screens in `docs/design-reference/*.dc.html` are prototypes: use them as the
-> spec for layout, copy and behavior, and reimplement in React. Never copy their format.
+> spec for layout and behavior only; copy comes from src/content/. Reimplement in React. Never copy their format.
 
 ---
 
