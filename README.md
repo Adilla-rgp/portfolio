@@ -19,7 +19,7 @@ Nenhum número é inventado: dado que não existe não aparece, e um teste falha
 
 - PageSpeed Insights: 100 em Performance, Acessibilidade, Boas práticas e SEO, no desktop e no celular.
 - Testes de unidade e de conteúdo com Vitest, incluindo uma verificação que renderiza todas as páginas e procura campos vazios ou links quebrados.
-- CI com GitHub Actions a cada push e pull request: type-check, lint, testes e build.
+- CI com GitHub Actions a cada push na main e em pull requests: type-check, lint, testes e build.
 - Acessibilidade: controles nativos, navegação por teclado, `aria-live` nas peças interativas, contraste AA e `prefers-reduced-motion` respeitado em todas as animações.
 - Conteúdo visível sem JavaScript: títulos e entradas de seção são CSS renderizado no servidor, com rede de segurança caso a hidratação falhe.
 
