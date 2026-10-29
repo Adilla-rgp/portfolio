@@ -51,8 +51,8 @@ export const stackTechs = [
   { name: "React", usedIn: ["gallifrey", "meridiano"] },
   { name: "Pandas", usedIn: ["recomendacao"] },
   { name: "SQL", usedIn: ["cosmo", "gallifrey", "agentes"] },
-  { name: "dbt", usedIn: ["cosmo", "gallifrey"] },
-  { name: "Power BI", usedIn: ["cosmo", "gallifrey"] },
+  { name: "dbt", usedIn: ["cosmo", "gallifrey", "recomendacao"] },
+  { name: "Power BI", usedIn: ["cosmo", "gallifrey", "recomendacao"] },
 ] as const satisfies readonly StackTech[];
 
 export type StackSelection =

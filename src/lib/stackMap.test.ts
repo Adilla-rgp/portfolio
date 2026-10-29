@@ -14,8 +14,8 @@ describe("stack map content", () => {
 
   it("links SQL, dbt and Power BI to the projects that use them", () => {
     expect(usedIn("SQL")).toEqual(["cosmo", "gallifrey", "agentes"]);
-    expect(usedIn("dbt")).toEqual(["cosmo", "gallifrey"]);
-    expect(usedIn("Power BI")).toEqual(["cosmo", "gallifrey"]);
+    expect(usedIn("dbt")).toEqual(["cosmo", "gallifrey", "recomendacao"]);
+    expect(usedIn("Power BI")).toEqual(["cosmo", "gallifrey", "recomendacao"]);
   });
 
   it("only links to projects on the map", () => {

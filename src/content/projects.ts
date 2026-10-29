@@ -56,7 +56,7 @@ export const projects = [
     isPublished: true,
     isListed: true,
     description:
-      "Motor de decisão em Python e API em FastAPI que calculam a viagem mais justa para um grupo, com privacidade de orçamento garantida por testes. O texto livre vira restrições estruturadas, medidas num conjunto de avaliação próprio com linha de base publicada: o texto vira sugestão, o motor decide.",
+      "Motor de decisão em Python e API em FastAPI que calculam a viagem mais justa para um grupo, com o orçamento de cada pessoa protegido por testes. O texto livre vira restrições estruturadas, avaliadas num conjunto de teste próprio, e quem decide é o motor.",
     tags: ["Python", "FastAPI", "PostgreSQL", "LLM"],
   },
   {
