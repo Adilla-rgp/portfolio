@@ -1,3 +1,4 @@
+import { formatCount, formatShare, submissionBase, submissionErrors } from "@/content/cache";
 import type { Architecture, CaseStudy } from "@/content/caseStudy";
 import { agentDecisions } from "@/content/decisions";
 import { projectPageContent } from "@/content/projectPage";
@@ -51,6 +52,7 @@ export const agentsCase: CaseStudy<AgentNodeId> = {
   nav: [
     { label: projectPageContent.homeNavLabel, href: projectPageContent.homeHref },
     ...(cosmoRoute ? [{ label: "Cosmo", href: cosmoRoute }] : []),
+    { label: "Os dados", href: "#dados" },
     { label: "Onde está hoje", href: "#hoje" },
   ],
   hero: {
@@ -71,6 +73,26 @@ export const agentsCase: CaseStudy<AgentNodeId> = {
     diagramName: "Arquitetura dos agentes tutores",
     items: agentDecisions,
     architecture,
+  },
+  data: {
+    id: "dados",
+    title: "Os dados",
+    body: `${formatCount(submissionBase.submissions)} submissões (${submissionBase.period}), ${formatShare(submissionErrors.withError, 2)} delas com erro. É a base em que o cache foi medido.`,
+    groups: [
+      {
+        title: `Submissões com erro, sobre as ${formatCount(submissionBase.submissions)}`,
+        fractionDigits: 2,
+        bars: [
+          { label: "Erros lógicos", value: submissionErrors.logic },
+          { label: "Erros de execução", value: submissionErrors.runtime },
+        ],
+      },
+      {
+        title: "Entre os erros de execução",
+        fractionDigits: 1,
+        bars: submissionErrors.runtimeByException,
+      },
+    ],
   },
   today: {
     id: "hoje",

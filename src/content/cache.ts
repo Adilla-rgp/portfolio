@@ -13,6 +13,20 @@ export const submissionBase = {
   period: "nov/2024–jul/2026",
 } as const;
 
+/** Shares of the whole submissions base (0..1). */
+export const submissionErrors = {
+  withError: 0.771,
+  errorCount: 12992,
+  logic: 0.4897,
+  runtime: 0.2813,
+  /** Shares of the runtime errors only. */
+  runtimeByException: [
+    { label: "SyntaxError", value: 0.633 },
+    { label: "IndentationError", value: 0.139 },
+    { label: "NameError", value: 0.104 },
+  ],
+} as const;
+
 export type RecoverySeries = "geral" | "sintaxe" | "logica";
 
 export interface RecoveryPoint {
@@ -153,6 +167,14 @@ export function formatSimilarity(value: number): string {
 
 export function formatRecovery(rate: number): string {
   return percent.format(rate);
+}
+
+export function formatShare(value: number, fractionDigits: number): string {
+  return new Intl.NumberFormat("pt-BR", {
+    style: "percent",
+    minimumFractionDigits: fractionDigits,
+    maximumFractionDigits: fractionDigits,
+  }).format(value);
 }
 
 export function formatCount(value: number): string {

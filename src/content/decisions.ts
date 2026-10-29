@@ -93,8 +93,10 @@ export const agentDecisions: readonly Decision<AgentNodeId>[] = [
     choice:
       "Cache baseado em casos: hash MD5 para pedidos idênticos e similaridade de Jaccard para os parecidos.",
     alternative: null,
-    tradeoff: "Leve e determinístico, mas reconhece semelhança de palavras, não de significado.",
-    result: null,
+    tradeoff:
+      "Leve e determinístico, mas o Jaccard ignora a ordem dos tokens: 'Expected False got True' e 'Expected True got False' empatam em 1,0. Uma triagem por campos Expected/Got passou a barrar esses falsos positivos.",
+    result:
+      "Com limiar 0,85, o cache recuperou 96,85% dos erros da base completa (12.583 de 12.992 submissões com erro), e a taxa cresce conforme o histórico aumenta.",
     nodes: ["sup", "cache"],
   },
   {

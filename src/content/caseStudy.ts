@@ -62,6 +62,27 @@ export interface CaseDecisions<NodeId extends string = string> {
   architecture: Architecture<NodeId>;
 }
 
+export interface CaseDataBar {
+  label: string;
+  /** Share of the group's whole (0..1). */
+  value: number;
+}
+
+export interface CaseDataGroup {
+  title: string;
+  bars: readonly CaseDataBar[];
+  /** Decimal places the source reported, kept as given. */
+  fractionDigits: number;
+}
+
+/** Measured numbers behind the decisions, drawn as horizontal bars. */
+export interface CaseData {
+  id: string;
+  title: string;
+  body: string;
+  groups: readonly CaseDataGroup[];
+}
+
 /** Everything a case study page needs; the layout lives in CaseStudyPage. */
 export interface CaseStudy<NodeId extends string = string> {
   meta: { title: string; description: string };
@@ -75,6 +96,8 @@ export interface CaseStudy<NodeId extends string = string> {
   };
   /** null hides the whole decisions section, diagram included. */
   decisions: CaseDecisions<NodeId> | null;
+  /** Omitted or null hides the data section. */
+  data?: CaseData | null;
   today: CaseToday;
 }
 

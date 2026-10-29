@@ -183,6 +183,11 @@
   grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
 }
 
+/* Case study data bars: label, bar, percentage. */
+@utility grid-cols-data-bar {
+  grid-template-columns: minmax(0, 10rem) minmax(0, 1fr) 4.5rem;
+}
+
 /* Recommender predictions: rank, name, probability bar, percentage. */
 @utility grid-cols-prediction {
   grid-template-columns: 2.5rem minmax(0, 13.75rem) minmax(0, 1fr) 3.5rem;

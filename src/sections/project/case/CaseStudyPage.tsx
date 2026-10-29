@@ -7,6 +7,7 @@ import { projectPageContent } from "@/content/projectPage";
 import type { Project } from "@/content/projects";
 import { ensureProjectPage } from "@/lib/projectPage";
 import { ProjectHero } from "@/sections/project/ProjectHero";
+import { CaseData } from "./CaseData";
 import { CaseFacts } from "./CaseFacts";
 import { CaseToday } from "./CaseToday";
 import { DecisionTour } from "./DecisionTour";
@@ -51,6 +52,7 @@ export function CaseStudyPage<NodeId extends string>({
             </Container>
           </Section>
         )}
+        {content.data && <CaseData data={content.data} />}
         <CaseToday today={content.today} />
       </main>
       <SiteFooter />
