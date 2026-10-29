@@ -21,10 +21,9 @@ export const aboutContent = {
     intro:
       "Estudante de Ciência da Computação na UFMA e desenvolvedora no Laboratório TeleMídia, onde construo o Cosmo, um tutor inteligente com IA. Faço pesquisa aplicada em IA na iniciação científica e gosto de sistemas que dá para medir.",
     photo: {
-      /** Shown once the file exists in public/; until then, the placeholder. */
+      /** Shown once the file exists in public/; until then, no photo at all. */
       src: "/images/adilla-gomes.jpg",
       alt: "Foto de Ádilla Gomes",
-      placeholder: "[Foto]",
     },
     cv: {
       ariaLabel: "Currículo",
@@ -63,7 +62,7 @@ export const aboutContent = {
     items: [
       {
         name: "Connection",
-        body: "Diretora de Projetos na empresa júnior. [Uma linha sobre o que você entregou ou coordenou.]",
+        body: "Diretora de Projetos na empresa júnior.",
       },
       {
         name: "Dacomp",

@@ -14,8 +14,4 @@ describe("visibleStack", () => {
     expect(techs.map((tech) => tech.name)).not.toContain("Gemini");
     expect(techs.map((tech) => tech.name)).toContain("Python");
   });
-
-  it("keeps stack entries that are not projects", () => {
-    expect(projects.map((project) => project.id)).toContain("bi");
-  });
 });

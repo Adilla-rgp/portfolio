@@ -26,7 +26,6 @@ export const stackProjects = [
   { id: "gallifrey", label: "Gallifrey", sub: "Missões" },
   { id: "documento-sinal", label: "Documento → sinal", sub: "Extração com LLM" },
   { id: "recomendacao", label: "Recomendação", sub: "Pesquisa" },
-  { id: "bi", label: "Análise & BI", sub: "[Onde usou]" },
 ] as const satisfies readonly StackProject[];
 
 export const stackTechs = [
@@ -41,9 +40,7 @@ export const stackTechs = [
   { name: "Next.js", usedIn: ["cosmo"] },
   { name: "React", usedIn: ["gallifrey", "meridiano"] },
   { name: "Pandas", usedIn: ["recomendacao"] },
-  { name: "SQL", usedIn: ["bi", "cosmo"] },
-  { name: "dbt", usedIn: ["bi"] },
-  { name: "Power BI", usedIn: ["bi"] },
+  { name: "SQL", usedIn: ["cosmo"] },
 ] as const satisfies readonly StackTech[];
 
 export type StackSelection =

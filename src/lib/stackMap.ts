@@ -43,8 +43,8 @@ export function linkPath(x1: number, y1: number, x2: number, y2: number): string
 
 /**
  * Drops projects hidden from the site (`isListed: false` in projects.ts) and
- * any technology left with nowhere to point. Stack entries that are not
- * projects (e.g. "Análise & BI") always stay.
+ * any technology left with nowhere to point. Stack entries with no matching
+ * project in projects.ts always stay.
  */
 export function visibleStack(
   techs: readonly StackTech[],

@@ -18,25 +18,17 @@ const [firstLine, lastLine] = hero.titleLines;
 const PHOTO_SIZE = 140;
 
 function Photo() {
-  if (publicFileExists(hero.photo.src)) {
-    return (
-      <Image
-        src={hero.photo.src}
-        alt={hero.photo.alt}
-        width={PHOTO_SIZE}
-        height={PHOTO_SIZE}
-        priority
-        className="size-35 rounded-pill object-cover"
-      />
-    );
-  }
+  if (!publicFileExists(hero.photo.src)) return null;
 
   return (
-    <div className="flex size-35 items-center justify-center rounded-pill border border-dashed border-faint">
-      <Text as="span" size="codeSm" tone="muted">
-        {hero.photo.placeholder}
-      </Text>
-    </div>
+    <Image
+      src={hero.photo.src}
+      alt={hero.photo.alt}
+      width={PHOTO_SIZE}
+      height={PHOTO_SIZE}
+      priority
+      className="size-35 rounded-pill object-cover"
+    />
   );
 }
 
