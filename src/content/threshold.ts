@@ -8,7 +8,7 @@ export interface ThresholdPoint {
 }
 
 // Illustrative curves from docs/design-reference/Home.dc.html, sampled at 0.01
-// from 0.50 to 0.95. Replace `thresholdPoints` with the measured Cosmo data;
+// from 0.50 to 0.95. Replace `thresholdPoints` with the measured tutoring agents data;
 // the chart reads only this array.
 const MIN_THRESHOLD = 0.5;
 const MAX_THRESHOLD = 0.95;
@@ -64,7 +64,7 @@ export const thresholdContent = {
     hits: "acertos de cache",
     wrong: "reuso errado",
   },
-  note: "curvas ilustrativas: os dados reais do Cosmo entram aqui",
+  note: "curvas ilustrativas: os dados reais dos agentes entram aqui",
 } as const;
 
 const decimal = new Intl.NumberFormat("pt-BR", {

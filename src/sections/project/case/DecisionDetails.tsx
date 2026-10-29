@@ -2,11 +2,10 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Heading } from "@/components/ui/Typography/Heading";
 import { Text } from "@/components/ui/Typography/Text";
-import { cosmoCase } from "@/content/cases/cosmo";
-import type { Decision } from "@/content/decisions";
+import { caseStudyContent, type Decision } from "@/content/caseStudy";
 import { cn } from "@/lib/cn";
 
-const copy = cosmoCase.decisions;
+const copy = caseStudyContent.decisions;
 
 interface DecisionDetailsProps {
   decision: Decision;

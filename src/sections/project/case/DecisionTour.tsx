@@ -1,31 +1,35 @@
 "use client";
 
+import Link from "next/link";
 import { useCallback, useId, useRef, useState, type KeyboardEvent } from "react";
-import { Button } from "@/components/ui/Button";
+import { Button, buttonVariants } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Accent } from "@/components/ui/Typography/Accent";
 import { Heading } from "@/components/ui/Typography/Heading";
 import { Text } from "@/components/ui/Typography/Text";
-import { cosmoCase } from "@/content/cases/cosmo";
-import type { Decision } from "@/content/decisions";
+import { caseStudyContent, type Architecture, type Decision } from "@/content/caseStudy";
 import { useRafTicker } from "@/hooks/useRafTicker";
 import { cn } from "@/lib/cn";
 import { clamp01 } from "@/lib/easing";
-import { ArchitectureDiagram, describeLitParts } from "./ArchitectureDiagram";
+import { ArchitectureDiagram, describeLitParts, linkedNodes } from "./ArchitectureDiagram";
 import { DecisionDetails } from "./DecisionDetails";
 
 /** Case.dc.html: each decision stays on screen for 6s during the tour. */
 const TOUR_STEP_SECONDS = 6;
 const INDEX_DIGITS = 2;
 
-const copy = cosmoCase.decisions;
+const copy = caseStudyContent.decisions;
 
 function decisionNumber(index: number): string {
   return String(index + 1).padStart(INDEX_DIGITS, "0");
 }
 
-interface DecisionTourProps {
-  decisions: readonly Decision[];
+interface DecisionTourProps<NodeId extends string> {
+  title: string;
+  decisions: readonly Decision<NodeId>[];
+  architecture: Architecture<NodeId>;
+  /** Screen-reader name of the diagram, e.g. "Arquitetura do Cosmo". */
+  diagramName: string;
 }
 
 /**
@@ -35,7 +39,12 @@ interface DecisionTourProps {
  * changes. Picking a tab or the alternative stops the tour. Under reduced
  * motion the tour never starts and its toggle is hidden.
  */
-export function DecisionTour({ decisions }: DecisionTourProps) {
+export function DecisionTour<NodeId extends string>({
+  title,
+  decisions,
+  architecture,
+  diagramName,
+}: DecisionTourProps<NodeId>) {
   const [index, setIndex] = useState(0);
   const [isTouring, setIsTouring] = useState(true);
   const [showAlternative, setShowAlternative] = useState(false);
@@ -94,12 +103,13 @@ export function DecisionTour({ decisions }: DecisionTourProps) {
   const number = decisionNumber(index);
   const tabId = (position: number) => `${baseId}-tab-${position}`;
   const panelId = `${baseId}-panel`;
+  const nodeLinks = linkedNodes(architecture);
 
   return (
     <div ref={tickerRef} className="flex flex-col gap-10">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <Heading>
-          {copy.title}
+          {title}
           <Accent>.</Accent>
         </Heading>
         {!reducedMotion && (
@@ -165,18 +175,29 @@ export function DecisionTour({ decisions }: DecisionTourProps) {
       </div>
 
       <div role="tabpanel" id={panelId} aria-labelledby={tabId(index)} className="flex flex-col gap-10">
-        <Card
-          variant="sunken"
-          padding="none"
-          role="img"
-          tabIndex={0}
-          aria-label={copy.describeDiagram(number, describeLitParts(current.nodes))}
-          className="overflow-x-auto bg-bg"
-        >
-          <Text as="span" size="label" tone="muted" className="block px-6 pt-5">
-            {copy.diagramCaption(number)}
-          </Text>
-          <ArchitectureDiagram lit={current.nodes} />
+        <Card variant="sunken" padding="none" className="bg-bg">
+          <div className="flex flex-wrap items-center justify-between gap-3 px-6 pt-5">
+            <Text as="span" size="label" tone="muted">
+              {copy.diagramCaption(number)}
+            </Text>
+            {nodeLinks.map((link) => (
+              <Link key={link.id} href={link.href} className={buttonVariants({ variant: "outline" })}>
+                {copy.nodeLink(link.label)}
+              </Link>
+            ))}
+          </div>
+          <div
+            role="img"
+            tabIndex={0}
+            aria-label={copy.describeDiagram(
+              diagramName,
+              number,
+              describeLitParts(architecture, current.nodes),
+            )}
+            className="overflow-x-auto"
+          >
+            <ArchitectureDiagram architecture={architecture} lit={current.nodes} />
+          </div>
         </Card>
 
         <DecisionDetails

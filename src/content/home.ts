@@ -37,7 +37,7 @@ export const homeContent = {
   },
   threshold: {
     ariaLabel: "Gráfico explorável",
-    kicker: "02 — Uma decisão do Cosmo",
+    kicker: "02 — Uma decisão dos agentes tutores",
     title: "Arraste o limiar",
     body: "O tutor reaproveita respostas quando dois pedidos são parecidos o bastante. Limiar baixo economiza chamadas ao LLM, mas devolve feedback errado. Onde você cortaria?",
   },

@@ -6,17 +6,17 @@ import { Tag } from "@/components/ui/Tag";
 import { Accent } from "@/components/ui/Typography/Accent";
 import { Heading } from "@/components/ui/Typography/Heading";
 import { Text } from "@/components/ui/Typography/Text";
-import { cosmoCase, type CaseLink } from "@/content/cases/cosmo";
+import type { CaseLink, CaseToday as CaseTodayContent } from "@/content/caseStudy";
 
-const { today } = cosmoCase;
-
-interface CosmoTodayProps {
+interface CaseTodayProps {
   /** Links without a destination yet are left out, buttons and column both. */
-  links?: readonly CaseLink[];
+  today: CaseTodayContent;
 }
 
-export function CosmoToday({ links: allLinks = today.links }: CosmoTodayProps) {
-  const links = allLinks.filter((link): link is CaseLink & { href: string } => link.href !== null);
+export function CaseToday({ today }: CaseTodayProps) {
+  const links = today.links.filter(
+    (link): link is CaseLink & { href: string } => link.href !== null,
+  );
 
   return (
     <Section id={today.id}>

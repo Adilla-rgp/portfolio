@@ -1,14 +1,16 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { cosmoCase } from "@/content/cases/cosmo";
+import { caseStudyContent } from "@/content/caseStudy";
 import { gallifreyCase, missionQuestions } from "@/content/cases/gallifrey";
 import { recommendationCase } from "@/content/cases/recomendacao";
-import { decisions } from "@/content/decisions";
+import { agentDecisions, cosmoDecisions } from "@/content/decisions";
 import { lensParam, lenses } from "@/content/lens";
+import { CaseToday } from "@/sections/project/case/CaseToday";
+import { DecisionDetails } from "@/sections/project/case/DecisionDetails";
 import Home from "./page";
+import AgentsPage from "./projetos/agentes/page";
 import CosmoPage from "./projetos/cosmo/page";
-import { CosmoToday } from "./projetos/cosmo/_components/CosmoToday";
-import { DecisionDetails } from "./projetos/cosmo/_components/DecisionDetails";
 import GallifreyPage from "./projetos/gallifrey/page";
 import { MissionPlayer } from "./projetos/gallifrey/_components/MissionPlayer";
 import RecommendationPage from "./projetos/recomendacao/page";
@@ -20,14 +22,15 @@ import AboutPage from "./sobre/page";
  * place must not be a label, heading or button with nothing behind it.
  */
 
-const copy = cosmoCase.decisions;
+const copy = caseStudyContent.decisions;
+const decisions = [...cosmoDecisions, ...agentDecisions];
 const noop = () => {};
 
 function html(element: React.ReactElement): string {
   return renderToStaticMarkup(element);
 }
 
-describe("Cosmo decisions", () => {
+describe("case study decisions", () => {
   it.each(decisions.map((decision, index) => [decision.id, decision, index] as const))(
     "%s shows the alternative, the trade-off and the result only when they exist",
     (_, decision, index) => {
@@ -48,13 +51,14 @@ describe("Cosmo decisions", () => {
   );
 });
 
-describe("Cosmo today", () => {
-  const [product] = cosmoCase.today.links;
+describe("case study today", () => {
+  const { today } = cosmoCase;
+  const [product] = today.links;
   const article = { label: "Ler mais ↗", href: null };
 
   it("drops every link button, and their column, while no link has a destination", () => {
     const markup = html(
-      <CosmoToday links={[{ ...product, href: null }, { ...article, href: null }]} />,
+      <CaseToday today={{ ...today, links: [{ ...product, href: null }, { ...article, href: null }] }} />,
     );
     expect(markup).not.toContain(product.label);
     expect(markup).not.toContain(article.label);
@@ -63,7 +67,9 @@ describe("Cosmo today", () => {
 
   it("shows only the links that have one", () => {
     const markup = html(
-      <CosmoToday links={[{ ...product, href: "https://example.com" }, { ...article, href: null }]} />,
+      <CaseToday
+        today={{ ...today, links: [{ ...product, href: "https://example.com" }, article] }}
+      />,
     );
     expect(markup).toContain(product.label);
     expect(markup).not.toContain(article.label);
@@ -123,6 +129,7 @@ function expectNoPlaceholders(markup: string) {
 describe("pages with today's content", () => {
   it.each([
     ["/projetos/cosmo", CosmoPage],
+    ["/projetos/agentes", AgentsPage],
     ["/projetos/gallifrey", GallifreyPage],
     ["/projetos/recomendacao", RecommendationPage],
     ["/sobre", AboutPage],

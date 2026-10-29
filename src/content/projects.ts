@@ -18,6 +18,8 @@ export interface Project {
   id: string;
   name: string;
   status: ProjectStatus;
+  /** Appended to the status label, e.g. the research program. */
+  statusNote?: string;
   /** Final route of the case page, or an external URL (e.g. a live demo) until one exists. */
   route: string;
   /** False until `route` leads somewhere; links then point to `#`. */
@@ -61,7 +63,7 @@ export const projects = [
     route: "/projetos/cosmo",
     isPublished: true,
     isListed: true,
-    order: { backend: 2, dados: 3 },
+    order: { backend: 2, dados: 5 },
     copy: {
       backend: {
         description:
@@ -76,13 +78,35 @@ export const projects = [
     },
   },
   {
+    id: "agentes",
+    name: "Agentes tutores",
+    status: "pesquisa",
+    statusNote: "PIBIC",
+    route: "/projetos/agentes",
+    isPublished: true,
+    isListed: true,
+    order: { backend: 3, dados: 3 },
+    copy: {
+      backend: {
+        description:
+          "Agentes de IA que dão feedback em exercícios de Python, orquestrados com LangGraph e servidos por FastAPI, com estado por aluno e cache de respostas por similaridade.",
+        tags: ["LangGraph", "FastAPI", "Python"],
+      },
+      dados: {
+        description:
+          "Tutores com LLM avaliados com dados históricos de alunos; o cache reaproveita respostas quando dois pedidos são parecidos o bastante.",
+        tags: ["LLM", "agentes", "avaliação"],
+      },
+    },
+  },
+  {
     id: "documento-sinal",
     name: "Documento → sinal",
     status: "construcao",
     route: "/projetos/documento-sinal",
     isPublished: false,
     isListed: false,
-    order: { backend: 4, dados: 2 },
+    order: { backend: 5, dados: 2 },
     copy: {
       backend: {
         description:
@@ -103,7 +127,7 @@ export const projects = [
     route: "/projetos/gallifrey",
     isPublished: true,
     isListed: true,
-    order: { backend: 3, dados: 5 },
+    order: { backend: 4, dados: 6 },
     copy: {
       backend: {
         description:
@@ -124,7 +148,7 @@ export const projects = [
     route: "/projetos/recomendacao",
     isPublished: true,
     isListed: true,
-    order: { backend: 5, dados: 4 },
+    order: { backend: 6, dados: 4 },
     copy: {
       backend: {
         description: "Modelo de recomendação exposto como endpoint de inferência.",
@@ -145,6 +169,17 @@ export const listedProjects = projects.filter((project) => project.isListed);
 
 export function getProjectHref(project: Project): string {
   return project.isPublished ? project.route : unpublishedHref;
+}
+
+export function projectStatusText(project: Pick<Project, "status" | "statusNote">): string {
+  const label = projectStatusLabel[project.status];
+  return project.statusNote ? `${label} · ${project.statusNote}` : label;
+}
+
+/** Route of a project's page while it is published; null otherwise. */
+export function getPublishedRoute(id: string): string | null {
+  const project: Project | undefined = projects.find((candidate) => candidate.id === id);
+  return project?.isPublished ? project.route : null;
 }
 
 export function isExternalHref(href: string): boolean {

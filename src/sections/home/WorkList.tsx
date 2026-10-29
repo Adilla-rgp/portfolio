@@ -10,7 +10,7 @@ import {
   getProjectHref,
   isExternalHref,
   listedProjects,
-  projectStatusLabel,
+  projectStatusText,
 } from "@/content/projects";
 import { cn } from "@/lib/cn";
 
@@ -80,7 +80,7 @@ export function WorkList() {
                   {project.name}
                 </Heading>
                 <Text as="span" size="label" tone="muted" className="ml-auto">
-                  {projectStatusLabel[project.status]}
+                  {projectStatusText(project)}
                 </Text>
               </span>
 
