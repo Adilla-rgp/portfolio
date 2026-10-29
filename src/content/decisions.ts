@@ -9,12 +9,15 @@ export const cosmoDecisions: readonly Decision<CosmoNodeId>[] = [
     tag: "Arquitetura",
     short: "Microsserviços",
     title: "Do monólito aos microsserviços",
-    context: "O Cosmo começou como um monólito.",
+    context:
+      "O Cosmo começou como um monólito. Acrescentar funcionalidades e manter o sistema atualizado ficava cada vez mais difícil, porque qualquer mudança mexia no sistema inteiro.",
     choice:
       "Separar o sistema em microsserviços, com back-end em Node e TypeScript seguindo Clean Architecture, Prisma e PostgreSQL. O Gallifrey entrou como um microsserviço.",
-    alternative: null,
-    tradeoff: null,
-    result: null,
+    alternative: "Continuar crescendo dentro do monólito.",
+    tradeoff:
+      "Mais peças para operar, como deploys e comunicação entre serviços, em troca de partes que evoluem e são mantidas separadamente.",
+    result:
+      "Novas áreas passaram a entrar como serviços próprios, sem mexer no resto. O Gallifrey foi o primeiro.",
     nodes: ["front", "back", "pg", "gal"],
   },
   {
