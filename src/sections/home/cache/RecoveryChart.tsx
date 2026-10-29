@@ -28,13 +28,14 @@ const layout = {
   barWidth: 64,
   fontSize: 14,
   axisGutter: 10,
-  /** Value labels sit inside the top of each bar. */
-  valueInset: 22,
+  /** Value labels sit just above each bar. */
+  valueGap: 8,
   xLabelY: 238,
   xTitleY: 264,
 } as const;
 
-const GRID_RATES = [0, 0.5, 1] as const;
+// No 100% line: the labels above bars near the top would sit on it.
+const GRID_RATES = [0, 0.5] as const;
 const plotHeight = layout.plotBottom - layout.plotTop;
 const slotWidth = (layout.plotRight - layout.plotLeft) / recoveryByBaseSize.length;
 const y = (rate: number) => layout.plotBottom - rate * plotHeight;
@@ -115,10 +116,10 @@ export function RecoveryChart() {
               />
               <text
                 x={slotCenter(index)}
-                y={y(rate) + layout.valueInset}
+                y={y(rate) - layout.valueGap}
                 textAnchor="middle"
                 fontSize={layout.fontSize}
-                className="fill-bg font-mono font-bold"
+                className="fill-fg font-mono font-bold"
               >
                 {formatRecovery(rate)}
               </text>
