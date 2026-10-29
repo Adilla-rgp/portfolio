@@ -22,7 +22,6 @@ export const homeContent = {
     clockFallback: "--:--:--",
     deployFallback: "local",
     items: (deployId: string) => [
-      "P95 [— ms]",
       `Deploy ${deployId}`,
       "Cosmo · em produção",
       "Gallifrey · em produção",

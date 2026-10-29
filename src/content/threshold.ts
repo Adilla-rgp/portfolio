@@ -64,7 +64,7 @@ export const thresholdContent = {
     hits: "acertos de cache",
     wrong: "reuso errado",
   },
-  note: "[curvas ilustrativas: os dados reais do Cosmo entram aqui]",
+  note: "curvas ilustrativas: os dados reais do Cosmo entram aqui",
 } as const;
 
 const decimal = new Intl.NumberFormat("pt-BR", {

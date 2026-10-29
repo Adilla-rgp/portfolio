@@ -200,6 +200,6 @@ Prepare the codebase (without requiring major refactoring) for:
 - Never duplicate components or abstractions
 - Never create magic numbers
 - Never hardcode colors or typography
-- Never invent metrics (use `[— ms]`-style placeholders) or present illustrative data as real
+- Never invent metrics (show `—` or hide the field; published pages carry no bracketed placeholders) or present illustrative data as real
 - Never ignore TypeScript errors
 - Never move files without justification
