@@ -65,7 +65,7 @@ export const agentDecisions: readonly Decision<AgentNodeId>[] = [
     alternative: null,
     tradeoff: "Fluxo explícito e estado inspecionável, em troca de depender de um framework ainda jovem.",
     result: null,
-    nodes: ["api", "sup", "ag"],
+    nodes: ["api", "sup", "sintaxe", "logica", "contexto"],
   },
   {
     id: "cache-cbr",

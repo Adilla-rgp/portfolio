@@ -42,7 +42,7 @@ export const stackTechs = [
   { name: "TypeScript", usedIn: ["cosmo", "meridiano"] },
   { name: "FastAPI", usedIn: ["agentes", "documento-sinal", "meridiano"] },
   { name: "LangGraph", usedIn: ["agentes"] },
-  { name: "API do Claude", usedIn: ["agentes"] },
+  { name: "Qwen", usedIn: ["agentes"] },
   { name: "Gemini", usedIn: ["documento-sinal"] },
   { name: "PostgreSQL", usedIn: ["cosmo", "meridiano"] },
   { name: "Prisma", usedIn: ["cosmo"] },
