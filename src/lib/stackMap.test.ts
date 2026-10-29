@@ -1,6 +1,28 @@
 import { describe, expect, it } from "vitest";
 import { stackProjects, stackTechs } from "@/content/stack";
+import { getStackLinks } from "@/lib/stackMap";
 import { visibleStack } from "@/lib/stackMap";
+
+describe("stack map content", () => {
+  const usedIn = (name: string) => stackTechs.find((tech) => tech.name === name)?.usedIn;
+
+  it("shows learning dashboards as a feature of Cosmo and Gallifrey, not as a node", () => {
+    expect(stackProjects.map((project) => project.id)).not.toContain("dashboards");
+    const withFeature = stackProjects.filter((project) => "feature" in project);
+    expect(withFeature.map((project) => project.id)).toEqual(["cosmo", "gallifrey"]);
+  });
+
+  it("links SQL, dbt and Power BI to the projects that use them", () => {
+    expect(usedIn("SQL")).toEqual(["cosmo", "gallifrey", "agentes"]);
+    expect(usedIn("dbt")).toEqual(["cosmo", "gallifrey"]);
+    expect(usedIn("Power BI")).toEqual(["cosmo", "gallifrey"]);
+  });
+
+  it("only links to projects on the map", () => {
+    const ids = stackProjects.map((project): string => project.id);
+    expect(getStackLinks(stackTechs).every((link) => ids.includes(link.project))).toBe(true);
+  });
+});
 
 describe("visibleStack", () => {
   const { techs, projects } = visibleStack(stackTechs, stackProjects, ["documento-sinal"]);

@@ -177,14 +177,14 @@ export function StackMap({ techs, projects }: StackMapProps) {
               <Heading as="span" size="node" tone="inherit">
                 {project.label}
               </Heading>
+              {project.feature && (
+                <Text as="span" size="label" tone={isOn ? "inherit" : "signal"}>
+                  {project.feature}
+                </Text>
+              )}
               <Text as="span" size="label" tone={isOn ? "inherit" : "muted"}>
                 {project.sub}
               </Text>
-              {project.body && (
-                <Text as="span" tone={isOn ? "inherit" : "muted"} className="font-normal">
-                  {project.body}
-                </Text>
-              )}
             </Button>
           );
         })}
