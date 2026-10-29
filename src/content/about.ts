@@ -18,8 +18,26 @@ export const aboutContent = {
     ariaLabel: "Apresentação",
     kicker: "Sobre — São Luís, Maranhão",
     titleLines: ["Quem está", "por trás"],
+    lead: "Engenheira de Software com foco em back-end e IA aplicada.",
     intro:
-      "Estudante de Ciência da Computação na UFMA e desenvolvedora no Laboratório TeleMídia, onde ajudei a construir o Cosmo, uma plataforma de questões de programação, e hoje desenvolvo agentes tutores com IA para ele. Faço pesquisa aplicada em IA na iniciação científica e gosto de sistemas que dá para medir.",
+      "Estudo Ciência da Computação na UFMA e sou desenvolvedora no Laboratório TeleMídia desde 2024. Ajudei a construir do zero o Cosmo, plataforma de questões de programação usada por alunos da universidade, e hoje desenvolvo os agentes tutores com IA integrados a ela.",
+    focus: {
+      title: "O que eu faço",
+      items: [
+        {
+          title: "Back-end",
+          body: "Microsserviços, APIs e bancos de dados em produção, com testes e CI.",
+        },
+        {
+          title: "IA aplicada",
+          body: "Sistemas multiagente com LLMs open source auto-hospedados, avaliados com dados reais.",
+        },
+        {
+          title: "Dados",
+          body: "Análise, métricas e dashboards para acompanhar a aprendizagem dos alunos.",
+        },
+      ],
+    },
     photo: {
       /** Shown once the file exists in public/; until then, no photo at all. */
       src: "/images/adilla-gomes.jpg",

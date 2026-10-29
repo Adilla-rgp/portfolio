@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
+import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { RevealText } from "@/components/ui/RevealText";
@@ -56,6 +57,28 @@ function CvLinks() {
   );
 }
 
+function Focus() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Text aria-hidden="true" size="label" tone="muted">
+        {hero.focus.title}
+      </Text>
+      <ul aria-label={hero.focus.title} className="grid gap-3 md:grid-cols-3">
+        {hero.focus.items.map((item) => (
+          <li key={item.title} className="flex">
+            <Card variant="outline" radius="item" padding="sm" className="flex grow flex-col gap-2">
+              <Text as="span" size="mono" tone="signal">
+                {item.title}
+              </Text>
+              <Text>{item.body}</Text>
+            </Card>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 export function AboutHero() {
   return (
     <Section spacing="none" bordered={false} aria-label={hero.ariaLabel} className="pt-22 pb-18">
@@ -73,9 +96,13 @@ export function AboutHero() {
               ]}
             />
           </Heading>
-          <Text size="lg" className="max-w-160">
-            {hero.intro}
-          </Text>
+          <div className="flex max-w-160 flex-col gap-4">
+            <Heading as="p" size="node">
+              {hero.lead}
+            </Heading>
+            <Text size="lg">{hero.intro}</Text>
+          </div>
+          <Focus />
         </div>
         <FadeIn delay="sibling" className="flex basis-65 flex-col items-start gap-4">
           <Photo />
