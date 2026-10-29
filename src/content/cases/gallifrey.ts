@@ -1,3 +1,4 @@
+import { cosmoProductUrl } from "@/content/cases/cosmo";
 import { projectPageContent } from "@/content/projectPage";
 
 export type MissionView = "aluno" | "sistema";
@@ -48,6 +49,8 @@ export const gallifreyCase = {
   },
   homeNav: { label: projectPageContent.homeNavLabel, href: projectPageContent.homeHref },
   cosmoNavLabel: "Cosmo",
+  /** Gallifrey runs as a Cosmo microservice, so the product lives there. */
+  productLink: { label: "Ver no Cosmo ↗", href: cosmoProductUrl },
   hero: {
     kicker: "Módulo do Cosmo —",
     titleLines: ["Gallifrey"],

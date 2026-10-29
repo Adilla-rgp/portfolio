@@ -1,17 +1,7 @@
 import type { SiteNavItem } from "@/components/layout/SiteHeader";
 import { projectPageContent } from "@/content/projectPage";
 
-export type CosmoNodeId =
-  | "aluno"
-  | "back"
-  | "gal"
-  | "liga"
-  | "pg"
-  | "api"
-  | "sup"
-  | "ag"
-  | "cache"
-  | "mem";
+export type CosmoNodeId = "aluno" | "front" | "back" | "pg" | "gal" | "liga" | "agentes";
 
 export interface ArchitectureNode {
   label: string;
@@ -21,7 +11,7 @@ export interface ArchitectureNode {
   y: number;
 }
 
-/** Diagram from Case.dc.html, in viewBox units. */
+/** Layout from Case.dc.html, redrawn for the current architecture, in viewBox units. */
 export const cosmoArchitecture = {
   width: 1240,
   height: 480,
@@ -38,28 +28,23 @@ export const cosmoArchitecture = {
   },
   stroke: { idle: 1.5, lit: 2.5 },
   nodes: {
-    aluno: { x: 40, y: 208, label: "Aluno", sub: "front · Next.js" },
-    back: { x: 320, y: 110, label: "Back-end", sub: "Node · Clean Arch" },
-    gal: { x: 600, y: 50, label: "Gallifrey", sub: "missões" },
-    liga: { x: 600, y: 170, label: "Liga", sub: "ranking semanal" },
-    pg: { x: 880, y: 110, label: "PostgreSQL", sub: "Prisma" },
-    api: { x: 320, y: 320, label: "API de IA", sub: "FastAPI" },
-    sup: { x: 600, y: 320, label: "Supervisor", sub: "LangGraph" },
-    ag: { x: 880, y: 250, label: "Agentes", sub: "API do Claude" },
-    cache: { x: 880, y: 390, label: "Cache CBR", sub: "MD5 · Jaccard" },
-    mem: { x: 1040, y: 320, label: "Memória", sub: "MemorySaver" },
+    aluno: { x: 40, y: 190, label: "Aluno", sub: "navegador" },
+    front: { x: 290, y: 190, label: "Front", sub: "Next.js" },
+    back: { x: 540, y: 190, label: "Back-end", sub: "Node · Clean Arch" },
+    pg: { x: 1030, y: 190, label: "PostgreSQL", sub: "Prisma" },
+    gal: { x: 790, y: 60, label: "Gallifrey", sub: "missões" },
+    liga: { x: 790, y: 320, label: "Liga", sub: "ranking semanal" },
+    agentes: { x: 540, y: 380, label: "Agentes tutores", sub: "pesquisa · PIBIC" },
   } satisfies Record<CosmoNodeId, ArchitectureNode>,
   edges: [
-    ["aluno", "back"],
-    ["aluno", "api"],
+    ["aluno", "front"],
+    ["front", "back"],
+    ["back", "pg"],
     ["back", "gal"],
     ["back", "liga"],
-    ["back", "pg"],
+    ["gal", "pg"],
     ["liga", "pg"],
-    ["api", "sup"],
-    ["sup", "ag"],
-    ["sup", "cache"],
-    ["sup", "mem"],
+    ["back", "agentes"],
   ] satisfies readonly (readonly [CosmoNodeId, CosmoNodeId])[],
 } as const;
 
@@ -69,7 +54,9 @@ export interface CaseLink {
   href: string | null;
 }
 
-const productLink: CaseLink = { label: "Ver o Cosmo ↗", href: null };
+export const cosmoProductUrl = "https://cosmo.telemidia-ma.com.br/";
+
+const productLink: CaseLink = { label: "Ver o Cosmo ↗", href: cosmoProductUrl };
 
 const nav: readonly SiteNavItem[] = [
   { label: projectPageContent.homeNavLabel, href: projectPageContent.homeHref },
@@ -80,23 +67,23 @@ export const cosmoCase = {
   meta: {
     title: "Cosmo",
     description:
-      "Estudo de caso do Cosmo, tutor inteligente com IA usado por alunos de Algoritmos na UFMA, contado pelas decisões que moldaram o sistema.",
+      "Estudo de caso do Cosmo, plataforma de questões de programação usada por alunos da UFMA, contado pelas decisões que moldaram o sistema.",
   },
   nav,
   hero: {
     kicker: "Estudo de caso — /backend",
     titleLines: ["Cosmo"],
     intro:
-      "Um tutor inteligente com IA, usado por alunos de Algoritmos na UFMA. Contado pelas escolhas que moldaram o sistema, e pelo caminho que ficou de fora em cada uma.",
+      "Uma plataforma de questões de programação, no estilo do LeetCode, onde alunos da UFMA resolvem exercícios. Ajudei a construí-la do zero com a equipe do laboratório, desde quando era um monólito. Contada pelas escolhas que moldaram o sistema.",
     facts: {
       where: { label: "Onde", value: "TeleMídia · UFMA" },
       status: { label: "Status" },
-      role: { label: "Papel", value: "desenvolvimento e pesquisa" },
+      role: { label: "Papel", value: "arquitetura, código e banco de dados" },
     },
   },
   decisions: {
     ariaLabel: "Decisões",
-    title: "Cinco decisões",
+    title: "Três decisões",
     tabsLabel: "Escolha uma decisão",
     tour: { play: "▶ Tour automático", pause: "❚❚ Pausar tour" },
     diagramCaption: (num: string) => `Arquitetura · partes envolvidas na decisão ${num}`,
@@ -112,8 +99,8 @@ export const cosmoCase = {
   today: {
     id: "hoje",
     title: "Onde está hoje",
-    body: "Em produção com alunos de Algoritmos I. Os próximos passos são os agentes tutores e a avaliação com dados históricos anonimizados de alunos.",
-    tags: ["LangGraph", "FastAPI", "API do Claude", "Node · TypeScript", "Prisma", "PostgreSQL", "Next.js"],
+    body: "Em produção com alunos de programação da UFMA, com o Gallifrey e a Liga no ar.",
+    tags: ["Next.js", "TypeScript", "Node", "Clean Architecture", "Prisma", "PostgreSQL"],
     links: [productLink],
   },
 } as const;

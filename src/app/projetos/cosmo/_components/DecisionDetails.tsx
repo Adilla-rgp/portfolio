@@ -16,7 +16,7 @@ interface DecisionDetailsProps {
 }
 
 /**
- * One decision's text. Optional fields (`alternative`, `result`) that are
+ * One decision's text. Optional fields (`alternative`, `tradeoff`, `result`) that are
  * still null take their label and controls with them, so nothing is left
  * with a heading and no content.
  */
@@ -59,15 +59,17 @@ export function DecisionDetails({
             {showAlternative ? copy.flip.hide : copy.flip.show}
           </Button>
         )}
-        <dl
-          className={cn(
-            "grid gap-6 border-t border-line pt-5",
-            decision.result && "sm:grid-cols-2",
-          )}
-        >
-          <Detail label={copy.tradeoff} body={decision.tradeoff} />
-          {decision.result && <Detail label={copy.result} body={decision.result} />}
-        </dl>
+        {(decision.tradeoff || decision.result) && (
+          <dl
+            className={cn(
+              "grid gap-6 border-t border-line pt-5",
+              decision.tradeoff && decision.result && "sm:grid-cols-2",
+            )}
+          >
+            {decision.tradeoff && <Detail label={copy.tradeoff} body={decision.tradeoff} />}
+            {decision.result && <Detail label={copy.result} body={decision.result} />}
+          </dl>
+        )}
       </div>
     </article>
   );

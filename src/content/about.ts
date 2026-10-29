@@ -19,7 +19,7 @@ export const aboutContent = {
     kicker: "Sobre — São Luís, Maranhão",
     titleLines: ["Quem está", "por trás"],
     intro:
-      "Estudante de Ciência da Computação na UFMA e desenvolvedora no Laboratório TeleMídia, onde construo o Cosmo, um tutor inteligente com IA. Faço pesquisa aplicada em IA na iniciação científica e gosto de sistemas que dá para medir.",
+      "Estudante de Ciência da Computação na UFMA e desenvolvedora no Laboratório TeleMídia, onde ajudei a construir o Cosmo, uma plataforma de questões de programação, e hoje desenvolvo agentes tutores com IA para ele. Faço pesquisa aplicada em IA na iniciação científica e gosto de sistemas que dá para medir.",
     photo: {
       /** Shown once the file exists in public/; until then, no photo at all. */
       src: "/images/adilla-gomes.jpg",

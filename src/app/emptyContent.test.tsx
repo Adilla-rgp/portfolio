@@ -29,7 +29,7 @@ function html(element: React.ReactElement): string {
 
 describe("Cosmo decisions", () => {
   it.each(decisions.map((decision, index) => [decision.id, decision, index] as const))(
-    "%s shows the alternative and the result only when they exist",
+    "%s shows the alternative, the trade-off and the result only when they exist",
     (_, decision, index) => {
       const markup = html(
         <DecisionDetails
@@ -43,7 +43,7 @@ describe("Cosmo decisions", () => {
       expect(markup.includes(copy.notChosen)).toBe(decision.alternative !== null);
       expect(markup.includes(copy.flip.show)).toBe(decision.alternative !== null);
       expect(markup.includes(`>${copy.result}<`)).toBe(decision.result !== null);
-      expect(markup).toContain(copy.tradeoff);
+      expect(markup.includes(`>${copy.tradeoff}<`)).toBe(decision.tradeoff !== null);
     },
   );
 });

@@ -22,7 +22,7 @@ export const stackContent = {
 
 export const stackProjects = [
   { id: "meridiano", label: "Meridiano", sub: "Viagens em grupo" },
-  { id: "cosmo", label: "Cosmo", sub: "Tutor com IA" },
+  { id: "cosmo", label: "Cosmo", sub: "Questões de programação" },
   { id: "gallifrey", label: "Gallifrey", sub: "Missões" },
   { id: "documento-sinal", label: "Documento → sinal", sub: "Extração com LLM" },
   { id: "recomendacao", label: "Recomendação", sub: "Pesquisa" },

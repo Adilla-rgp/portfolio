@@ -114,7 +114,7 @@ export function DecisionTour({ decisions }: DecisionTourProps) {
         role="tablist"
         aria-label={copy.tabsLabel}
         onKeyDown={onTabKeyDown}
-        className="grid grid-cols-5 gap-2"
+        className="grid auto-cols-fr grid-flow-col gap-2"
       >
         {decisions.map((decision, position) => {
           const isCurrent = position === index;

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { RevealText } from "@/components/ui/RevealText";
@@ -77,7 +78,19 @@ export default function GallifreyPage() {
                   </li>
                 ))}
               </ul>
-              <BackHomeLink />
+              <div className="flex flex-wrap items-center gap-6">
+                <Button
+                  as="a"
+                  href={gallifreyCase.productLink.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  size="lg"
+                  variant="signal"
+                >
+                  {gallifreyCase.productLink.label}
+                </Button>
+                <BackHomeLink />
+              </div>
             </FadeIn>
           </Container>
         </Section>

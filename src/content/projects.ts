@@ -65,13 +65,13 @@ export const projects = [
     copy: {
       backend: {
         description:
-          "Tutor inteligente com agentes em LangGraph servidos por FastAPI, com estado por aluno e cache de respostas por similaridade.",
-        tags: ["LangGraph", "FastAPI", "PostgreSQL"],
+          "Plataforma de questões de programação construída do zero com a equipe do laboratório: arquitetura, back-end em Node e TypeScript com Clean Architecture, Prisma e PostgreSQL, front em Next.js.",
+        tags: ["Node", "TypeScript", "PostgreSQL"],
       },
       dados: {
         description:
-          "Agentes de IA que dão feedback em exercícios de Python, avaliados com dados históricos anonimizados de alunos.",
-        tags: ["LLM", "agentes", "avaliação"],
+          "Plataforma onde alunos de programação resolvem exercícios; cada tentativa vira dado de aprendizagem.",
+        tags: ["dados de aprendizagem", "PostgreSQL"],
       },
     },
   },

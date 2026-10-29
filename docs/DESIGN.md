@@ -111,7 +111,7 @@ Todas com `forwardRef`, repasse de `...props` nativas, `className` via `cn()` e 
 |---|---|---|
 | `/` | `Home.dc.html` | Ver detalhes abaixo. |
 | `/projetos/documento-sinal` | `Signal.dc.html` | Linha de leitura que percorre o documento; JSON digitado campo a campo; nota contra o gabarito subindo; clique no campo acende o trecho de origem; pacote atravessando as 4 etapas. |
-| `/projetos/cosmo` | `Case.dc.html` | 5 decisões com tour automático (6s cada) e barra de progresso; diagrama da arquitetura que acende os nós de cada decisão, com as conexões tracejadas em movimento; botão para alternar entre "escolhi" e "não escolhi". |
+| `/projetos/cosmo` | `Case.dc.html` | Decisões com tour automático (6s cada) e barra de progresso; diagrama da arquitetura que acende os nós de cada decisão, com as conexões tracejadas em movimento; botão para alternar entre "escolhi" e "não escolhi". |
 | `/projetos/gallifrey` | `Gallifrey.dc.html` | Missão de 3 questões sobre listas com feedback; alternância entre visão do aluno e do sistema, que mostra o nível de Bloom e o registro do back-end; linha animada do protótipo à produção. |
 | `/projetos/recomendacao` | `Rec.dc.html` | O visitante monta uma sequência de tópicos e vê barras de atenção, a posição [MASK] pulsando e os 3 tópicos mais prováveis (modelo de brinquedo); animação de mascaramento com alternância bidirecional/só da esquerda. |
 | `/sobre` | `About.dc.html` | Números que sobem contando; grafo da stack (tecnologia ↔ projeto, com links animados); linha do tempo de 2020 a 2028 que roda sozinha e pode ser arrastada. |
