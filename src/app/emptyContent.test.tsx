@@ -4,13 +4,16 @@ import { cosmoCase } from "@/content/cases/cosmo";
 import { gallifreyCase, missionQuestions } from "@/content/cases/gallifrey";
 import { recommendationCase } from "@/content/cases/recomendacao";
 import { decisions } from "@/content/decisions";
-import CosmoPage from "./cosmo/page";
-import { CosmoToday } from "./cosmo/_components/CosmoToday";
-import { DecisionDetails } from "./cosmo/_components/DecisionDetails";
-import GallifreyPage from "./gallifrey/page";
-import { MissionPlayer } from "./gallifrey/_components/MissionPlayer";
-import RecommendationPage from "./recomendacao/page";
-import { RoleSection } from "./recomendacao/_components/RoleSection";
+import { lensParam, lenses } from "@/content/lens";
+import Home from "./page";
+import CosmoPage from "./projetos/cosmo/page";
+import { CosmoToday } from "./projetos/cosmo/_components/CosmoToday";
+import { DecisionDetails } from "./projetos/cosmo/_components/DecisionDetails";
+import GallifreyPage from "./projetos/gallifrey/page";
+import { MissionPlayer } from "./projetos/gallifrey/_components/MissionPlayer";
+import RecommendationPage from "./projetos/recomendacao/page";
+import { RoleSection } from "./projetos/recomendacao/_components/RoleSection";
+import AboutPage from "./sobre/page";
 
 /**
  * Fields still waiting for real content are null. Whatever renders in their
@@ -103,19 +106,32 @@ describe("Recommendation role section", () => {
   });
 });
 
-describe("case pages with today's content", () => {
+/**
+ * Fails on what a reader would see as unfinished: a literal null/undefined,
+ * a bracketed placeholder like "[dataset]" or "[— ms]", or a link to nowhere.
+ * Python lists and indexes in the questions hold digits; the demo's [MASK]
+ * token is real copy.
+ */
+function expectNoPlaceholders(markup: string) {
+  expect(markup).not.toMatch(/>\s*null\s*</);
+  expect(markup).not.toContain("undefined");
+  expect(markup.replaceAll(recommendationCase.demo.mask, "")).not.toMatch(/\[[^\]<>"\d,]{1,40}\]/);
+  expect(markup).not.toContain('href="#"');
+}
+
+describe("pages with today's content", () => {
   it.each([
-    ["cosmo", CosmoPage],
-    ["gallifrey", GallifreyPage],
-    ["recomendacao", RecommendationPage],
-  ] as const)("/projetos/%s renders no placeholder or empty value", (_, Page) => {
-    const markup = html(<Page />);
-    expect(markup).not.toMatch(/>\s*null\s*</);
-    expect(markup).not.toContain("undefined");
-    // Bracketed placeholders like "[dataset]" or "[— ms]". Python lists and
-    // indexes in the questions hold digits; the demo's [MASK] token is real copy.
-    expect(markup.replaceAll(recommendationCase.demo.mask, "")).not.toMatch(/\[[^\]<>"\d,]{1,40}\]/);
-    expect(markup).not.toContain('href="#"');
+    ["/projetos/cosmo", CosmoPage],
+    ["/projetos/gallifrey", GallifreyPage],
+    ["/projetos/recomendacao", RecommendationPage],
+    ["/sobre", AboutPage],
+  ] as const)("%s renders no placeholder or empty value", (_, Page) => {
+    expectNoPlaceholders(html(<Page />));
+  });
+
+  it.each(lenses)("/ with lens %s renders no placeholder or empty value", async (lens) => {
+    const page = await Home({ searchParams: Promise.resolve({ [lensParam]: lens }) });
+    expectNoPlaceholders(html(page));
   });
 
   it("does not label the dataset on the recommendation page while it is unknown", () => {
