@@ -80,7 +80,8 @@ export const agentsCase: CaseStudy<AgentNodeId> = {
     body: `${formatCount(submissionBase.submissions)} submissões (${submissionBase.period}), ${formatShare(submissionErrors.withError, 2)} delas com erro. É a base em que o cache foi medido.`,
     groups: [
       {
-        title: `Submissões com erro, sobre as ${formatCount(submissionBase.submissions)}`,
+        title: `% das ${formatCount(submissionBase.submissions)} submissões`,
+        unit: `das ${formatCount(submissionBase.submissions)} submissões`,
         fractionDigits: 2,
         bars: [
           { label: "Erros lógicos", value: submissionErrors.logic },
@@ -88,7 +89,8 @@ export const agentsCase: CaseStudy<AgentNodeId> = {
         ],
       },
       {
-        title: "Entre os erros de execução",
+        title: "% dos erros de execução",
+        unit: "dos erros de execução",
         fractionDigits: 1,
         bars: submissionErrors.runtimeByException,
       },

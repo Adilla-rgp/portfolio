@@ -5,7 +5,7 @@ import { Accent } from "@/components/ui/Typography/Accent";
 import { Heading } from "@/components/ui/Typography/Heading";
 import { Text } from "@/components/ui/Typography/Text";
 import { formatShare } from "@/content/cache";
-import type { CaseData as CaseDataContent } from "@/content/caseStudy";
+import { caseStudyContent, type CaseData as CaseDataContent } from "@/content/caseStudy";
 import { cssVars } from "@/lib/cssVars";
 
 interface CaseDataProps {
@@ -32,7 +32,18 @@ export function CaseData({ data }: CaseDataProps) {
               <Text as="figcaption" size="label" tone="muted">
                 {group.title}
               </Text>
-              <ul className="flex flex-col gap-3">
+              <ul
+                aria-label={group.bars
+                  .map((bar) =>
+                    caseStudyContent.data.describeBar(
+                      bar.label,
+                      formatShare(bar.value, group.fractionDigits),
+                      group.unit,
+                    ),
+                  )
+                  .join("; ")}
+                className="flex flex-col gap-3"
+              >
                 {group.bars.map((bar) => (
                   <li key={bar.label} className="grid grid-cols-data-bar items-center gap-4">
                     <Text as="span" size="codeSm" tone="fg" className="truncate">

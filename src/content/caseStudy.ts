@@ -70,6 +70,8 @@ export interface CaseDataBar {
 
 export interface CaseDataGroup {
   title: string;
+  /** What each percentage is a share of, e.g. "das 16.850 submissões". */
+  unit: string;
   bars: readonly CaseDataBar[];
   /** Decimal places the source reported, kept as given. */
   fractionDigits: number;
@@ -103,6 +105,9 @@ export interface CaseStudy<NodeId extends string = string> {
 
 /** Copy and diagram geometry shared by every case study. */
 export const caseStudyContent = {
+  data: {
+    describeBar: (label: string, share: string, unit: string) => `${label}: ${share} ${unit}`,
+  },
   decisions: {
     ariaLabel: "Decisões",
     tabsLabel: "Escolha uma decisão",
