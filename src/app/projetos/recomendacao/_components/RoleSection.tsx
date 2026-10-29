@@ -47,7 +47,7 @@ export function RoleSection({ cards }: RoleSectionProps) {
           {role.title}
           <Accent>.</Accent>
         </Heading>
-        <FadeIn className="grid gap-4 md:grid-cols-3">
+        <FadeIn className="grid gap-4 md:grid-cols-2">
           {visible.map((card, index) => (
             <Card key={card.title} className="flex flex-col gap-3.5">
               <Text as="span" size="mono" tone="signal">

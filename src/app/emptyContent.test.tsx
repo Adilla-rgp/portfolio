@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { cosmoCase } from "@/content/cases/cosmo";
 import { caseStudyContent } from "@/content/caseStudy";
 import { gallifreyCase, missionQuestions } from "@/content/cases/gallifrey";
-import { recommendationCase } from "@/content/cases/recomendacao";
+import { recommendationCase, recommendationResearch } from "@/content/cases/recomendacao";
 import { agentDecisions, cosmoDecisions } from "@/content/decisions";
 import { lensParam, lenses } from "@/content/lens";
 import { CaseToday } from "@/sections/project/case/CaseToday";
@@ -142,9 +142,9 @@ describe("pages with today's content", () => {
     expectNoPlaceholders(html(page));
   });
 
-  it("does not label the dataset on the recommendation page while it is unknown", () => {
-    expect(html(<RecommendationPage />)).not.toContain(
-      `${recommendationCase.role.exploration.datasetLabel}:`,
+  it("labels the dataset on the recommendation page only when it is known", () => {
+    expect(html(<RecommendationPage />).includes(`${recommendationCase.role.exploration.datasetLabel}:`)).toBe(
+      recommendationResearch.dataset !== null,
     );
   });
 });

@@ -48,6 +48,8 @@ interface RecommendationResearch {
   findings: string | null;
   /** Filters and decisions made while preparing the sequences. */
   preparation: string | null;
+  /** How the model and the path builder fit together. */
+  approach: string | null;
   metrics: {
     hrAt10: string | null;
     ndcgAt10: string | null;
@@ -56,9 +58,12 @@ interface RecommendationResearch {
 }
 
 export const recommendationResearch: RecommendationResearch = {
-  dataset: null,
+  dataset:
+    "Dois datasets públicos de submissões de programação do Codeforces, com cerca de 1 milhão e 14 milhões de registros, e um dataset próprio do laboratório com cerca de 20 mil registros de alunos da UFMA.",
   findings: null,
   preparation: null,
+  approach:
+    "Combinei o BERT4Rec com metaheurísticas para montar trilhas de estudo personalizáveis: o modelo aprende as sequências, e as metaheurísticas montam a trilha.",
   metrics: { hrAt10: null, ndcgAt10: null, baseline: null },
 };
 
@@ -125,12 +130,13 @@ export const recommendationCase = {
     exploration: {
       title: "Exploração",
       body: "Análise exploratória das interações dos alunos com os tópicos.",
-      datasetLabel: "Dataset",
+      datasetLabel: "Dados",
     },
     preparation: {
       title: "Preparação",
       body: "Transformar o histórico em sequências ordenadas no tempo para o modelo.",
     },
+    approach: { title: "Abordagem" },
     training: {
       title: "Treino",
       body: "Treino do BERT4Rec nas sequências preparadas.",

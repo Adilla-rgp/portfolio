@@ -29,7 +29,7 @@ function trainingMetrics(): string | null {
 
 export default function RecommendationPage() {
   ensureProjectPage(project);
-  const { dataset, findings, preparation } = recommendationResearch;
+  const { dataset, findings, preparation, approach } = recommendationResearch;
 
   return (
     <>
@@ -74,6 +74,7 @@ export default function RecommendationPage() {
               ],
             },
             { title: role.preparation.title, lines: [role.preparation.body, preparation] },
+            { title: role.approach.title, lines: [approach] },
             { title: role.training.title, lines: [role.training.body, trainingMetrics()] },
           ]}
         />
