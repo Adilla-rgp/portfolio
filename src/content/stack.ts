@@ -36,11 +36,12 @@ export const stackProjects = [
   { id: "gallifrey", label: "Gallifrey", sub: "Missões", feature: learningDashboards },
   { id: "documento-sinal", label: "Documento → sinal", sub: "Extração com LLM" },
   { id: "recomendacao", label: "Recomendação", sub: "Pesquisa" },
+  { id: "histoclick", label: "Histoclick", sub: "App mobile" },
 ] as const satisfies readonly StackProject[];
 
 export const stackTechs = [
   { name: "Python", usedIn: ["agentes", "recomendacao", "documento-sinal", "meridiano"] },
-  { name: "TypeScript", usedIn: ["cosmo", "meridiano"] },
+  { name: "TypeScript", usedIn: ["cosmo", "meridiano", "histoclick"] },
   { name: "FastAPI", usedIn: ["agentes", "documento-sinal", "meridiano"] },
   { name: "LangGraph", usedIn: ["agentes"] },
   { name: "Qwen", usedIn: ["agentes"] },
@@ -48,7 +49,9 @@ export const stackTechs = [
   { name: "PostgreSQL", usedIn: ["cosmo", "meridiano"] },
   { name: "Prisma", usedIn: ["cosmo"] },
   { name: "Next.js", usedIn: ["cosmo"] },
-  { name: "React", usedIn: ["gallifrey", "meridiano"] },
+  { name: "React", usedIn: ["gallifrey", "meridiano", "histoclick"] },
+  { name: "React Native", usedIn: ["histoclick"] },
+  { name: "Expo", usedIn: ["histoclick"] },
   { name: "Pandas", usedIn: ["recomendacao"] },
   { name: "SQL", usedIn: ["cosmo", "gallifrey", "agentes"] },
   { name: "dbt", usedIn: ["cosmo", "gallifrey", "recomendacao"] },

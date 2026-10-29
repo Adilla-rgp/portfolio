@@ -18,6 +18,13 @@ describe("stack map content", () => {
     expect(usedIn("Power BI")).toEqual(["cosmo", "gallifrey", "recomendacao"]);
   });
 
+  it("links the mobile stack to Histoclick", () => {
+    expect(usedIn("React Native")).toEqual(["histoclick"]);
+    expect(usedIn("Expo")).toEqual(["histoclick"]);
+    expect(usedIn("TypeScript")).toContain("histoclick");
+    expect(usedIn("React")).toContain("histoclick");
+  });
+
   it("only links to projects on the map", () => {
     const ids = stackProjects.map((project): string => project.id);
     expect(getStackLinks(stackTechs).every((link) => ids.includes(link.project))).toBe(true);

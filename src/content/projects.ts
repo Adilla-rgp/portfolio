@@ -86,8 +86,8 @@ export const projects = [
     name: "Histoclick",
     status: "construcao",
     route: "/projetos/histoclick",
-    isPublished: false,
-    isListed: false,
+    isPublished: true,
+    isListed: true,
     description:
       "App mobile de atlas de patologias bucais para o ensino de odontologia, com lâminas microscópicas interativas, busca e filtros. Fui a única desenvolvedora num projeto de 7 pessoas.",
     tags: ["React Native", "Expo", "TypeScript"],

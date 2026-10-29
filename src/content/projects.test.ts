@@ -11,6 +11,7 @@ describe("work list", () => {
       "meridiano",
       "gallifrey",
       "recomendacao",
+      "histoclick",
     ]);
   });
 
@@ -31,5 +32,9 @@ describe("getPublishedProjectPaths", () => {
       .map((project): string => project.route);
     expect(paths.every((path) => path.startsWith("/"))).toBe(true);
     expect(paths.some((path) => unpublished.includes(path))).toBe(false);
+  });
+
+  it("puts the Histoclick case in the sitemap", () => {
+    expect(getPublishedProjectPaths()).toContain("/projetos/histoclick");
   });
 });
