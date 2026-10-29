@@ -126,7 +126,7 @@ Detalhes da Home:
    - CTA "VER O TRABALHO ↓" e botão "↺ VOLTAR AO RUÍDO".
    - Faixa (marquee) de status ao vivo com a hora real de São Luís (`America/Fortaleza`).
 2. **"Esta página, por dentro.":** trace real de `GET /api/home`, disparado por botão e medido no navegador (Resource Timing para DNS, TCP, TLS, espera e download; `Server-Timing` para as etapas internas; `x-vercel-cache` para o cache da CDN), animado com as durações reais. Cache frio fura a CDN com `?nocache=`; no quente, um HIT da CDN mostra as etapas do servidor como PULADO. Se o fetch falhar, mostra a última execução gravada, avisando que é uma gravação.
-3. **"Arraste o limiar.":** gráfico em SVG com o limiar de Jaccard (0,50 a 0,95). Mostra a curva de acertos de cache (com área) e a de reuso errado (tracejada), com alça arrastável, um `input range` para acessibilidade, uma frase que muda conforme a zona e o aviso de que as curvas são ilustrativas.
+3. **"Arraste o limiar.":** calculadora do cache dos agentes tutores. Dois campos de mensagem de erro (com exemplos num Segmented) viram tokens em chips, com a similaridade de Jaccard ao vivo, um limiar arrastável de 0,50 a 1,00 (marca em 0,85, o limiar usado) sincronizado com um `input range`, a triagem Expected/Got e o veredito anunciado por `aria-live`. Ao lado, o gráfico de barras da taxa de recuperação por tamanho da base, com dados reais.
 4. **"Trabalho":** lista com nomes gigantes. O item com hover ou foco se expande com descrição e tags, e a ordem e o texto dependem da lente.
 5. **Rodapé:** marquee gigante "VAMOS CONVERSAR →" e links para Cal.com, GitHub e LinkedIn.
 

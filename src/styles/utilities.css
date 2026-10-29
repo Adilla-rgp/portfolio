@@ -128,24 +128,9 @@
   --fade-delay: var(--stagger-sibling);
 }
 
-/* Threshold chart. The handle, its dots and its label are drawn at the origin
-   and moved by custom properties (viewBox units) that the component sets on
-   the <svg> while dragging, so React never re-renders during a drag. CSS px in
-   an SVG transform are user units. */
-@utility chart-at-handle {
-  transform: translateX(calc(var(--handle-x) * 1px));
-}
-
-@utility chart-at-hit {
-  transform: translate(calc(var(--handle-x) * 1px), calc(var(--hit-y) * 1px));
-}
-
-@utility chart-at-wrong {
-  transform: translate(calc(var(--handle-x) * 1px), calc(var(--wrong-y) * 1px));
-}
-
-@utility chart-at-label {
-  transform: translateX(calc(var(--label-x) * 1px));
+/* Markers placed along a track by a runtime fraction (0–1) in --at. */
+@utility at-x {
+  left: calc(var(--at, 0) * 100%);
 }
 
 /* Soft bg-colored glow behind text that sits over the hero particles, so the
@@ -182,6 +167,14 @@
 
 @utility bar-y {
   height: calc(var(--bar, 1) * 100%);
+}
+
+/* SVG bars drawn at full height and scaled from their base, so a change of
+   --bar can transition (an SVG height attribute cannot). */
+@utility bar-grow-y {
+  transform: scaleY(var(--bar, 1));
+  transform-box: fill-box;
+  transform-origin: bottom;
 }
 
 /* Ordered steps (Gallifrey's road to production): as many 200px-or-wider

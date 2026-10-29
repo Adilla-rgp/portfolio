@@ -10,6 +10,8 @@ export const tagVariants = cva(
         default: "border-line-strong text-fg-soft",
         signal: "border-signal text-signal",
         lit: "border-fg bg-fg font-bold text-bg",
+        /** Faded next to `signal` tags, e.g. items outside a match. */
+        quiet: "border-line text-muted",
       },
     },
     defaultVariants: {

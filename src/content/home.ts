@@ -36,10 +36,10 @@ export const homeContent = {
     body: "Uma requisição real ao conteúdo desta página, medida etapa por etapa no seu navegador. Dispare e veja cada etapa acontecer. Depois esquente o cache e compare.",
   },
   threshold: {
-    ariaLabel: "Gráfico explorável",
+    ariaLabel: "Calculadora do cache",
     kicker: "02 — Uma decisão dos agentes tutores",
     title: "Arraste o limiar",
-    body: "O tutor reaproveita respostas quando dois pedidos são parecidos o bastante. Limiar baixo economiza chamadas ao LLM, mas devolve feedback errado. Onde você cortaria?",
+    body: "O tutor reaproveita a resposta quando um erro já apareceu: MD5 para a mesma mensagem, Jaccard sobre as palavras para as parecidas. Teste com as suas mensagens e arraste o limiar.",
   },
   work: {
     id: "trabalho",
