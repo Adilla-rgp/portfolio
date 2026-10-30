@@ -21,6 +21,7 @@ describe("stack map content", () => {
   it("links the mobile stack to Histoclick", () => {
     expect(usedIn("React Native")).toEqual(["histoclick"]);
     expect(usedIn("Expo")).toEqual(["histoclick"]);
+    expect(usedIn("Supabase")).toEqual(["histoclick"]);
     expect(usedIn("TypeScript")).toContain("histoclick");
     expect(usedIn("React")).toContain("histoclick");
   });

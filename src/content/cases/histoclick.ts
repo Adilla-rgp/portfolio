@@ -54,7 +54,7 @@ export const histoclickCase: CaseStudy<HistoclickNodeId> = {
     id: "hoje",
     title: "Onde está hoje",
     body: "O Atlas já roda em build de desenvolvimento, ainda fora das lojas. A versão 2 vai trazer atividades e gamificação.",
-    tags: ["React Native", "Expo", "TypeScript"],
+    tags: ["React Native", "Expo", "TypeScript", "Supabase"],
     links: [],
   },
 };

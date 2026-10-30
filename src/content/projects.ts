@@ -90,7 +90,7 @@ export const projects = [
     isListed: true,
     description:
       "App mobile de atlas de patologias bucais para o ensino de odontologia, com lâminas microscópicas interativas, busca e filtros. Fui a única desenvolvedora num projeto de 7 pessoas.",
-    tags: ["React Native", "Expo", "TypeScript"],
+    tags: ["React Native", "Expo", "TypeScript", "Supabase"],
   },
   {
     id: "documento-sinal",

@@ -52,6 +52,7 @@ export const stackTechs = [
   { name: "React", usedIn: ["gallifrey", "meridiano", "histoclick"] },
   { name: "React Native", usedIn: ["histoclick"] },
   { name: "Expo", usedIn: ["histoclick"] },
+  { name: "Supabase", usedIn: ["histoclick"] },
   { name: "Pandas", usedIn: ["recomendacao"] },
   { name: "SQL", usedIn: ["cosmo", "gallifrey", "agentes"] },
   { name: "dbt", usedIn: ["cosmo", "gallifrey", "recomendacao"] },
